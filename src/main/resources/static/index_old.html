@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="https://kit.fontawesome.com/402e808c1d.js" crossorigin="anonymous"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/style1.css">
+</head>
+<body>
+	
+<!--	<div>-->
+<!--	    <img class="img_bg1" th:src="${imagePath}" />-->
+<!--	</div>-->
+
+<!--<div class="slider">-->
+<!--    <div class="list">-->
+<!--        <div class="item" th:each="image : ${LisImages}">-->
+<!--            <img th:src="${image.path}" alt="Image">-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+
+<div  id="carouselExampleFade" class="carousel slide carousel-fade img_bg1" >
+    <div class="carousel-inner">
+        <div class="carousel-item active" th:each="image : ${LisImages}">
+            <img th:src="${image.path}" class="d-block w-100 hung" alt="Image">
+        </div>
+    </div>
+    <button class="carousel-control-prev prev_pic" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+
+    <button class="carousel-control-next next_pic" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+
+<div>
+    <div class="Donate">
+        <h3 class="donatetext">Donate</h3>
+        <img class="QRscan" src="/Image/QRscan1.jpg">
+    </div>
+
+    <div class="textdonate">Donate</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="container">
+        <div class="snow">
+
+        </div>
+    </div>
+
+<!--    =================================== thanh nhac =========================================== -->
+    <div class="musicbar">
+
+
+
+        <div class="namems1">
+            <h1 class="namems" th:text="'Welcome ' + ${ten}">  </h1>
+        </div>
+
+        <audio autoplay src="~/@Model.Music" id="song"></audio>
+
+        <a href="@Url.Action("ChangeImage","Chill", new {id = Model.IdImage-1, k = 0})"><i class='bx bx-skip-previous'></i></a>
+
+        <div class="click_play">
+            <i class='bx bx-pause'></i>
+        </div>
+
+        <a href="@Url.Action("ChangeImage","Chill", new {id = Model.IdImage+1, k = 1})"><i class='bx bx-skip-next'></i></a>
+
+
+
+    </div>
+
+
+<!--   ============================= quay quay quay ==============================	-->
+    <div class="quay rotate">
+        <img src="/Image/Picture3.png" alt="">
+    </div>
+
+<!--   ============================= sóng nhạc ==============================	-->
+
+    <div id="wave" class="loader">
+        <span class="stroke"></span>
+        <span class="stroke"></span>
+        <span class="stroke"></span>
+        <span class="stroke"></span>
+        <span class="stroke"></span>
+        <span class="stroke"></span>
+        <span class="stroke"></span>
+    </div>
+
+    <div id="wave1" class="loader1">
+        <span class="stroke1"></span>
+        <span class="stroke1"></span>
+        <span class="stroke1"></span>
+        <span class="stroke1"></span>
+        <span class="stroke1"></span>
+        <span class="stroke1"></span>
+        <span class="stroke1"></span>
+
+    </div>
+
+    <div class="chinh">
+        <div class="container1">
+
+            <span style="--i:11;"></span>
+            <span style="--i:21;"></span>
+            <span style="--i:31;"></span>
+            <span style="--i:22;"></span>
+            <span style="--i:68;"></span>
+            <span style="--i:28;"></span>
+            <span style="--i:23;"></span>
+            <span style="--i:61;"></span>
+            <span style="--i:33;"></span>
+            <span style="--i:72;"></span>
+            <span style="--i:34;"></span>
+            <span style="--i:23;"></span>
+            <span style="--i:28;"></span>
+            <span style="--i:72;"></span>
+            <span style="--i:34;"></span>
+            <span style="--i:23;"></span>
+            <span style="--i:28;"></span>
+            <span style="--i:61;"></span>
+            <span style="--i:54;"></span>
+            <span style="--i:12;"></span>
+            <span style="--i:72;"></span>
+            <span style="--i:34;"></span>
+            <span style="--i:23;"></span>
+            <span style="--i:28;"></span>
+            <span style="--i:61;"></span>
+            <span style="--i:54;"></span>
+            <span style="--i:12;"></span>
+            <span style="--i:61;"></span>
+            <span style="--i:54;"></span>
+            <span style="--i:12;"></span>
+            <span style="--i:11;"></span>
+            <span style="--i:23;"></span>
+            <span style="--i:45;"></span>
+            <span style="--i:22;"></span>
+            <span style="--i:32;"></span>
+            <span style="--i:16;"></span>
+            <span style="--i:39;"></span>
+            <span style="--i:62;"></span>
+            <span style="--i:34;"></span>
+            <span style="--i:43;"></span>
+            <span style="--i:28;"></span>
+            <span style="--i:72;"></span>
+            <span style="--i:34;"></span>
+            <span style="--i:23;"></span>
+            <span style="--i:28;"></span>
+            <span style="--i:61;"></span>
+            <span style="--i:54;"></span>
+            <span style="--i:12;"></span>
+            <span style="--i:45;"></span>
+            <span style="--i:22;"></span>
+            <span style="--i:32;"></span>
+            <span style="--i:61;"></span>
+            <span style="--i:33;"></span>
+            <span style="--i:72;"></span>
+            <span style="--i:39;"></span>
+            <span style="--i:62;"></span>
+            <span style="--i:34;"></span>
+            <span style="--i:43;"></span>
+            <span style="--i:28;"></span>
+            <span style="--i:45;"></span>
+            <span style="--i:22;"></span>
+            <span style="--i:32;"></span>
+            <span style="--i:45;"></span>
+            <span style="--i:61;"></span>
+            <span style="--i:22;"></span>
+            <span style="--i:32;"></span>
+            <span style="--i:16;"></span>
+            <span style="--i:39;"></span>
+            <span style="--i:62;"></span>
+            <span style="--i:34;"></span>
+            <span style="--i:43;"></span>
+            <span style="--i:28;"></span>
+            <span style="--i:45;"></span>
+            <span style="--i:22;"></span>
+            <span style="--i:11;"></span>
+            <span style="--i:21;"></span>
+            <span style="--i:31;"></span>
+            <span style="--i:45;"></span>
+            <span style="--i:22;"></span>
+            <span style="--i:32;"></span>
+            <span style="--i:61;"></span>
+            <span style="--i:33;"></span>
+            <span style="--i:72;"></span>
+            <span style="--i:22;"></span>
+            <span style="--i:68;"></span>
+            <span style="--i:28;"></span>
+
+            <div class="effect-bar">
+                <div class="select_btn">
+                    <i class="fa-sharp fa-regular fa-snowflake"></i>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+<!--    ===================================== menu =============================================================*@ -->
+    <div class="menu">
+
+<!--        <i class='bx bx-menu'></i>-->
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+
+    </div>
+
+<!--    @*       ================================================= sao bang ========================================================*@-->
+    <div class="allstar">
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+
+        <!-- <a href="/background_summer/"><div class="button1"></div></a> -->
+    </div>
+
+    <div class="buttonstar">
+        <i class='bx bxs-star saomat'></i>
+    </div>
+
+<div class="clock">
+    <span id="hours">00</span>
+    <span>:</span>
+    <span id="minutes">00</span>
+    <span>:</span>
+    <span id="secons">00</span>
+    <span id="session">AM</span>
+
+</div>
+
+
+    <div onclick="toggleVisibility()" class="btn_clock" id="btn_id_clock">
+        <i class='bx bx-time-five'></i>
+
+    </div>
+
+
+
+<!----------------------- bật tắt clock--------------------------------------->
+<script>
+    function toggleVisibility() {
+    var btn_id = document.getElementById("btn_id_clock");
+    var div = document.querySelector(".clock");
+
+    div.style.display = (div.style.display == 'block') ? 'none' : 'block';
+
+    btn_id.classList.toggle("click_color");
+}
+
+
+</script>
+
+
+<!--    @*================================================ bong bong =========================================*@-->
+
+    <div class="chinh">
+        <div class="container2">
+
+            <span style="--i:11;"></span>
+            <span style="--i:21;"></span>
+            <span style="--i:31;"></span>
+            <span style="--i:22;"></span>
+            <span style="--i:68;"></span>
+            <span style="--i:28;"></span>
+            <span style="--i:23;"></span>
+            <span style="--i:61;"></span>
+            <span style="--i:33;"></span>
+            <span style="--i:72;"></span>
+            <span style="--i:34;"></span>
+            <span style="--i:23;"></span>
+            <span style="--i:28;"></span>
+            <span style="--i:61;"></span>
+            <span style="--i:54;"></span>
+            <span style="--i:12;"></span>
+            <span style="--i:11;"></span>
+            <span style="--i:23;"></span>
+            <span style="--i:45;"></span>
+            <span style="--i:22;"></span>
+            <span style="--i:32;"></span>
+            <span style="--i:16;"></span>
+            <span style="--i:39;"></span>
+            <span style="--i:62;"></span>
+            <span style="--i:34;"></span>
+            <span style="--i:43;"></span>
+            <span style="--i:28;"></span>
+            <span style="--i:45;"></span>
+            <span style="--i:22;"></span>
+            <span style="--i:32;"></span>
+            <span style="--i:61;"></span>
+            <span style="--i:33;"></span>
+            <span style="--i:72;"></span>
+            <span style="--i:39;"></span>
+            <span style="--i:62;"></span>
+            <span style="--i:34;"></span>
+            <span style="--i:43;"></span>
+            <span style="--i:28;"></span>
+            <span style="--i:45;"></span>
+            <span style="--i:22;"></span>
+            <span style="--i:32;"></span>
+            <span style="--i:45;"></span>
+            <span style="--i:61;"></span>
+            <span style="--i:22;"></span>
+            <span style="--i:32;"></span>
+            <span style="--i:16;"></span>
+            <span style="--i:39;"></span>
+            <span style="--i:62;"></span>
+            <span style="--i:34;"></span>
+            <span style="--i:43;"></span>
+            <span style="--i:28;"></span>
+            <span style="--i:45;"></span>
+            <span style="--i:22;"></span>
+            <span style="--i:11;"></span>
+            <span style="--i:21;"></span>
+            <span style="--i:31;"></span>
+            <span style="--i:22;"></span>
+            <span style="--i:68;"></span>
+            <span style="--i:28;"></span>
+
+            <div class="select_btn2">
+                <i class='bx bx-circle'></i>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+        <script>
+            const buttonstar = document.querySelector(".buttonstar");
+
+            let allstar = document.querySelector(".allstar");
+
+
+
+            let playing1 = true;
+            buttonstar.addEventListener("click", play);
+
+
+            function play() {
+
+                if (playing1 == true) {
+
+                    buttonstar.innerHTML = `<i class='bx bx-star saoroi' ></i>`;
+
+                    /*quay*/
+                    allstar.classList.add('night');
+
+                    playing1 = false;
+                }
+
+                else if (playing1 == false) {
+                    buttonstar.innerHTML = `<i class='bx bxs-star saomat'></i> `;
+
+                    /*quay*/
+                    allstar.classList.remove('night');
+
+                    playing1 = true;
+
+                }
+            }
+
+        </script>
+
+
+        <script>
+            const barcontainer = document.querySelector('.menu');
+
+
+            barcontainer.addEventListener('click', function () {
+                barcontainer.classList.toggle('effect')
+            })
+
+            barcontainer.addEventListener('click', function () {
+                barcontainer.classList.toggle('menucon')
+            })
+
+        </script>
+
+
+        <!--<div class="Donate">
+            <h3 class="donatetext">Donate</h3>
+            <img class="QRscan" src="~/Images/QRscan1.jpg">
+        </div>
+
+        <div class="textdonate">Donate</div>
+
+        <div class="clock">
+            <span id="hours">00</span>
+            <span>:</span>
+            <span id="minutes">00</span>
+            <span>:</span>
+            <span id="secons">00</span>
+            <span id="session">AM</span>
+
+        </div>
+
+        <div id="container">
+            <div class="snow">
+
+            </div>
+        </div>
+
+        <div>
+            <a href="@Url.Action("ChangeImage","Chill", new {id = Model.IdImage-1})">
+                <div class="prev_pic">
+                    <i class='bx bx-chevron-left'></i>
+                </div>
+            </a>
+            <a href="@Url.Action("ChangeImage","Chill", new {id = Model.IdImage+1})">
+                <div class="next_pic">
+                    <i class='bx bx-chevron-right'></i>
+                </div>
+            </a>
+        </div>-->
+
+<!--
+
+        @*@Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ID })*@
+-->
+
+
+
+        <!--<div class="musicbar">
+            <i class='bx bx-skip-previous'></i>
+            <i class='bx bx-pause'></i>
+            <i class='bx bx-play'></i>
+            <i class='bx bx-skip-next'></i>
+
+        </div>-->
+
+<script>
+
+</script>
+
+<script>
+
+    const song = document.getElementById("song");
+    const playBtn = document.querySelector(".click_play");
+
+
+
+
+
+    const optionMenu = document.querySelector(".container1");
+    const selectBtn = optionMenu.querySelector(".select_btn");
+    selectBtn.addEventListener("click", () => optionMenu.classList.toggle("bubbles"));
+
+
+
+    const optionMenu2 = document.querySelector(".container2");
+    const selectBtn2 = optionMenu2.querySelector(".select_btn2");
+    selectBtn2.addEventListener("click", () => optionMenu2.classList.toggle("bubbles2"));
+
+
+
+
+    let quay = document.querySelector(".quay");
+
+    let wave = document.getElementById("wave");
+    let wave1 = document.getElementById("wave1");
+
+    let volume_slider = document.querySelector('.volume_slider');
+
+    let playing = true;
+
+
+    //   khai bao playing = true khi click vào button thì set cai playing = false ( vòng lập )//
+
+    playBtn.addEventListener("click", playPause);
+
+    function playPause() {
+
+        if (playing == true) {
+            song.pause();
+
+
+            playBtn.innerHTML = `<i class='bx bx-play'></i>`;
+
+
+            /*quay*/
+            quay.classList.remove('rotate');
+
+            /*sóng*/
+            wave.classList.remove('loader');
+            wave1.classList.remove('loader1');
+
+            playing = false;
+        }
+
+        else if (playing == false) {
+            song.play();
+
+            playBtn.innerHTML = `<i class='bx bx-pause'></i>`;
+
+
+            /*quay*/
+            quay.classList.add('rotate');
+
+            /*sóng*/
+            wave.classList.add('loader');
+            wave1.classList.add('loader1');
+
+            playing = true;
+
+        }
+
+        function setVolume() {
+            curr_track.volume = volume_slider.value / 100;
+        }
+
+
+    }
+</script>
+
+
+        <script src="js/clock.js"></script>
+
+        <p>
+
+
+        </p>
+
+        <div id="container1">
+            <div class="snow">
+            </div>
+        </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+
+</body>
+</html>

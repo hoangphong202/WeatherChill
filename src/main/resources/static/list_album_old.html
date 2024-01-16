@@ -1,0 +1,54 @@
+<!-- image-list.html -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Image List</title>
+</head>
+<style>
+        .size{
+            width: 100px;
+            padding: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+      </style>
+<body>
+
+<h2>Image List</h2>
+
+<!-- Hiển thị danh sách ảnh trong một bảng -->
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Cover</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Duyệt qua danh sách ảnh và hiển thị từng dòng -->
+    <tr th:each="albumEntity : ${listAlbum}">
+
+        <td th:text="${albumEntity.id}"></td>
+        <td th:text="${albumEntity.name}"></td>
+        <td>
+            <img th:src="'/Album/' +${albumEntity.imgPath}" class="size">
+        </td>
+
+        <td>
+            <a th:href="@{'/album/listmusic/' + ${albumEntity.id}}">Xem</a>
+            <a th:href="@{/delete/{id}(id=${albumEntity.id})}" onclick="return confirm('Are you sure?')">Xóa</a>
+        </td>
+    </tr>
+
+    <button type="button" th:onclick="|window.location.href='/album/insert'|">Thêm Ảnh</button>
+    <button type="button" th:onclick="|window.location.href='/showImage'|">Trang Chủ</button>
+
+    </tbody>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,84 @@
+h1 {
+    color: deeppink;
+    animation: pulsate 0.11s ease-in-out infinite alternate;
+}
+@keyframes pulsate {
+
+    100% {
+        text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 19px #fff, 0 0 40px #f09, 0 0 80px #f09, 0 0 90px #f09, 0 0 100px #f09, 0 0 150px #f09;
+    }
+
+    0% {
+        text-shadow: 0 0 4px #fff, 0 0 10px #fff, 0 0 18px #fff, 0 0 38px #f09, 0 0 73px #f09, 0 0 80px #f09, 0 0 94px #f09, 0 0 140px #f09;
+    }
+}
+
+.crud h{
+    color: deeppink;
+}
+
+.img_bg1{
+    width: 800px;
+    height: 500px;
+}
+.bar{
+    margin-top: -35px;
+    width: 800px;
+}
+
+.ImageText{
+    font-size: 50px;
+    margin-left: 325px;
+}
+
+.EditText{
+    font-size: 50px;
+    margin-left: 55px;
+}
+
+.crud{
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: deeppink;
+    justify-content: center;
+}
+
+    .crud h1{
+        background-color: black;
+        padding-top: 40px ;
+        width: 200px;
+        height: 150px;
+        border-radius: 10px;
+        margin-top: 70px;
+        font-size: 50px;
+        color: deeppink;
+        opacity: .5;
+        border-color: deeppink;
+        border-width: 11px;
+        text-align:center;
+        text-decoration: none;
+
+            box-shadow: 0 0 0 3px rgba(255, 53, 174, 0.703);
+
+    animation: bodersd 2.5s ease-in-out infinite alternate;
+
+    }
+    .crud h1:hover{
+        opacity: .8;
+    }
+@keyframes bodersd {
+    0%,100% {
+        transform: translate(0,0);
+
+        color: #f09;
+    }
+
+    50% {
+        color: #f09;
+        text-shadow: 0 0 4px #fff, 0 0 10px #fff, 0 0 18px #fff, 0 0 38px #f09, 0 0 73px #f09, 0 0 80px #f09, 0 0 94px #f09, 0 0 140px #f09;
+        box-shadow: 0 0 4px #fff, 0 0 10px #fff, 0 0 13px #f09, 0 0 38px #f09, 0 0 13px #f09, 0 0 38px #f09;
+    }
+}
+

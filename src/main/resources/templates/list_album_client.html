@@ -1,0 +1,101 @@
+<!-- image-list.html -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Album</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" type="text/css" href="/css/list_album_client.css" />
+    <link rel="stylesheet" type="text/css" href="/css/ListAlbumClient.css" />
+    <style>
+        form {
+            display: flex;
+        }
+
+        /* Style the select dropdown */
+        #categorySelect {
+            height: 4vh;
+            width: 16vh;
+        }
+
+        .font{
+
+        }
+
+
+                .btn{
+                    margin-left: 2vh;
+                    font-size: 1em;
+
+                    background-color: #0000002b;
+                    color: #fae1ff;
+                    border: none;
+                    text-decoration: none;
+                    cursor: pointer;
+                    border-radius: 4px;
+                    border: 1px solid #89708b;
+                    transition: transform 0.3s ease-in-out;
+                }
+
+                .btn:hover {
+                    box-shadow: 0 0 4px #fff, 0 0 10px #fff, 0 0 13px #f09, 0 0 38px #f09;
+                    transform: scale(1.05);
+                }
+    </style>
+</head>
+<body>
+<div class="header">
+    <h1>Album Music</h1>
+    <!--<h2 class="namems" th:text="'Welcome ' + ${ten}">  </h2>-->
+
+    <div class="btn_prev" th:attr="onclick=|window.location.href='/ListMusic?ten=${ten}'|">
+        <i class='bx bxs-left-arrow'></i>
+    </div>
+
+    <div class="btn_next" th:attr="onclick=|window.location.href='/ListMusic?ten=${ten}'|">
+        <i class='bx bxs-right-arrow'></i>
+    </div>
+
+
+</div>
+
+<form th:action="@{'/ListAlbum/filter?ten=' + ${ten}}" method="post" enctype="multipart/form-data">
+    <select id="categorySelect" name="categorySelect">
+        <option th:value="0">Tất Cả</option>
+        <!-- Sử dụng th:each để lặp qua danh sách thể loại và tạo các tùy chọn -->
+        <option th:each="category : ${listCategory}" th:value="${category.id}" th:text="${category.name}"></option>
+    </select>
+    <br/>
+    <input type="hidden" id="categoryId" name="categoryId" th:value="0"/>
+    <button class="btn" type="submit">Lọc</button>
+</form>
+<script>
+    document.getElementById('categorySelect').addEventListener('change', function() {
+        // Lấy giá trị của tùy chọn được chọn
+        var selectedGenre = this.value;
+
+        // Cập nhật giá trị vào trường input ẩn
+        document.getElementById('categoryId').value = selectedGenre;
+    });
+</script>
+
+<!--<button type="button" class="btn" th:attr="onclick=|window.location.href='/showImage?ten=${ten}'|">Phát tất cả nhạc</button>-->
+
+
+<div class="gallery">
+    <div th:each="albumEntity : ${listAlbum}" class="album-item">
+
+        <a th:href="@{'/ListAlbum/listmusic/' + ${albumEntity.id}(ten=${ten})}">
+            <img th:src="'/Album/' + ${albumEntity.imgPath}" class="size">
+
+            <p class="font" th:text="${albumEntity.name}"></p>
+        </a>
+
+        <!--            <p th:text="[+ ${albumEntity.category.name} +]"></p>-->
+
+    </div>
+</div>
+
+</body>
+</html>

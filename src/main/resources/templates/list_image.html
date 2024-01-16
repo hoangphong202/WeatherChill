@@ -1,0 +1,126 @@
+<!-- image-list.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Image List</title>
+</head>
+<style>
+  .xuong_dong {
+      white-space: pre-wrap; /* Cho phép xuống dòng */
+  }
+
+  table {
+      border: 1px solid #ddd;
+      border-collapse: collapse;
+      width: 100%;
+  }
+
+  td, th {
+      padding: 10px;
+  }
+
+  th {
+      font-weight: bold;
+  }
+
+  img {
+      width: 100px;
+      padding: 8px;
+      border-radius: 5px;
+  }
+
+  .even {
+      background-color: #eee;
+  }
+
+  .odd {
+      background-color: #fff;
+  }
+
+  button {
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #007bff;
+      color: #fff;
+      border-radius: 5px;
+      margin: 5px;
+  }
+
+  button:hover {
+      background-color: #0062cc;
+  }
+
+  h2 {
+      font-size: 1.5em;
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-align: center;
+  }
+</style>
+<body>
+
+<h2>Image List</h2>
+
+<!-- Hiển thị danh sách ảnh trong một bảng -->
+<table border="1">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Path</th>
+    <th>Info</th>
+    <th>Category Image</th>
+    <th>Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <!-- Duyệt qua danh sách ảnh và hiển thị từng dòng -->
+  <tr class="xuong_dong" th:each="imageEntity : ${listImage}">
+
+    <td th:text="${imageEntity.id}"></td>
+
+    <td>
+      <img th:src="${imageEntity.path}">
+    </td>
+
+    <td th:text="${imageEntity.info}"></td>
+
+    <td th:text="${imageEntity.categoryImage.name}"></td>
+    <!-- Thêm liên kết xóa cho mỗi ảnh -->
+    <td>
+      <a th:href="@{/delete/{id}(id=${imageEntity.id})}" onclick="return confirm('Are you sure?')">Xóa</a>
+      <a th:href="@{/edit/{id}(id=${imageEntity.id})}">Sửa thông tin</a>
+
+    </td>
+  </tr>
+
+  <!-- Thêm một biểu mẫu để lọc ảnh theo danh mục -->
+  <form th:action="@{/ListImage}" method="get">
+    <!-- Nhãn cho danh sách thả xuống -->
+    <label for="categoryFilter">Chọn danh mục:</label>
+
+    <!-- Danh sách thả xuống để chọn một danh mục -->
+    <select id="categoryFilter" name="categoryFilter">
+      <!-- Tùy chọn mặc định để hiển thị tất cả các danh mục -->
+      <option value="" selected>Tất cả</option>
+
+      <!-- Lặp qua các danh mục và tạo một tùy chọn cho mỗi danh mục -->
+      <option th:each="category_image : ${listCategories}" th:value="${category_image.id}" th:text="${category_image.name}"></option>
+    </select>
+
+    <!-- Nút gửi để áp dụng bộ lọc danh mục đã chọn -->
+    <button type="submit">Lọc</button>
+  </form>
+
+
+  <button type="button" th:onclick="|window.location.href='/AddImage'|">Thêm Ảnh</button>
+  <button type="button" th:onclick="|window.location.href='/music'|">Quản lý nhạc</button>
+  <button type="button" th:onclick="|window.location.href='/showImage'|">Trang Chủ</button>
+
+  </tbody>
+</table>
+
+</body>
+</html>

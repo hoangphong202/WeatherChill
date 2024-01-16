@@ -1,0 +1,944 @@
+body {
+    margin: 0;
+    padding: 0;
+
+    overflow: hidden;
+}
+
+.home{
+    position: absolute;
+    z-index: 2;
+    margin-top: 2vh;
+    margin-left: 1vh;
+}
+
+.home a i{
+    z-index: 2;
+    color: #831d5d69;
+    font-size: 6vh;
+    cursor: pointer;
+}
+
+.home a i:hover{
+    text-shadow: 0 0 4px #fff, 0 0 10px #fff, 0 0 13px #f09, 0 0 38px #f09, 0 0 73px #f09;
+}
+
+.carousel-inner img{
+    background-repeat: no-repeat;
+}
+
+.clock {
+      display: none;
+    top: 0;
+    position:absolute;
+    color: #fff;
+    text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #f09, 0 0 82px #f09, 0 0 92px #f09, 0 0 102px#f09, 0 0 151px#f09;
+    font-size: 6.2rem;
+    animation: pulsate 0.11s ease-in-out infinite alternate;
+    position: absolute;
+    font-size: 900%;
+    margin-top: 34vh;
+    margin-left: 40vh;
+    font-family: 'digital-7', sans-serif;
+    text-align: center;
+    z-index: 10000;
+}
+
+@keyframes pulsate {
+
+    100% {
+        text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 19px #fff, 0 0 40px #f09, 0 0 80px #f09, 0 0 90px #f09, 0 0 100px #f09, 0 0 150px #f09;
+    }
+
+    0% {
+        text-shadow: 0 0 4px #fff, 0 0 10px #fff, 0 0 18px #fff, 0 0 38px #f09, 0 0 73px #f09, 0 0 80px #f09, 0 0 94px #f09, 0 0 140px #f09;
+    }
+}
+
+
+
+
+@keyframes animationSnow {
+    0% {
+        transform: translate(0,0);
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1.0;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(100px,50vh);
+    }
+}
+
+
+
+.hung{
+    object-fit: cover
+}
+
+.img_bg1{
+
+    top: 0;
+    left: 0;
+/*    margin-top:50px;*/
+    width: 100%;
+    height: 100vh;
+/*    object-fit: cover*/
+    image-rendering:pixelated;
+
+}
+
+.carousel{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    white-space: nowrap;
+}
+
+.prev_pic {
+    top: 45%;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    width: 70px;
+    height: 90px;
+    border-radius: 10%;
+    background-color: #000000;
+    margin-left: 2px;
+    opacity: .3;
+}
+
+    .prev_pic:hover {
+        opacity: .8;
+    }
+
+    .prev_pic i {
+        position: absolute;
+        color: aliceblue;
+        font-size: 600%;
+    }
+
+.next_pic {
+    top: 45%;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    width: 70px;
+    height: 90px;
+    border-radius: 10%;
+    background-color: #000000;
+    margin-left: 2px;
+    opacity: .3;
+}
+
+    .next_pic:hover {
+        opacity: .8;
+    }
+
+    .next_pic i {
+        position: absolute;
+        color: aliceblue;
+        font-size: 600%;
+    }
+
+.Donate {
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    top: 0;
+    right: 0;
+    position: absolute;
+    margin-top: 11px;
+    margin-right: 2px;
+    border-radius: 8px;
+    box-shadow: 0 0 0 3px rgba(255, 53, 174, 0.703);
+    background-color: rgba(0, 0, 0, 0.507);
+    animation: bodersd 2.5s ease-in-out infinite alternate;
+}
+
+@keyframes bodersd {
+    0%,100% {
+        transform: translate(0,0);
+        color: #f09;
+    }
+
+    50% {
+        color: #f09;
+        box-shadow: 0 0 4px #fff, 0 0 10px #fff, 0 0 13px #f09, 0 0 38px #f09;
+    }
+}
+
+.Donate img {
+    width: 150px;
+    border-radius: 8px;
+}
+
+.donatetext {
+    z-index: 10000;
+    font-size: 20px;
+    color: rgba(255, 0, 153, 0);
+    padding-left: 40%;
+}
+
+.textdonate {
+    z-index: 10000;
+    position: absolute;
+    top: 0;
+    margin-top: 20px;
+    font-size: 35px;
+    color: #f09;
+    right: 0;
+    margin-right: 30px;
+    animation: boder 2.5s ease-in-out infinite alternate;
+}
+
+@keyframes boder {
+    0%,100% {
+        transform: translate(0,0);
+        color: rgb(98, 0, 59);
+    }
+
+    50% {
+        color: #f09;
+        text-shadow: 0 0 4px #fff, 0 0 10px #fff, 0 0 13px #f09, 0 0 38px #f09, 0 0 73px #f09;
+    }
+}
+
+.QRscan {
+    box-shadow: 0 0 0 3px rgba(255, 53, 174, 0.703);
+    margin: 10px;
+    animation: bodersd 2.5s ease-in-out infinite alternate;
+}
+
+.musicbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    background-color: rgb(0, 0, 0);
+    width: 100%;
+    height: 8%;
+    top: 0;
+    left: 0;
+    margin-top: 92vh;
+    box-shadow: 0 0 9px #f09, 0 0 13px #f09,0 0 13px #f09,0 0 13px #f09;
+    z-index: 10000;
+}
+
+
+
+    .musicbar i {
+
+        color: #f09;
+        font-size: 5vh;
+        border-radius: 50%;
+        box-shadow: 0 0 0 2px #f09;
+        margin-left: 50px;
+        box-shadow: 0 0 9px #f09, 0 0 13px #f09,0 0 13px #f09,0 0 13px #f09;
+        cursor: pointer;
+        transition: opacity 0.1s ease; /* thời gian nó mờ xuống */
+    }
+
+        .musicbar i:hover {
+            opacity: 0.7;
+        }
+
+
+
+.gopytext{
+    width: 2000px;
+    height: 500px;
+}
+.namems1{
+    position: absolute;
+
+    text-align: center;
+    margin-top: 91vh;
+    margin-left: 16%;
+    top: 0;
+    z-index: 100001;
+
+}
+
+.namems {
+    position: absolute;
+    width: 40vh;
+    font-size: 30px;
+    margin-right: 600px;
+    margin-bottom: 20px;
+    color: #f09;
+    animation: boder1 2.5s ease-in-out infinite alternate;
+}
+@keyframes boder1 {
+    0%,100% {
+        transform: translate(0,0);
+        color: rgb(98, 0, 59);
+    }
+
+    50% {
+        color: #f09;
+        text-shadow: 
+
+            0 0 13px #f09,
+            0 0 38px #f09, 
+            0 0 73px #f09;
+    }
+}
+
+
+
+/*=========================== quay quay ==============================*/
+
+.quay {
+    position: absolute;
+    top: 0;
+    margin-top: 93vh;
+    margin-left: 28vh;
+    z-index: 10000;
+}
+
+    .quay img {
+
+        height: 40px;
+        width: 40px;
+        border: 2px solid #f09;
+        box-shadow: 0 0 5px #f09,
+                    0 0 5px #f09;
+        object-fit: cover;
+        border-radius: 190px;
+
+    }
+
+.rotate {
+    animation: rotation 8s infinite linear;
+}
+
+@keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(359deg);
+    }
+}
+
+
+/* ================================ sóng sóng nhạc =============================*/
+.loader {
+    position: absolute;
+    top: 0;
+    margin-top: 93vh;
+    left: 0;
+    margin-left: 20px;
+    height: 38px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+    .loader .stroke {
+        background: #f09;
+        height: 150%;
+        width: 10px;
+        border-radius: 50px;
+        margin: 0px 5px;
+        animation: animate 1.4s linear infinite;
+        z-index: 10000;
+    }
+
+
+
+@keyframes animate {
+    50% {
+        height: 20%;
+        background: #f09;
+    }
+
+    100% {
+        height: 100%;
+    }
+}
+
+.stroke:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.stroke:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.stroke:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+.stroke:nth-child(4) {
+    animation-delay: 0.9s;
+}
+
+.stroke:nth-child(5) {
+    animation-delay: 0.6s;
+}
+
+.stroke:nth-child(6) {
+    animation-delay: 0.3s;
+}
+
+.stroke:nth-child(7) {
+    animation-delay: 0s;
+}
+
+
+.loader1 {
+    position: absolute;
+    top: 0;
+    margin-top: 93vh;
+    right: 0;
+    margin-right: 10px;
+    height: 38px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+    .loader1 .stroke1 {
+        background: #f09;
+        height: 150%;
+        width: 10px;
+        border-radius: 50px;
+        margin: 0px 5px;
+        animation: animate 1.4s linear infinite;
+        z-index: 10000;
+    }
+
+.stroke1:nth-child(1) {
+    animation-delay: 0s;
+
+}
+
+.stroke1:nth-child(2) {
+    animation-delay: 0.3s;
+
+}
+
+.stroke1:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+.stroke1:nth-child(4) {
+    animation-delay: 0.9s;
+}
+
+.stroke1:nth-child(5) {
+    animation-delay: 0.6s;
+}
+
+.stroke1:nth-child(6) {
+    animation-delay: 0.3s;
+}
+
+.stroke1:nth-child(7) {
+    animation-delay: 0s;
+}
+
+
+/*===================================== tuyet ================================*/
+
+
+.chinh {
+    display:none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10000;
+        margin-top: -25vh;
+}
+
+}
+
+.container1 {
+    position: absolute;
+
+    left: 0;
+    height: 600%;
+    width: 600%;
+}
+
+
+.bubbles {
+    position: relative;
+    display: flex; /* xắp xêp tự động */
+}
+
+    .bubbles span {
+        position: relative;
+        width: 50px;
+        height: 50px;
+        background-image: url(/Image/Fixicon-Xmas-2006-White-snow.256.png);
+        margin: 0 4px; /* khoảng cách hình tròn */
+        background-size: cover;
+
+
+        animation: animate1 20s linear infinite; /* thoi gian cai cuc no chay */
+
+        animation-duration: calc(195s / var(--i));
+        opacity: 0.5; /* độ mờ */
+    }
+
+        .bubbles span:nth-child(even) {
+        /* :nth-child(even) Lựa chọn phần tử chẳn*/
+        }
+
+@keyframes animate1 {
+
+
+    0% /*khung mấy cục chạy xéo*/ {
+        transform: translateX(20vh) scale(0); /*khung hình*/ /*trở  về kích thức cũ từ từ*/
+    }
+
+    100% /*khung hinh mấy cục chạy xuống*/ {
+        transform: translateY(125vh) scale(1); /*khung hình*/ /*trở  về kích thức cũ từ từ*/
+    }
+}
+
+.btn_tuyet.click_color{
+
+    animation: boder1 2.5s ease-in-out infinite alternate;
+
+}
+
+.btn_tuyet {
+    top: 0;
+    margin-top: 93vh;
+    margin-left: 69%;
+
+    position: absolute;
+    height: 40px;
+    width: 40px;
+    /*    background-image: url(/Images/Fixicon-Xmas-2006-White-snow.256.png);
+    background-size: cover;*/
+
+    color: white;
+    border-radius: 10%;
+    display: flex;
+    cursor: pointer;
+    /*    box-shadow: 0 0 0 2px #ffffff94;*/
+    opacity: 0.5;
+    transition: opacity 0.1s ease; /* thời gian nó mờ xuống */
+    z-index: 10000;
+}
+
+    .btn_tuyet i {
+
+        font-size: 40px;
+    }
+
+    .btn_tuyet:hover {
+        opacity: 0.4;
+    }
+
+
+
+/* =========================================================== sao bang =================================================*/
+
+.night {
+    top: 0;
+    position: absolute;
+
+    width: 90%;
+    height: 100%;
+    transform: rotateZ(165deg);
+    opacity: 0.8;
+    overflow: hidden;
+    z-index: 1;
+}
+
+    .night .star {
+        position: absolute;
+        left: 0%;
+        top: 90%;
+        height: 1.5px;
+        background: linear-gradient(-45deg, #a8c3ff, rgba(0,0,255,0));
+        border-radius: 999px;
+        filter: drop-shadow(0 0 6px #699BFF);
+        animation: tail 3s ease-in-out infinite, falling 3s ease-in-out infinite;
+    }
+
+@keyframes tail {
+    0% {
+        width: 0px;
+    }
+
+    30% {
+        width: 100px; /* độ dài của dường di  sao*/
+    }
+
+    100% {
+        width: 0;
+    }
+}
+
+@keyframes falling {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(150vh);
+    }
+}
+
+.star::before, .star::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(-45deg, rgba(0,0,255,0),#5f91ff, rgba(0,0,255,0));
+    border-radius: 100%;
+    transform: translate(55%) rotate(45deg);
+    animation: shining 3s ease-in-out infinite;
+}
+
+@keyframes shining {
+    0% {
+        width: 0px;
+    }
+
+    50% {
+        width: 30px;
+    }
+
+    100% {
+        width: 0;
+    }
+}
+
+.star::after {
+    transform: translate(55%) rotate(-45deg);
+}
+
+.star:nth-child(1) {
+    top: calc(70% - 100px);
+    left: -150px;
+    animation-delay: 1s;
+}
+
+    .star:nth-child(1)::before, .star:nth-child(1)::after {
+        animation-delay: 1s;
+    }
+
+.star:nth-child(2) {
+    top: calc(50% - 100px);
+    left: 150px;
+    animation-delay: 3s;
+}
+
+    .star:nth-child(2)::before, .star:nth-child(2)::after {
+        animation-delay: 3s;
+    }
+
+.star:nth-child(3) {
+    top: calc(90% - 100px);
+    left: 150px;
+    animation-delay: 5s;
+}
+
+    .star:nth-child(3)::before, .star:nth-child(3)::after {
+        animation-delay: 5s;
+    }
+
+
+/* ============================================================================= */
+
+
+
+
+.buttonstar {
+    top:0;
+    right: 0;
+    margin-top: calc(93vh - 3px);
+    margin-right: 34%;
+
+    position: absolute;
+    width: 40px;
+    height: 40px;
+
+
+    border-radius: 5px;
+    cursor: pointer;
+    transition: opacity 0.1s ease;
+
+
+    z-index: 10000;
+}
+
+    .buttonstar:hover {
+        opacity: 0.7;
+    }
+
+.saoroi {
+    width: 40px;
+    height: 40px;
+    font-size: 44px;
+    color: #f09;
+
+            animation: boder1 2.5s ease-in-out infinite alternate;
+}
+
+.saomat {
+    width: 40px;
+    height: 40px;
+    font-size: 44px;
+    color: white;
+    opacity: .5;
+    /*        animation: boder1 2.5s ease-in-out infinite alternate;*/
+}
+
+
+/* ========================================================= bong bong ==============================*/
+.khung_bong_bong{
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10000;
+}
+
+.container2 {
+    top: 0;
+    position: absolute;
+    left: 0;
+    height: 600%;
+    width: 600%;
+}
+
+.bubbles2 {
+    position: relative;
+    display: flex; /* xắp xêp tự động */
+}
+
+    .bubbles2 span {
+        position: relative;
+        width: 20px;
+        height: 20px;
+        background: #80caff65;
+        margin: 0 4px; /* khoảng cách hình tròn */
+        border-radius: 50%;
+        box-shadow: 0 0 0 1px #ffffff94, 0 0 25px #4fc3dc, 0 0 50px #4fc3dc; /* tren duoi mờ dày */
+
+        animation: animate2 15s linear infinite; /* thoi gian cai cuc no chay */
+
+        animation-duration: calc(125s / var(--i));
+        opacity: 0.9; /* độ mờ */
+    }
+
+        .bubbles2 span:nth-child(even) { /* :nth-child(even) Lựa chọn phần tử chẳn*/
+            background: #cfe2f981;
+            box-shadow: 0 0 0 1px #96e3ffa0, 0 0 25px #8797b9, 0 0 50px #8797b9; /* tren duoi mờ dày */
+        }
+
+@keyframes animate2 {
+
+
+    100% /*mấy cục chạy xuống*/ {
+        transform: translateX(30vh) scale(0); /*khung hình*/ /*trở  về kích thức cũ từ từ*/
+    }
+
+    0% /*mấy cục chạy xuống*/ {
+        transform: translateY(100vh) scale(1); /*khung hình*/ /*trở  về kích thức cũ từ từ*/
+    }
+}
+
+
+.btn_bong_bong.click_color{
+
+    animation: boder1 2.5s ease-in-out infinite alternate;
+
+}
+
+.btn_bong_bong {
+    top: 0;
+    margin-top: 93vh;
+    margin-left: 74%;
+
+    position: absolute;
+    height: 40px;
+    width: 40px;
+    /*    background-image: url(/Images/Fixicon-Xmas-2006-White-snow.256.png);
+    background-size: cover;*/
+
+    color: white;
+    border-radius: 10%;
+    display: flex;
+    cursor: pointer;
+    /*    box-shadow: 0 0 0 2px #ffffff94;*/
+    opacity: 0.5;
+    transition: opacity 0.1s ease; /* thời gian nó mờ xuống */
+    z-index: 10000;
+}
+
+    .btn_bong_bong i {
+        font-size: 40px;
+    }
+
+    .btn_bong_bong:hover {
+        opacity: 0.4;
+    }
+
+
+/*========================================== clock ==============================================*/
+
+.btn_clock.click_color{
+    color: #f09
+/*    animation: boder1 2.5s ease-in-out infinite alternate;*/
+
+}
+
+
+.btn_clock {
+        top: 0;
+
+    margin-top: 93vh;
+    margin-left: 79%;
+    position: absolute;
+    height: 40px;
+    width: 40px;
+    /*    background-image: url(/Images/Fixicon-Xmas-2006-White-snow.256.png);
+    background-size: cover;*/
+
+    color: white;
+    border-radius: 10%;
+    display: flex;
+    cursor: pointer;
+    /*    box-shadow: 0 0 0 2px #ffffff94;*/
+    opacity: 0.5;
+    transition: opacity 0.1s ease; /* thời gian nó mờ xuống */
+    z-index: 10000;
+}
+
+    .btn_clock i {
+        font-size: 40px;
+    }
+
+    .btn_clock:hover {
+        opacity: 0.4;
+    }
+
+/*========================================== chat ==============================================*/
+
+.btn_chat.click_color{
+    color: #f09
+/*    animation: boder1 2.5s ease-in-out infinite alternate;*/
+
+}
+
+
+.btn_chat {
+    top: 0;
+    margin-top: 93vh;
+    margin-left: 84%;
+    position: absolute;
+    height: 40px;
+    width: 40px;
+
+    color: white;
+    border-radius: 10%;
+    display: flex;
+    cursor: pointer;
+    /*    box-shadow: 0 0 0 2px #ffffff94;*/
+    opacity: 0.5;
+    transition: opacity 0.1s ease; /* thời gian nó mờ xuống */
+    z-index: 10000;
+}
+
+    .btn_chat i {
+        font-size: 40px;
+    }
+
+    .btn_chat:hover {
+        opacity: 0.4;
+    }
+
+
+/* ================================= volume nhac ===============================*/
+    .volume_nhac{
+        position: absolute;
+        top: 0;
+        margin-top: 93vh;
+        margin-left: 34%;
+        opacity: 0.7;
+        z-index: 10000;
+    }
+
+    .volume_nhac i {
+            animation: boder1 2.5s ease-in-out infinite alternate;
+    }
+
+
+/*============================== thanh nhac ====================================*/
+    .thanh_tua{
+        position: absolute;
+        top: 0;
+        margin-top: 97vh;
+        margin-left: 34%;
+        opacity: 0.7;
+        z-index: 10000;
+    }
+
+    .thanh_tua i {
+        animation: boder1 2.5s ease-in-out infinite alternate;
+    }
+
+
+
+
+
+
+
+/*
+container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.snow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50px;
+    height: 50px;
+    background-size: cover;
+    background-image: url(\Image\Fixicon-Xmas-2006-White-snow.256.png) animation: animationSnow 4s ease-in-out infinite;
+    z-index: 200000000;
+}
+
+@keyframes animationSnow {
+    0% {
+        transform: translate(0,0);
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1.0;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(100px,50vh);
+    }
+}
+*/
+

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title></title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+</head>
+<body onload="playNextSong()">
+<ul id="playlist" th:data-song-list="${listMusic}"></ul>
+
+<!-- Thêm một thẻ audio để hiển thị các điều khiển âm thanh -->
+<audio controls autoplay id="audioPlayer" onended="playNextSong()"></audio>
+<!-- Button 1 -->
+<button id="next_music" onclick="playNextSong()"> > </button>
+
+<!-- Button 2 -->
+<button id="pre_music" onclick="playPreviousSong()"> < </button>
+
+<div id="volume-container">
+    <label for="volume-slider">Volume:</label>
+    <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="1">
+</div>
+
+<div id="time-container">
+    <label for="time-slider">Time:</label>
+    <input type="range" id="time-slider" min="0" step="1" value="0">
+</div>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+      var currentSongIndex = 0;
+      var songList = /*[[${listMusic}]]*/;
+
+      function playNextSong() {
+      console.log("Hàm playNextSong() được gọi.");
+        if (currentSongIndex < songList.length) {
+          console.log("Chỉ số bài hát hiện tại:", currentSongIndex);
+          var nextSong = songList[currentSongIndex];
+
+          // Gán nguồn nhạc cho thẻ audio để hiển thị điều khiển âm thanh
+          document.getElementById('audioPlayer').src = '/Music/' + nextSong.path;
+
+          currentSongIndex++;
+        }
+      }
+
+      function playPreviousSong() {
+        console.log("Hàm playPreviousSong() được gọi.");
+        if (currentSongIndex > 0) {
+          currentSongIndex-=2;
+          console.log("Chỉ số bài hát hiện tại:", currentSongIndex);
+          var previousSong = songList[currentSongIndex];
+
+          // Gán nguồn nhạc cho thẻ audio để hiển thị điều khiển âm thanh
+          document.getElementById('audioPlayer').src = '/Music/' + previousSong.path;
+          currentSongIndex++;
+        }
+      }
+    /*]]>*/
+</script>
+
+<script>
+    // Lấy phần tử audio và thanh điều khiển âm lượng từ DOM
+    var audio = document.getElementById('audioPlayer');
+    var volumeSlider = document.getElementById('volume-slider');
+
+    // Thiết lập sự kiện change cho thanh điều khiển âm lượng
+    volumeSlider.addEventListener('input', function() {
+      // Gán giá trị của thanh điều khiển âm lượng vào phần tử audio
+      audio.volume = volumeSlider.value;
+    });
+</script>
+
+<script>
+    // Lấy phần tử audio và thanh điều khiển thời gian từ DOM
+    var audio = document.getElementById('audioPlayer');
+    var timeSlider = document.getElementById('time-slider');
+
+    // Thiết lập sự kiện input cho thanh điều khiển thời gian
+    timeSlider.addEventListener('input', function() {
+      // Gán giá trị của thanh điều khiển thời gian vào phần tử audio
+      audio.currentTime = timeSlider.value;
+    });
+
+    // Lắng nghe sự kiện timeupdate để cập nhật giá trị của thanh trượt
+    audio.addEventListener('timeupdate', function() {
+      // Gán giá trị thời gian hiện tại của audio vào thanh trượt
+      timeSlider.value = audio.currentTime;
+    });
+</script>
+</body>
+</html>
+
+

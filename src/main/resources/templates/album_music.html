@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Album</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f8f8f8;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        audio {
+            width: 100%;
+            max-width: 200px;
+        }
+
+        img {
+          width: 100px;
+          padding: 8px;
+          border-radius: 5px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            text-decoration: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        button + button {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>List Music</h2>
+
+<!-- Display the list of music and images in a single table -->
+<table>
+    <thead>
+    <!-- Header row for music -->
+    <tr>
+        <th>ID Nhạc</th>
+        <th>Audio</th>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <!-- Music section -->
+    <tr th:each="musicEntity : ${listMusic}">
+        <td th:text="${musicEntity.id}"></td>
+        <td><audio controls th:attr="src='/Music/' + ${musicEntity.path}"></audio></td>
+        <td th:text="${musicEntity.name}"></td>
+        <td th:text="${musicEntity.category.name}"></td>
+        <td class="action-buttons">
+            <a th:href="@{/album/deleteMusic/{musicId}/{albumId}(musicId=${musicEntity.id}, albumId=${albumId})}"
+               onclick="return confirm('Are you sure?')">Xóa nhạc</a>
+        </td>
+    </tr>
+
+    <!-- Header row for images -->
+    <tr>
+        <th>ID Hình</th>
+        <th>Image</th>
+        <th>Thông tin</th>
+        <th>Category</th>
+        <th>Action</th>
+    </tr>
+
+    <!-- Image section -->
+    <tr th:each="imageEntity : ${listImage}">
+        <td th:text="${imageEntity.id}"></td>
+        <td>
+            <img th:src="${imageEntity.path}">
+        </td>
+        <td th:text="${imageEntity.info}"></td>
+        <td th:text="${imageEntity.categoryImage.name}"></td>
+        <td class="action-buttons">
+            <!-- Add image-specific action button if needed -->
+        </td>
+    </tr>
+
+    <!-- Buttons outside the table for better organization -->
+    <button type="button" th:onclick="|window.location.href='/album/insertMusic?albumId=${albumId}'|">Thêm Nhạc Vào Album</button>
+
+    <button type="button" th:onclick="|window.location.href='/album'|">Quay về danh sách Album</button>
+
+    <button type="button" th:onclick="|window.location.href='/showImage'|">Phát Nhạc </button>
+
+    </tbody>
+</table>
+
+
+
+</body>
+
+</html>

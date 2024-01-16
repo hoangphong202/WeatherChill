@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Add Album Music</title>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
+
+    h2 {
+        color: #333;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    select, button {
+        padding: 8px;
+        margin-bottom: 10px;
+    }
+
+    audio {
+        width: 100%;
+    }
+
+    button {
+        margin-top: 10px;
+        padding: 8px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+            button + button {
+              margin: 1vh;
+            }
+
+
+  </style>
+</head>
+<body>
+
+<h2>Add Music Vào Album</h2>
+
+<!-- Hiển thị danh sách ảnh trong một bảng -->
+<table>
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Player</th>
+    <th>Name</th>
+    <th>Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <form th:action="@{/music/filter/album}" method="post" enctype="multipart/form-data">
+    <select id="categorySelect" name="categorySelect">
+      <option th:value="0">All</option>
+      <option th:each="category : ${listCategory}" th:value="${category.id}" th:text="${category.name}"></option>
+    </select>
+    <br/>
+    <input type="hidden" id="categoryId" name="categoryId" th:value="0"/>
+    <input type="hidden" id="albumId" name="albumId" th:value="${albumId}"/>
+    <button type="submit">Lọc</button>
+  </form>
+  <script>
+    document.getElementById('categorySelect').addEventListener('change', function() {
+        var selectedGenre = this.value;
+        document.getElementById('categoryId').value = selectedGenre;
+    });
+  </script>
+
+  <tr th:each="musicEntity : ${listMusic}">
+    <td th:text="${musicEntity.id}"></td>
+    <td><audio controls th:attr="src='/Music/' + ${musicEntity.path}"></audio></td>
+    <td th:text="${musicEntity.name}"></td>
+    <td>
+      <a th:href="@{/album/insertMusic/{musicId}/{albumId}(musicId=${musicEntity.id}, albumId=${albumId})}">
+        Thêm nhạc
+      </a>
+    </td>
+  </tr>
+
+
+      <button th:onclick="|window.location.href='/album/listmusic/' + ${albumId}|">Quay về danh sách Album</button>
+
+  </tbody>
+</table>
+
+</body>
+</html>

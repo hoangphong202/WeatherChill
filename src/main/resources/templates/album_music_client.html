@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Album</title>
+    <link rel="stylesheet" type="text/css" href="/css/album_music_client.css">
+
+</head>
+
+<body>
+
+<h2>List Music</h2>
+<!-- Hiển thị danh sách ảnh trong một bảng -->
+<table>
+    <thead>
+    <tr>
+        <th>Audio</th>
+        <th>Name</th>
+        <th>Category</th>
+    </tr>
+
+
+    </thead>
+    <tbody>
+
+    <!-- Duyệt qua danh sách ảnh và hiển thị từng dòng -->
+    <tr th:each="musicEntity : ${listMusic}">
+
+        <td><audio controls th:attr="src='/Music/' + ${musicEntity.path}"></audio></td>
+        <td th:text="${musicEntity.name}"></td>
+
+        <td th:text="${musicEntity.category.name}"></td>
+
+    </tr>
+
+    <button type="button" th:attr="onclick=|window.location.href='/ListAlbum?ten=${ten}'|">Quay về danh sách Album</button>
+
+    <button type="button" th:attr="onclick=|window.location.href='/showImage?ten=${ten}'|">Phát tất cả nhạc</button>
+
+    </tbody>
+</table>
+
+</body>
+
+</html>

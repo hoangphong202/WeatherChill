@@ -1,0 +1,133 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8"/>-->
+<!--    <title>Image Form</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h2>Image Form</h2>-->
+<!--<form action="#" th:action="@{/form}" th:object="${image}" method="post">-->
+<!--    <label for="path">Path:</label>-->
+<!--    <input type="file" id="path" th:field="*{path}"/>-->
+<!--    <br/>-->
+<!--    <label for="music">Music:</label>-->
+<!--    <input type="file" id="music" th:field="*{music}"/>-->
+<!--    <br/>-->
+<!--    <button type="submit">Submit</button>-->
+<!--</form>-->
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Image Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 20px;
+        }
+
+        h2 {
+            color: #333;
+            text-align: center;
+        }
+
+        form {
+            margin-top: 20px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold; /* Đậm chữ cho nhãn */
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            outline: none;
+        }
+
+        textarea {
+            height: 150px; /* Điều chỉnh chiều cao của textarea */
+            resize: vertical;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3; /* Màu hover tối hơn */
+        }
+
+        button + button {
+            margin-left: 10px;
+        }
+
+        /* Thêm một lớp mới cho ô nhập liệu để áp dụng CSS riêng */
+        .textarea-container {
+            position: relative;
+        }
+
+        /* Ứng dụng CSS cho ô nhập liệu */
+        .textarea-container textarea {
+            white-space: pre-wrap; /* Cho phép xuống dòng */
+            overflow-y: auto; /* Hiển thị thanh cuộn khi nội dung quá dài */
+        }
+
+    </style>
+
+</head>
+<body>
+<h2>Add Image</h2>
+<form action="#" th:action="@{/AddImage}" th:object="${imageEntity}" method="post" enctype="multipart/form-data">
+    <label for="file">Choose File:</label>
+    <!-- Use input type="file" for choosing a file -->
+    <input type="file" id="file" name="file" accept="image/*" required/>
+    <br/>
+
+    <div class="textarea-container">
+        <label for="info">Thông tin:</label>
+        <!-- Sử dụng thẻ textarea thay vì input -->
+        <textarea id="info" th:field="*{info}"></textarea>
+    </div>
+    <br/>
+
+
+    <label for="categoryFilter">Thể loại:</label>
+
+    <!-- Danh sách thả xuống để chọn một danh mục -->
+    <select id="categoryFilter" name="categoryFilter">
+        <!-- Tùy chọn mặc định để hiển thị tất cả các danh mục -->
+<!--        <option value="" selected>Tất cả</option>-->
+
+        <!-- Lặp qua các danh mục và tạo một tùy chọn cho mỗi danh mục -->
+        <option th:each="category_image : ${listCategories}" th:value="${category_image.id}" th:text="${category_image.name}"></option>
+    </select>
+
+
+    <br/>
+
+    <button type="submit">Submit</button>
+    <button type="button" th:onclick="|window.location.href='/ListImage'|">Back</button>
+
+</form>
+</body>
+</html>
