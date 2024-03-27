@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Album Form</title>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    h2 {
+        top: 0;
+        color: #333;
+        margin-top: 10vh;
+        font-size: 8vh;
+        position: absolute;
+    }
+
+    form {
+        max-width: 400px;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+        display: block;
+        margin-bottom: 8px;
+    }
+
+    input,
+    select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    button {
+        background-color: #4caf50;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+
+    .btn{
+      display: flex;
+      justify-content: space-around;
+    }
+  </style>
+
+</head>
+
+<body>
+<h2>Thêm Bìa Album</h2>
+<form th:action="@{/User/insert-album}" method="post" enctype="multipart/form-data">
+  <label for="file">Choose File:</label>
+  <!-- Use input type="file" for choosing a file -->
+  <input type="file" id="file" name="file" accept="image/*" required />
+  <br />
+
+  <label for="name">Tên album:</label>
+  <input type="text" id="name" name="name" required />
+  <br />
+
+  <label>Thể loại:</label>
+
+
+
+<!--  id="categorySelect" cái tên id thôi hiện tại chưa sử dụng-->
+  <select id="categorySelect" name="categoryId">
+    <!-- Sử dụng th:each để lặp qua danh sách thể loại và tạo các tùy chọn -->
+    <option th:each="category : ${listCategory}" th:value="${category.id}" th:text="${category.name}"></option>
+  </select>
+
+
+  <br />
+
+
+  <div class="btn">
+    <button type="submit">Gửi</button>
+    <button type="button" th:onclick="|window.location.href='/User'|">Back</button>
+  </div>
+
+
+</form>
+
+</body>
+
+</html>

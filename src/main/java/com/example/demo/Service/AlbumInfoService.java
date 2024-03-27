@@ -21,11 +21,14 @@ public class AlbumInfoService {
         try{
             MusicEntity musicEntity = new MusicEntity();
             musicEntity.setId(musicId);
+
             AlbumEntity albumEntity = new AlbumEntity();
             albumEntity.setId(albumId);
+
             AlbumInfoEntity albumInfoEntity = new AlbumInfoEntity();
             albumInfoEntity.setMusic(musicEntity);
             albumInfoEntity.setAlbum(albumEntity);
+
             albumInfoRepository.save(albumInfoEntity);
             return true;
         }catch (Exception e){
@@ -60,14 +63,19 @@ public class AlbumInfoService {
 
 
     public boolean deleteAlbumInfoByMusicIdAndAlbumId(int musicId, int albumId) {
-        try{
-            AlbumInfoEntity music = albumInfoRepository.findByMusicIdAndAlbumId(musicId, albumId);
-            albumInfoRepository.delete(music);
-            return true;
-        }
-        catch (Exception e){
-            return false;
-        }
+
+            // Kiểm tra xem albumInfo có tồn tại không
+            AlbumInfoEntity albumInfo = albumInfoRepository.findByMusicIdAndAlbumId(musicId, albumId);
+//            System.out.println("AlbumInfo: " + albumInfo);
+            if (albumInfo != null) {
+                albumInfoRepository.delete(albumInfo);
+                return true;
+            } else {
+                // Trường hợp albumInfo không tồn tại
+                return false;
+            }
+
     }
+
 
 }

@@ -33,7 +33,6 @@
 
         audio {
             width: 100%;
-            max-width: 200px;
         }
 
         img {
@@ -115,16 +114,19 @@
         <td th:text="${imageEntity.info}"></td>
         <td th:text="${imageEntity.categoryImage.name}"></td>
         <td class="action-buttons">
-            <!-- Add image-specific action button if needed -->
+            <a th:href="@{/album/deleteImage/{imageId}/{albumId}(imageId=${imageEntity.id}, albumId=${albumId})}"
+               onclick="return confirm('Are you sure?')">Xóa hình</a>
         </td>
     </tr>
 
     <!-- Buttons outside the table for better organization -->
     <button type="button" th:onclick="|window.location.href='/album/insertMusic?albumId=${albumId}'|">Thêm Nhạc Vào Album</button>
 
+    <button type="button" th:onclick="|window.location.href='/album/insertImage?albumId=${albumId}'|">Thêm Hình Vào Album</button>
+
     <button type="button" th:onclick="|window.location.href='/album'|">Quay về danh sách Album</button>
 
-    <button type="button" th:onclick="|window.location.href='/showImage'|">Phát Nhạc </button>
+    <button type="button" th:onclick="|window.location.href='/showImage-admin/${albumId}'|">Phát Nhạc </button>
 
     </tbody>
 </table>

@@ -65,11 +65,47 @@
         button + button {
             margin-left: 10px;
         }
+
+        .search-container{
+            margin-bottom: 2vh;
+        }
     </style>
 
 <body>
 
 <h2>List Album Music</h2>
+
+<!--------------------------- tìm kiếm---------------------------->
+<div class="search-container">
+    <input type="text" id="searchInput" placeholder="Search by album name...">
+    <button onclick="searchAlbum()">Search</button>
+</div>
+
+<!-- JavaScript cho chức năng tìm kiếm -->
+<script >
+    function searchAlbum() {
+        // Lấy giá trị đầu vào tìm kiếm và chuyển đổi thành chữ in hoa để so sánh không phân biệt chữ hoa/chữ thường
+        var input, filter, albumItems, txtValue;
+        input = document.getElementById('searchInput');
+        filter = input.value.toUpperCase();
+        albumItems = document.getElementsByClassName('search2');
+
+        // Lặp qua các mục album và lọc dựa trên tên album
+        for (var i = 0; i < albumItems.length; i++) {
+            var albumNameElement = albumItems[i];
+            txtValue = albumNameElement.textContent || albumNameElement.innerText;
+
+            // Sử dụng includes cho so sánh chuỗi không phân biệt chữ hoa/chữ thường
+            if (txtValue.toUpperCase().includes(filter)) {
+                albumNameElement.parentNode.style.display = ''; // Hiển thị phần tử cha nếu có kết quả
+            } else {
+                albumNameElement.parentNode.style.display = 'none'; // Ẩn phần tử cha nếu không có kết quả
+            }
+        }
+    }
+
+</script>
+
 
 <!-- Hiển thị danh sách ảnh trong một bảng -->
 <table border="1">
@@ -79,31 +115,29 @@
         <th>Image Album</th>
         <th>Name</th>
         <th>Category</th>
+        <th>View</th>
+        <th>User</th>
         <th>Action</th>
     </tr>
     </thead>
     <tbody>
 
-    <form th:action="@{/album/filter}" method="post" enctype="multipart/form-data">
-        <select id="categorySelect" name="categorySelect">
-            <option th:value="0">All</option>
-            <!-- Sử dụng th:each để lặp qua danh sách thể loại và tạo các tùy chọn -->
-            <option th:each="category : ${listCategory}" th:value="${category.id}" th:text="${category.name}"></option>
-        </select>
-        <br/>
-        <input type="hidden" id="categoryId" name="categoryId" th:value="0"/>
-        <button type="submit">Lọc</button>
-    </form>
-    <script>
-        document.getElementById('categorySelect').addEventListener('change', function() {
-            // Lấy giá trị của tùy chọn được chọn
-            var selectedGenre = this.value;
 
-            // Cập nhật giá trị vào trường input ẩn
-            document.getElementById('categoryId').value = selectedGenre;
-        });
-    </script>
+<form th:action="@{/album/filter}" method="post" enctype="multipart/form-data">
 
+    <select id="categorySelect" name="categoryId">
+        <option value="0" selected>Tất cả</option>
+        <!-- Sử dụng th:each để lặp qua danh sách thể loại và tạo các tùy chọn -->
+        <option th:each="category : ${categoryAlbum}"
+                th:value="${category.id}"
+                th:text="${category.name}">
+
+        </option>
+    </select>
+
+
+    <button type="submit">Lọc</button>
+</form>
 
     <!-- Duyệt qua danh sách ảnh và hiển thị từng dòng -->
     <tr th:each="albumEntity : ${listAlbum}">
@@ -113,20 +147,29 @@
             <img th:src="'/Album/' + ${albumEntity.imgPath}" class="size">
         </td>
 
-        <td th:text="${albumEntity.name}"></td>
+        <td class="search2" th:text="${albumEntity.name}"></td>
 
-        <td th:text="${albumEntity.category.name}"></td>
+        <td th:text="${albumEntity.categoryAlbum.name}"></td>
+
+        <!-- Ví dụ trong Thymeleaf -->
+        <td th:text="${albumEntity.viewCount >= 1000000 ? albumEntity.viewCount / 1000000 + 'M' : (albumEntity.viewCount >= 1000 ? albumEntity.viewCount / 1000 + 'K' : albumEntity.viewCount)}"></td>
+
+        <div th:if="${albumEntity.user != null}">
+            <td th:text="${albumEntity.user.name}"></td>
+        </div>
+
 
         <td class="action-buttons">
             <a th:href="@{'/album/listmusic/' + ${albumEntity.id}}">Xem</a>
             <a th:href="@{/album/delete/{albumId}(albumId=${albumEntity.id})}" onclick="return confirm('Are you sure?')">Xóa</a>
+            <a th:href="@{'/album/update/' + ${albumEntity.id}}">Sửa thông tin</a>
         </td><!--/delete/{albumId}-->
     </tr>
 
 
     <button type="button" onclick="window.location.href='/album/insert'">Thêm Album</button>
     <button type="button" th:onclick="|window.location.href='/music'|">Danh sách tất cả Nhạc</button>
-    <button type="button" onclick="window.location.href='/showImage'">Trang Chủ</button>
+    <button type="button" th:onclick="|window.location.href='/Home-admin'|">Home</button>
 
 
     </tbody>

@@ -21,18 +21,6 @@ public class AlbumInfoEntity {
     @JoinColumn(name = "album_id")
     private AlbumEntity album;
 
-    @ManyToOne
-    @JsonIgnore
-    @JoinColumn(name = "image_id")
-    private ImageEntity image;
-
-    public ImageEntity getImage() {
-        return image;
-    }
-
-    public void setImage(ImageEntity image) {
-        this.image = image;
-    }
 
     public int getId() {
         return id;

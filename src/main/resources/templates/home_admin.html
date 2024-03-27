@@ -1,0 +1,109 @@
+<!-- image-list.html -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Album</title>
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <link rel="stylesheet" type="text/css" href="/css/list_album_client.css" />
+    <link rel="stylesheet" type="text/css" href="/css/ListAlbumClient.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        form {
+            display: flex;
+        }
+
+        /* Style the select dropdown */
+        #categorySelect {
+            height: 4vh;
+            width: 16vh;
+        }
+
+
+
+
+        .btn{
+            margin-left: 2vh;
+            font-size: 1em;
+
+            background-color: #0000002b;
+            color: #fae1ff;
+            border: none;
+            text-decoration: none;
+            cursor: pointer;
+            border-radius: 4px;
+            border: 1px solid #89708b;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .btn:hover {
+            box-shadow: 0 0 4px #fff, 0 0 10px #fff, 0 0 13px #f09, 0 0 38px #f09;
+            transform: scale(1.05);
+        }
+
+        .blur{
+            backdrop-filter: blur(15px);
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <h1>Trang Chủ</h1>
+
+</div>
+
+
+<!--------------------------- List home ---------------------------->
+<div class="gallery">
+
+    <div class="album-item blur">
+        <a th:onclick="window.location.href='/JPLevel-admin'">
+            <img th:src="'ImageHome/JapanNeon.jpg'" class="size">
+            <p>Learn Japan</p>
+        </a>
+    </div>
+
+    <div class="album-item blur">
+        <a th:attr="onclick=|window.location.href='/album?ten=${ten}'|">
+            <img th:src="'ImageHome/MusicNeon2.jpg'" class="size">
+            <p>Music</p>
+        </a>
+    </div>
+
+    <div class="album-item blur">
+        <a th:onclick="window.location.href='/Home-admin/Account'">
+            <img th:src="'ImageHome/UserNeon.jpg'" class="size">
+            <p>Account</p>
+        </a>
+    </div>
+
+    <div class="album-item blur">
+        <a th:onclick="window.location.href='/Home-admin/Account'">
+            <img th:src="'ImageHome/ShopNeon.jpg'" class="size">
+            <p>Shop</p>
+        </a>
+    </div>
+
+    <div class="album-item blur">
+        <a th:href="@{Home-admin/Logout}">
+            <img th:src="'ImageHome/logout.jpg'" class="size">
+            <p>Logout</p>
+        </a>
+    </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+</body>
+</html>

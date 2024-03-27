@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Add Album Music</title>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
+
+    h2 {
+        color: #333;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    select, button {
+        padding: 8px;
+        margin-bottom: 10px;
+    }
+
+    audio {
+        width: 100%;
+    }
+
+        img {
+          width: 100px;
+          padding: 8px;
+          border-radius: 5px;
+        }
+
+    button {
+        margin-top: 10px;
+        padding: 8px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+            button + button {
+              margin: 1vh;
+            }
+
+
+  </style>
+</head>
+<body>
+
+<h2>Add Image Vào Album</h2>
+
+<!--------------------------- tìm kiếm---------------------------->
+<div class="search-container">
+  <input type="text" id="searchInput" placeholder="Search by album name...">
+  <button onclick="searchAlbum()">Search</button>
+</div>
+
+<!-- JavaScript cho chức năng tìm kiếm -->
+<script >
+  function searchAlbum() {
+      // Lấy giá trị đầu vào tìm kiếm và chuyển đổi thành chữ in hoa để so sánh không phân biệt chữ hoa/chữ thường
+      var input, filter, albumItems, txtValue;
+      input = document.getElementById('searchInput');
+      filter = input.value.toUpperCase();
+      albumItems = document.getElementsByClassName('search1');
+
+      // Lặp qua các mục album và lọc dựa trên tên album
+      for (var i = 0; i < albumItems.length; i++) {
+          var albumNameElement = albumItems[i];
+          txtValue = albumNameElement.textContent || albumNameElement.innerText;
+
+          // Sử dụng includes cho so sánh chuỗi không phân biệt chữ hoa/chữ thường
+          if (txtValue.toUpperCase().includes(filter)) {
+              albumNameElement.parentNode.style.display = ''; // Hiển thị phần tử cha nếu có kết quả
+          } else {
+              albumNameElement.parentNode.style.display = 'none'; // Ẩn phần tử cha nếu không có kết quả
+          }
+      }
+  }
+
+</script>
+
+
+<!-- Hiển thị danh sách ảnh trong một bảng -->
+<table>
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Path</th>
+    <th>Infomation</th>
+    <th>Category</th>
+    <th>Action</th>
+  </tr>
+  </thead>
+  <tbody>
+
+
+  <form th:action="@{/User/insertImage}" method="get">
+    <!-- Hidden field for albumId -->
+    <input type="hidden" name="albumId" th:value="${albumId}" />
+
+    <!-- Nhãn cho danh sách thả xuống -->
+    <label for="categoryFilter">Chọn danh mục:</label>
+
+    <!-- Danh sách thả xuống để chọn một danh mục -->
+    <select id="categoryFilter" name="categoryId">
+      <!-- Tùy chọn mặc định để hiển thị tất cả các danh mục -->
+      <option value="" selected>Tất cả</option>
+
+      <!-- Lặp qua các danh mục và tạo một tùy chọn cho mỗi danh mục -->
+      <option th:each="category_image : ${listCategoryImage}" th:value="${category_image.id}" th:text="${category_image.name}"></option>
+    </select>
+
+    <!-- Nút gửi để áp dụng bộ lọc danh mục đã chọn -->
+    <button type="submit">Lọc</button>
+  </form>
+
+
+
+
+  <tr th:each="image : ${listImage}">
+    <td th:text="${image.id}"></td>
+    <td>
+      <img th:src="${image.path}">
+    </td>
+    <td class="search1" th:text="${image.info}"></td>
+    <td th:text="${image.categoryImage.name}"></td>
+    <td>
+      <a th:href="@{/User/insertImage/{imageId}/{albumId}(imageId=${image.id}, albumId=${albumId})}">
+        Thêm Hình
+      </a>
+    </td>
+  </tr>
+
+
+      <button th:onclick="|window.location.href='/User/listimage/' + ${albumId}|">Quay về</button>
+
+  </tbody>
+</table>
+
+</body>
+</html>

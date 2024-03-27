@@ -42,13 +42,23 @@ public class AddImageController {
     private static final String UPLOAD_DIR = "src/main/resources/static/Image/";
 
     @PostMapping("/AddImage")
-    public String addImage(@ModelAttribute ImageEntity imageEntity,
+    public String addImage(Model model,
+                           @ModelAttribute ImageEntity imageEntity,
                            @RequestParam("file") MultipartFile file,
                            @RequestParam("categoryFilter") Integer categoryId) throws IOException {
+
+        String fileName = file.getOriginalFilename();
+        Path filePath = Path.of(UPLOAD_DIR + fileName);
+
+        // Kiểm tra nếu tệp đã tồn tại
+        if (Files.exists(filePath)) {
+            model.addAttribute("error", "Tên tệp đã tồn tại.");
+            return "addimage";
+        }
+
+
         // Save the file to the "src/main/resources/static/Image/" folder
         if (!file.isEmpty()) {
-            String fileName = file.getOriginalFilename();
-            Path filePath = Path.of(UPLOAD_DIR + fileName);
             Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
 
             // Set the path in the Image object

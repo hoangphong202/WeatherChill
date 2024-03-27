@@ -37,7 +37,7 @@ public class ListImageController {
 
         List<ImageEntity> listImage  = imageService.getAllImage();
 
-        List<CategoryImageEntity> listCategories = categoryImageService.GetAllCategoryImage();
+        List<CategoryImageEntity> listCategories = categoryImageService.findAllCategoryImage();
 
 
         // Nếu có lọc theo danh mục, chỉ giữ lại ảnh thuộc danh mục đó

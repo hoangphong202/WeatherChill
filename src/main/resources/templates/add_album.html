@@ -80,12 +80,18 @@
   <br />
 
   <label>Thể loại:</label>
-  <select id="categorySelect" name="categorySelect">
+
+
+
+<!--  id="categorySelect" cái tên id thôi hiện tại chưa sử dụng-->
+  <select id="categorySelect" name="categoryId">
     <!-- Sử dụng th:each để lặp qua danh sách thể loại và tạo các tùy chọn -->
     <option th:each="category : ${listCategory}" th:value="${category.id}" th:text="${category.name}"></option>
   </select>
+
+
   <br />
-  <input type="hidden" id="categoryId" name="categoryId" />
+
 
   <div class="btn">
     <button type="submit">Gửi</button>
@@ -94,15 +100,7 @@
 
 
 </form>
-<script>
-  document.getElementById('categorySelect').addEventListener('change', function () {
-      // Lấy giá trị của tùy chọn được chọn
-      var selectedGenre = this.value;
 
-      // Cập nhật giá trị vào trường input ẩn
-      document.getElementById('categoryId').value = selectedGenre;
-  });
-</script>
 </body>
 
 </html>

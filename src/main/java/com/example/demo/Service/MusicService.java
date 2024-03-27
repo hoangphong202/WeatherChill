@@ -54,14 +54,18 @@ public class MusicService {
         Optional<MusicEntity> musicExisted = musicRepository.findById(id);
         if(musicExisted.isPresent()){
             try{
+
                 musicStorageService.save(file);
+
                 MusicEntity musicEntity = new MusicEntity();
                 musicEntity = musicExisted.get();
                 musicEntity.setName(name);
                 musicEntity.setPath(file.getOriginalFilename());
+
                 CategoryEntity categoryEntity = new CategoryEntity();
                 categoryEntity.setId(categoryId);
                 musicEntity.setCategory(categoryEntity);
+
                 musicRepository.save(musicEntity);
                 System.out.println("Service: Update music success");
                 return true;

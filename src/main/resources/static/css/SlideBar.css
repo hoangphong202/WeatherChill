@@ -1,0 +1,28 @@
+.slide_bar_container{
+    top: 0;
+    right: 0;
+    width: 300px;
+    border-left: 1px solid rgba(0,0,0,.2);
+    transform: translateX(100%);
+}
+
+.form_slide_user{
+    width: 70px;
+    height: 70px;
+    display: flex;
+    margin-bottom: 2vh;
+}
+
+.form_slide_user p{
+    margin-left: 2vh;
+    font-size: 2.6em;
+}
+
+
+.d-flex i{
+    font-size: 2em;
+}
+
+.d-flex p{
+
+}

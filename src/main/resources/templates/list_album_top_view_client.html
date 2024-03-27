@@ -1,0 +1,186 @@
+<!-- image-list.html -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Album</title>
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" type="text/css" href="/css/list_album_client.css" />
+    <link rel="stylesheet" type="text/css" href="/css/ListAlbumClient.css" />
+    <link rel="stylesheet" type="text/css" href="/css/BtnNeon.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        form {
+            display: flex;
+        }
+
+        /* Style the select dropdown */
+        #categorySelect {
+            height: 4vh;
+            width: 16vh;
+        }
+
+        .btn{
+            margin-left: 2vh;
+            font-size: 1em;
+
+            background-color: #0000002b;
+            color: #fae1ff;
+            border: none;
+            text-decoration: none;
+            cursor: pointer;
+            border-radius: 4px;
+            border: 1px solid #89708b;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .btn:hover {
+            box-shadow: 0 0 4px #fff, 0 0 10px #fff, 0 0 13px #f09, 0 0 38px #f09;
+            transform: scale(1.05);
+        }
+
+        .home{
+            position: absolute;
+            z-index: 2;
+            margin-top: 1vh;
+            margin-left: 1vh;
+        }
+
+        .home a i{
+            z-index: 2;
+            color: #ffffff69;
+            font-size: 6vh;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;   <!--to lên mượt-->
+        }
+
+        .home a i:hover{
+            text-shadow: 0 0 4px #fff, 0 0 10px #fff, 0 0 13px #f09, 0 0 38px #f09, 0 0 73px #f09;
+            transform: scale(1.05);
+
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="home">
+    <a th:attr="onclick=|window.location.href='/home-page'|">
+        <i class='bx bx-home'></i>
+    </a>
+</div>
+
+<div class="header">
+    <h1>Top View</h1>
+    <!--<h2 class="namems" th:text="'Welcome ' + ${ten}">  </h2>-->
+
+    <div class="btn_prev" th:attr="onclick=|window.location.href='/User?ten=${ten}'|">
+        <i class='bx bxs-left-arrow'></i>
+    </div>
+
+    <div class="btn_next" th:attr="onclick=|window.location.href='/User?ten=${ten}'|">
+        <i class='bx bxs-right-arrow'></i>
+    </div>
+
+
+</div>
+
+<!--------------------------- tìm kiếm---------------------------->
+
+<div class="search-container">
+    <input type="text" id="searchInput" placeholder="Search by album name...">
+    <button onclick="searchAlbum()">Search</button>
+</div>
+
+<!-- JavaScript cho chức năng tìm kiếm -->
+<script >
+    function searchAlbum() {
+        // Lấy giá trị từ hộp văn bản tìm kiếm
+        var input, filter, gallery, albumItems, a, p, i, txtValue;
+        input = document.getElementById('searchInput');
+        filter = input.value.toUpperCase();
+        gallery = document.getElementsByClassName('gallery')[0];
+        albumItems = gallery.getElementsByClassName('album-item');
+
+        // Duyệt qua danh sách album và kiểm tra tên album
+        for (i = 0; i < albumItems.length; i++) {
+            a = albumItems[i].getElementsByTagName('a')[0];
+            p = albumItems[i].getElementsByTagName('p')[0];
+            txtValue = p.textContent || p.innerText;
+
+            // So sánh tên album với từ khóa tìm kiếm
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                albumItems[i].style.display = ''; // Hiển thị nếu trùng khớp
+            } else {
+                albumItems[i].style.display = 'none'; // Ẩn nếu không trùng khớp
+            }
+        }
+    }
+</script>
+
+
+<!--------------------------- lọc theo lượt --------------------->
+<div class="sort">
+
+    <i class='bx bx-sort-down' onclick="sortAlbumsByViews('desc')" ></i>
+
+    <i class='bx bx-sort-up'  onclick="sortAlbumsByViews('asc')"></i>
+
+
+</div>
+
+<script>
+    // Chức năng sắp xếp danh sách album theo lượt xem
+    function sortAlbumsByViews(order) {
+        // Lấy danh sách album và chuyển đổi thành mảng để sử dụng các hàm mảng
+        var gallery = document.getElementsByClassName('gallery')[0];
+        var albumItems = Array.from(gallery.getElementsByClassName('album-item'));
+
+        // Sắp xếp danh sách album dựa trên giá trị lượt xem
+        albumItems.sort(function (a, b) {
+            // Lấy giá trị lượt xem từ các phần tử HTML và chuyển đổi thành số nguyên
+            var viewCountA = parseInt(a.querySelector('.font').textContent.replace(/[^\d]/g, ''), 10);
+            var viewCountB = parseInt(b.querySelector('.font').textContent.replace(/[^\d]/g, ''), 10);
+
+            // Sắp xếp theo thứ tự tăng dần hoặc giảm dần
+            return order === 'asc' ? viewCountA - viewCountB : viewCountB - viewCountA;
+        });
+
+        // Xóa tất cả các phần tử cũ khỏi danh sách
+        while (gallery.firstChild) {
+            gallery.removeChild(gallery.firstChild);
+        }
+
+        // Thêm lại các phần tử đã được sắp xếp vào danh sách
+        albumItems.forEach(function (albumItem) {
+            gallery.appendChild(albumItem);
+        });
+    }
+</script>
+
+
+<!--------------------------- List album ---------------------------->
+<div class="gallery">
+    <div th:each="albumEntity : ${listAlbum}" class="album-item">
+
+        <a th:href="@{'/ListAlbum/listmusic/' + ${albumEntity.id}(ten=${ten})}">
+            <img th:src="'/Album/' + ${albumEntity.imgPath}" class="size">
+
+            <p th:text="${albumEntity.name}"></p>
+
+        </a>
+
+        <div class = "view">
+            <i class="fa fa-eye"></i>
+            <p class="font" th:text="${albumEntity.viewCount >= 1000000 ? albumEntity.viewCount / 1000000 + 'M' : (albumEntity.viewCount >= 1000 ? albumEntity.viewCount / 1000 + 'K' : albumEntity.viewCount)}"></p>
+        </div>
+        <!--            <p th:text="[+ ${albumEntity.category.name} +]"></p>-->
+
+    </div>
+</div>
+
+</body>
+</html>

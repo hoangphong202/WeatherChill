@@ -1,8 +1,6 @@
 package com.example.demo.Service;
 
-import com.example.demo.Entity.AlbumEntity;
-import com.example.demo.Entity.CategoryEntity;
-import com.example.demo.Entity.MusicEntity;
+import com.example.demo.Entity.*;
 import com.example.demo.Repository.AlbumRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,14 +16,50 @@ public class AlbumService {
     @Autowired
     private AlbumRepository albumRepository;
 
+
     public boolean InsertCover(MultipartFile file, String name, int categoryId){
         albumStorageService.save(file);
+
         AlbumEntity albumEntity = new AlbumEntity();
         albumEntity.setImgPath(file.getOriginalFilename());
         albumEntity.setName(name);
-        CategoryEntity categoryEntity = new CategoryEntity();
-        categoryEntity.setId(categoryId);
-        albumEntity.setCategory(categoryEntity);
+
+        UserEntity userEntity = new UserEntity();
+        userEntity.setId(1);
+        albumEntity.setUser(userEntity);
+
+        // Tạo đối tượng CategoryAlbumEntity để thiết lập quan hệ với album
+        CategoryAlbumEntity categoryAlbum = new CategoryAlbumEntity();
+        categoryAlbum.setId(categoryId);
+
+
+        albumEntity.setCategoryAlbum(categoryAlbum);
+        try{
+            albumRepository.save(albumEntity);
+            return true;
+        }catch (Exception e){
+            System.out.println("Loi Insert Album trong Album Service"+e.getLocalizedMessage());
+            return false;
+        }
+    }
+
+    public boolean InsertCoverClient(MultipartFile file, String name, int categoryId, int userId){
+        albumStorageService.save(file);
+
+        AlbumEntity albumEntity = new AlbumEntity();
+        albumEntity.setImgPath(file.getOriginalFilename());
+        albumEntity.setName(name);
+
+        UserEntity userEntity = new UserEntity();
+        userEntity.setId(userId);
+        albumEntity.setUser(userEntity);
+
+        // Tạo đối tượng CategoryAlbumEntity để thiết lập quan hệ với album
+        CategoryAlbumEntity categoryAlbum = new CategoryAlbumEntity();
+        categoryAlbum.setId(categoryId);
+
+
+        albumEntity.setCategoryAlbum(categoryAlbum);
         try{
             albumRepository.save(albumEntity);
             return true;
@@ -40,9 +74,23 @@ public class AlbumService {
         return albumRepository.findAll();
     }
 
-    public List<MusicEntity> getAllMusic(int albumId){
-        return null;
+    public List<AlbumEntity> getAllAlbumByUserId(int userId){
+
+        return albumRepository.findAllAlbumByUser_Id(userId);
     }
+
+    public AlbumEntity findAlbumById(int albumId){
+
+        return albumRepository.findById(albumId);
+    }
+
+    //     lọc
+    public List<AlbumEntity> getAlbumsByCategory(int categoryId) {
+        // Gọi phương thức từ repository để lấy danh sách album theo category
+        return albumRepository.findByCategoryAlbum_Id(categoryId);
+    }
+
+
 
 
     public boolean deleteAlbumById(int id){
@@ -55,8 +103,12 @@ public class AlbumService {
         }
     }
 
-    public List<AlbumEntity> findAllAlbumByCategoryId(int categoryId){
-        return albumRepository.findAllByCategoryId(categoryId);
+    public List<AlbumEntity> getAlbumsByCategory(String categoryName){
+        return albumRepository.findBycategoryAlbum_Name(categoryName);
     }
+
+//    public List<AlbumEntity> findAllAlbumByCategoryId(int categoryId){
+//        return albumRepository.findAllByCategoryId(categoryId);
+//    }
 
 }

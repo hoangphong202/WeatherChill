@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Album</title>
+    <link rel="stylesheet" type="text/css" href="/css/album_music_client.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" type="text/css" href="/css/ListImageClient.css" />
+    <style>
+        img {
+          width: 100px;
+          padding: 8px;
+          border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="header">
+    <h2>List Image</h2>
+    <!--<h2 class="namems" th:text="'Welcome ' + ${ten}">  </h2>-->
+
+    <div class="btn_prev" th:attr="onclick=|window.location.href='/User/listmusic/${albumId}?ten=${ten}'|">
+        <i class='bx bxs-left-arrow'></i>
+    </div>
+
+    <div class="btn_next" th:attr="onclick=|window.location.href='/User/listmusic/${albumId}?ten=${ten}'|">
+        <i class='bx bxs-right-arrow'></i>
+    </div>
+
+
+</div>
+
+<!-- Hiển thị danh sách ảnh trong một bảng -->
+<table>
+    <thead>
+    <tr>
+        <th>Image</th>
+        <th>Thông tin</th>
+        <th>Category</th>
+        <th>Action</th>
+    </tr>
+
+
+    </thead>
+    <tbody>
+
+    <!-- Duyệt qua danh sách ảnh và hiển thị từng dòng -->
+    <tr th:each="imageEntity : ${listImage}">
+        <td>
+            <img th:src="${imageEntity.path}">
+        </td>
+        <td th:text="${imageEntity.info}"></td>
+        <td th:text="${imageEntity.categoryImage.name}"></td>
+        <td class="action-buttons">
+            <a th:href="@{/User/deleteImage/{imageId}/{albumId}(imageId=${imageEntity.id}, albumId=${albumId})}"
+               onclick="return confirm('Are you sure?')">Xóa hình</a>
+        </td>
+    </tr>
+
+    <button type="button" th:attr="onclick=|window.location.href='/ListAlbum?ten=${ten}'|">Quay về danh sách Album</button>
+
+    <button type="button" th:onclick="|window.location.href='/User/insertImage?albumId=${albumId}'|">Thêm Hình Vào Album</button>
+
+    <button type="button" th:attr="onclick=|window.location.href='/showImage?ten=${ten}'|">Phát tất cả nhạc</button>
+
+    </tbody>
+</table>
+
+</body>
+
+</html>

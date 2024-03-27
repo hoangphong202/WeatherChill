@@ -44,7 +44,8 @@ public class EditImageController {
     }
 
     @PostMapping("/update/{id}")
-    public String updateImage(@PathVariable int id, @ModelAttribute ImageEntity updatedImage) {
+    public String updateImage(@PathVariable int id,
+                              @ModelAttribute ImageEntity updatedImage) {
         // Lấy ảnh từ cơ sở dữ liệu
         ImageEntity imageEntity = imageRepository.findById(id).orElse(null);
 

@@ -8,5 +8,8 @@ import java.util.List;
 
 @Repository
 public interface AlbumRepository extends JpaRepository<AlbumEntity, Integer> {
-    List<AlbumEntity> findAllByCategoryId(int categoryId);
+    List<AlbumEntity> findBycategoryAlbum_Name(String categoryName);
+    List<AlbumEntity> findByCategoryAlbum_Id(int categoryId);
+    List<AlbumEntity> findAllAlbumByUser_Id(int userId);
+    AlbumEntity findById(int albumId);
 }

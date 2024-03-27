@@ -1,9 +1,7 @@
 package com.example.demo.Controller;
 
 import com.example.demo.Entity.RoleEntity;
-import com.example.demo.Entity.TkKhachEntity;
 import com.example.demo.Entity.UserEntity;
-import com.example.demo.Repository.TkKhachRepository;
 import com.example.demo.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

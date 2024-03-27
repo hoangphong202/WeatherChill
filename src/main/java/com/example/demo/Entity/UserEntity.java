@@ -17,9 +17,31 @@ public class UserEntity {
     @Column(name ="password")
     private String password;
 
+    @Column(name ="descriptions")
+    private String describe;
+
+    @Column(name ="img_path")
+    private String imgpath;
+
     @ManyToOne
     @JoinColumn(name = "role_id")
     private RoleEntity role;
+
+    public String getImgpath() {
+        return imgpath;
+    }
+
+    public void setImgpath(String imgpath) {
+        this.imgpath = imgpath;
+    }
+
+    public String getDescribe() {
+        return describe;
+    }
+
+    public void setDescribe(String describe) {
+        this.describe = describe;
+    }
 
     public int getId() {
         return id;

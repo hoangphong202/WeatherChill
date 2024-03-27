@@ -4,9 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" type="text/css" href="css/login.css">
+
+    <style>
+.home{
+    position: absolute;
+    z-index: 2;
+    margin-top: 2vh;
+    right: 0;
+    margin-right: 4vh;
+}
+
+.home a i{
+    z-index: 2;
+    color: #ffffff69;
+    font-size: 6vh;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;   <!--to lên mượt-->
+}
+
+.home a i:hover{
+    text-shadow: 0 0 4px #fff, 0 0 10px #fff, 0 0 13px #f09, 0 0 38px #f09, 0 0 73px #f09;
+    transform: scale(1.05);
+
+}
+    </style>
 </head>
 <body>
+
+<div class="home">
+    <a th:attr="onclick=|window.location.href='/home-page'|">
+        <i class='bx bx-home'></i>
+    </a>
+</div>
+
+
 
 <!--novalidate : tắt thông báo trình duyệt-->
 <form action="/login" method="post" novalidate>
@@ -31,10 +64,10 @@
             </div>
 
 
-<!--            <div class="forget">-->
-<!--                 <label for=""><input type="checkbox">Remember Me  <a href="#">Forget Password</a></label> -->
+            <div class="forget">
+                 <label for=""><input type="checkbox">Remember Me  <a href="#">Forget Password</a></label>
 
-<!--            </div>-->
+            </div>
 
             <div th:if="${error}" class="error-message">
                 <p th:text="${error}"></p>

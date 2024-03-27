@@ -1,0 +1,210 @@
+<!-- image-list.html -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Album</title>
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" type="text/css" href="/css/MyUser.css" />
+    <link rel="stylesheet" type="text/css" href="/css/BtnNeon.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        form {
+            display: flex;
+        }
+
+        /* Style the select dropdown */
+        #categorySelect {
+            height: 4vh;
+            width: 16vh;
+        }
+
+        .btn{
+            margin-left: 2vh;
+            font-size: 1em;
+
+            background-color: #0000002b;
+            color: #fae1ff;
+            border: none;
+            text-decoration: none;
+            cursor: pointer;
+            border-radius: 4px;
+            border: 1px solid #89708b;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .btn:hover {
+            box-shadow: 0 0 4px #fff, 0 0 10px #fff, 0 0 13px #f09, 0 0 38px #f09;
+            transform: scale(1.05);
+        }
+
+        .home{
+            position: absolute;
+            margin-top: 1vh;
+            margin-left: 1vh;
+        }
+
+        .home a i{
+            z-index: 2;
+            color: #ffffff69;
+            font-size: 6vh;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;   <!--to lên mượt-->
+        }
+
+        .home a i:hover{
+            text-shadow: 0 0 4px #fff, 0 0 10px #fff, 0 0 13px #f09, 0 0 38px #f09, 0 0 73px #f09;
+            transform: scale(1.05);
+
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="block_edit"></div>
+
+<div class="home">
+    <a th:attr="onclick=|window.location.href='/Home?ten=${ten}'|">
+        <i class='bx bx-home'></i>
+    </a>
+</div>
+
+<div class="header">
+
+    <!--<h2 class="namems" th:text="'Welcome ' + ${ten}">  </h2>-->
+
+    <div class="btn_prev" th:attr="onclick=|window.location.href='/ListAlbum?ten=${ten}'|">
+        <i class='bx bxs-left-arrow'></i>
+    </div>
+
+    <h1>My Album</h1>
+
+    <div class="btn_next" th:attr="onclick=|window.location.href='/ListAlbum?ten=${ten}'|">
+        <i class='bx bxs-right-arrow'></i>
+    </div>
+
+
+</div>
+
+
+
+
+<div class="tools_bar">
+    <!--------------------------- tìm kiếm---------------------------->
+
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Search by album name...">
+        <button onclick="searchAlbum()">Search</button>
+    </div>
+    <script src="/js/searchAlbum.js"></script>
+
+    <!--------------------------- lọc theo lượt --------------------->
+    <div class="sort">
+        <i class='bx bx-sort-down' onclick="sortAlbumsByViews('desc')" ></i>
+        <i class='bx bx-sort-up'  onclick="sortAlbumsByViews('asc')"></i>
+    </div>
+    <script src="/js/sortAlbumsByViews.js"></script>
+
+</div>
+
+
+
+
+
+
+<div class="main_area">
+
+    <div class="side_bar">
+
+        <form th:action="@{/User/editfile}" method="post" enctype="multipart/form-data">
+            <div class="form_up_avatar">
+
+                <input type="file" id="tepHinh" name="file" accept="image/*" style="display: none;" onchange="submitForm()"/>
+                <script>
+                    function kichHoatInput() {
+                        document.getElementById('tepHinh').click();
+                    }
+
+                    function submitForm() {
+                        document.getElementById('btntepHinh').click();
+                    }
+                </script>
+
+                <div class="container_avatar">
+                    <img class="avatar_choose" onclick="kichHoatInput()">
+                    <i class='bx bx-image-add' onclick="kichHoatInput()"></i>
+                </div>
+
+                <button type="submit" id="btntepHinh" style="display: none;"></button>
+
+            </div>
+        </form>
+
+        <form th:action="@{/User/edit}" method="post" >
+        <div class="form">
+
+            <img class="avatar" th:src="'/Avatar/' + ${imgpath}">
+
+            <input class="name_avatar" type="text" name="name"  th:value="${ten}" required/>
+
+
+            <input type="text" name="email"  th:value="${email}" required/>
+
+
+            <textarea maxlength="100" name="describe" type="text" th:text="${describe}" required ></textarea>
+
+            <div class="box_folow">
+                <div class="like">
+                    <p>Like</p>
+                    <a href="">9</a>
+                </div>
+                <div class="follow">
+                    <p>Follow</p>
+                    <a href="">9</a>
+                </div>
+                <div class="follower">
+                    <p>Follower</p>
+                    <a href="">9</a>
+                </div>
+            </div>
+        </div>
+
+            <button type="submit" class="tools_album" title="done">
+                <i class='bx bx-check'></i>
+            </button>
+
+            <div class="tools_edit" title="edit" th:onclick="|window.location.href='/User'|">
+                <i class='bx bx-x'></i>
+            </div>
+
+        </form>
+    </div>
+
+
+
+    <div class="gallery">
+        <!--------------------------- List album ---------------------------->
+        <div th:each="albumEntity : ${listAlbum}" class="album-item">
+
+            <a th:href="@{'/User/listmusic/' + ${albumEntity.id}(ten=${ten})}">
+                <img th:src="'/Album/' + ${albumEntity.imgPath}" class="size">
+
+                <p th:text="${albumEntity.name}"></p>
+
+            </a>
+
+            <div class = "view">
+                <i class="fa fa-eye"></i>
+                <p class="font" th:text="${albumEntity.viewCount >= 1000000 ? albumEntity.viewCount / 1000000 + 'M' : (albumEntity.viewCount >= 1000 ? albumEntity.viewCount / 1000 + 'K' : albumEntity.viewCount)}"></p>
+            </div>
+            <!--            <p th:text="[+ ${albumEntity.category.name} +]"></p>-->
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

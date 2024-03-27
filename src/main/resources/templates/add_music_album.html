@@ -26,6 +26,7 @@
     }
 
     th {
+        width: 0;
         background-color: #f2f2f2;
     }
 
@@ -62,6 +63,38 @@
 
 <h2>Add Music Vào Album</h2>
 
+<!--------------------------- tìm kiếm---------------------------->
+<div class="search-container">
+  <input type="text" id="searchInput" placeholder="Search by album name...">
+  <button onclick="searchAlbum()">Search</button>
+</div>
+
+<!-- JavaScript cho chức năng tìm kiếm -->
+<script >
+  function searchAlbum() {
+      // Lấy giá trị đầu vào tìm kiếm và chuyển đổi thành chữ in hoa để so sánh không phân biệt chữ hoa/chữ thường
+      var input, filter, albumItems, txtValue;
+      input = document.getElementById('searchInput');
+      filter = input.value.toUpperCase();
+      albumItems = document.getElementsByClassName('search1');
+
+      // Lặp qua các mục album và lọc dựa trên tên album
+      for (var i = 0; i < albumItems.length; i++) {
+          var albumNameElement = albumItems[i];
+          txtValue = albumNameElement.textContent || albumNameElement.innerText;
+
+          // Sử dụng includes cho so sánh chuỗi không phân biệt chữ hoa/chữ thường
+          if (txtValue.toUpperCase().includes(filter)) {
+              albumNameElement.parentNode.style.display = ''; // Hiển thị phần tử cha nếu có kết quả
+          } else {
+              albumNameElement.parentNode.style.display = 'none'; // Ẩn phần tử cha nếu không có kết quả
+          }
+      }
+  }
+
+</script>
+
+
 <!-- Hiển thị danh sách ảnh trong một bảng -->
 <table>
   <thead>
@@ -83,6 +116,7 @@
     <input type="hidden" id="albumId" name="albumId" th:value="${albumId}"/>
     <button type="submit">Lọc</button>
   </form>
+
   <script>
     document.getElementById('categorySelect').addEventListener('change', function() {
         var selectedGenre = this.value;
@@ -93,7 +127,7 @@
   <tr th:each="musicEntity : ${listMusic}">
     <td th:text="${musicEntity.id}"></td>
     <td><audio controls th:attr="src='/Music/' + ${musicEntity.path}"></audio></td>
-    <td th:text="${musicEntity.name}"></td>
+    <td class="search1" th:text="${musicEntity.name}"></td>
     <td>
       <a th:href="@{/album/insertMusic/{musicId}/{albumId}(musicId=${musicEntity.id}, albumId=${albumId})}">
         Thêm nhạc

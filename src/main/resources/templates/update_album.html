@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Update Nhac</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 20px;
+        }
+
+        h2 {
+            color: #333;
+            text-align: center;
+        }
+
+        form {
+            margin-top: 20px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        select {
+            appearance: none;
+            background: url('data:image/svg+xml;utf8,<svg fill="black" height="24" width="24" xmlns="http://www.w3.org/2000/svg"><polygon points="0,0 24,0 12,24"/></svg>') no-repeat right 10px center/15px 15px;
+            cursor: pointer;
+        }
+
+        .size {
+            width: 100%;
+            height: auto;
+            max-width: 200px;
+            padding: 8px;
+            display: block;
+            margin: 0 auto;
+            box-sizing: border-box;
+            border-radius: 4px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        button + button {
+            margin-top: 10px;
+            background-color: #ccc;
+            color: #333;
+        }
+
+        button + button:hover {
+            background-color: #bbb;
+        }
+
+
+    </style>
+
+</head>
+<body>
+<h2>Update Album</h2>
+<form th:action="@{/album/update/{albumId}(albumId=${album.id})}" method="post" th:each="album : ${album}" enctype="multipart/form-data">
+
+
+    <img th:src="@{'/Album/' + ${album.imgPath}}" class="size">
+    <br/>
+
+    <label for="file">Choose File:</label>
+    <!-- Use input type="file" for choosing a file -->
+    <input type="file" id="file" name="file" accept="image/*" />
+    <br/>
+
+    <label for="name">Tên Album:</label>
+    <input type="text" id="name" name="name"  th:value="${album.name}" required/>
+    <br/>
+
+    <label>Thể loại:</label>
+    <select id="categorySelect" name="categoryAlbum.id">
+        <!-- Sử dụng th:each để lặp qua danh sách thể loại và tạo các tùy chọn -->
+        <option th:each="category : ${categoryAlbum}"
+                th:value="${category.id}"
+                th:text="${category.name}"
+                th:selected="${category.id == album.categoryAlbum.id}">
+        </option>
+    </select>
+    <br/>
+
+
+    <button type="submit">Gửi</button>
+    <button type="button" th:onclick="|window.location.href='/album'|">Back</button>
+
+
+</form>
+
+</body>
+</html>

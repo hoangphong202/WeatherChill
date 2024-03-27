@@ -9,15 +9,15 @@ import java.util.List;
 @Entity(name = "Image")
 public class ImageEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 
 	@Column(name = "path")
-    private String path;
+	private String path;
 
 	@Column(name = "info")
-    private String info;
+	private String info;
 
 	@ManyToOne
 	@JoinColumn(name = "category_image_id")
@@ -26,14 +26,14 @@ public class ImageEntity {
 	@OneToMany(mappedBy = "image",fetch = FetchType.EAGER)
 	@ToString.Exclude
 	@JsonIgnore
-	private List<AlbumInfoEntity> albums;
+	private List<AlbuminfoImageEntity> albumsImage;
 
-	public List<AlbumInfoEntity> getAlbums() {
-		return albums;
+	public List<AlbuminfoImageEntity> getAlbumsImage() {
+		return albumsImage;
 	}
 
-	public void setAlbums(List<AlbumInfoEntity> albums) {
-		this.albums = albums;
+	public void setAlbumsImage(List<AlbuminfoImageEntity> albumsImage) {
+		this.albumsImage = albumsImage;
 	}
 
 	public int getId() {

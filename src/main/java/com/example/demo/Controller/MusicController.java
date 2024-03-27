@@ -35,8 +35,10 @@ public class MusicController {
     public String GetAllMusic(HttpSession session,Model model){
         List<MusicEntity> listMusic = musicService.getAllMusic();
         List<CategoryEntity> listCategory = categoryService.getAllCategory();
+
         model.addAttribute("listMusic",listMusic);
         model.addAttribute("listCategory",listCategory);
+
         session.setAttribute("filterMusic",listMusic);
         return "list_music";
     }
@@ -89,7 +91,10 @@ public class MusicController {
     }
 
     @PostMapping("/update")
-    public String UpdateMusic(@RequestParam("file") MultipartFile file, @RequestParam String name, @RequestParam String categoryId, @RequestParam String musicId){
+    public String UpdateMusic(@RequestParam("file") MultipartFile file,
+                              @RequestParam String name,
+                              @RequestParam String categoryId,
+                              @RequestParam String musicId){
         try{
             System.out.println("Ktra: "+ musicId +" - "+file.getOriginalFilename()+" - "+name+" - "+categoryId);
             if(musicService.updateMusicById(Integer.parseInt(musicId) , file, name, Integer.parseInt(categoryId))){

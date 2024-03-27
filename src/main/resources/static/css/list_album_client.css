@@ -33,6 +33,7 @@
                 background: url('/image/Illustration2.png')no-repeat;
                 background-position: center;
                 background-size: cover;
+
         }
 
 
@@ -49,7 +50,7 @@
             text-align: center;
             height: 250px;
             width: 250px;
-
+            cursor: pointer;
             margin: 36px;
             border: 1px solid #ffb1f6;
             border-radius: 8px;
@@ -86,7 +87,8 @@
             color: white;
         }
 
-        .album-item p {
+
+/*        .album-item p {
             margin-bottom: -6vh;
             position: absolute;
             bottom: 0;
@@ -98,7 +100,7 @@
             border-bottom-right-radius: 8px;
             text-shadow: 0 0 4px #fff, 0 0 10px #fff, 0 0 13px #f09, 0 0 38px #f09;
             color: white;
-        }
+        }*/
 
 
 

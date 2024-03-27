@@ -10,17 +10,17 @@ import java.nio.file.StandardCopyOption;
 
 @Service
 public class AlbumStorageService {
-    private final String root = "D:/eclipjava/WeatherChill2/src/main/resources/static/Album";
+    private static final String UPLOAD_DIR = "src/main/resources/static/Image/";
 
     public void save(MultipartFile file) {
-        Path rootPath = Paths.get(root);
+        Path rootPath = Paths.get(UPLOAD_DIR);
         try {
             if (!Files.exists(rootPath)){
                 Files.createDirectories(rootPath);
             }
             Files.copy(file.getInputStream(), rootPath.resolve(file.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
         } catch (Exception e) {
-            System.out.println("Loi upload hinh album vao static: " +e.getLocalizedMessage());
+            System.out.println("Loi upload hinh avatar vao static: " +e.getLocalizedMessage());
         }
     }
 }

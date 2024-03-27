@@ -1,0 +1,157 @@
+/*animation: bodersd 2.5s ease-in-out infinite alternate;*/
+@keyframes bodersd {
+    0%,100% {
+        transform: translate(0,0);
+        color: #f09;
+    }
+
+    50% {
+        color: #f09;
+        box-shadow: 0 0 4px #fff, 0 0 10px #fff, 0 0 13px #f09, 0 0 38px #f09;
+    }
+}
+
+/*    animation: boder1 2.5s ease-in-out infinite alternate;*/
+@keyframes boder1 {
+    0%,100% {
+        transform: translate(0,0);
+        color: rgb(159, 44, 124);
+    }
+
+    50% {
+        color: #f09;
+        text-shadow:
+
+            0 0 13px #f09,
+            0 0 38px #f09,
+            0 0 73px #f09;
+    }
+}
+
+
+
+/* Reset CSS để loại bỏ các margin và padding mặc định của trình duyệt */
+body, h1, h2, h3, p, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: url('/image/Illustration2.png')no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+h2 {
+    font-size: 7vh;
+    text-align: center;
+    animation: boder1 2.5s ease-in-out infinite alternate;
+    margin-bottom: 20px;
+    margin-top: 2vh;
+}
+
+h3 {
+    line-height: 1.7;
+    font-size: 1.5em;
+    font-weight: normal;
+    color: #ffffff;
+    text-shadow: 0 0 4px #fff, 0 0 13px #f09;
+    white-space: pre-wrap; /* Cho phép xuống dòng */
+}
+
+
+/* Phần câu hỏi */
+.question {
+    margin-bottom: 20px;
+}
+
+.question_container{
+    border-radius: 16px;
+    backdrop-filter: blur(15px);
+    background-color: #0000001f;
+    border: 1px solid #e762ff;
+    padding: 4vh;
+    box-shadow: 0 0 4px #fff, 0 0 10px #f09;
+}
+
+/* Phần câu trả lời */
+.answer_contaier{
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Chia thành 2 cột bằng nhau */
+  gap: 10px; /* Khoảng cách giữa các ô */
+  margin-top: 2vh;
+}
+
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    border-radius: 16px;
+    box-sizing: border-box;
+    border: 1px solid #ffffff78;
+    padding: 10px;
+    margin: 10px 0;
+    margin-top: 3vh;
+    backdrop-filter: blur(15px);
+    background-color: #0000001f;
+    cursor: pointer;
+    line-height: 1.7;
+    font-size: 1.1em;
+    font-weight: normal;
+    color: #ffffff;
+    text-shadow: 0 0 6px #ffffff42, 0 0 10px #ff009982;
+    white-space: pre-wrap;
+    transition: transform 0.3s ease-in-out;
+}
+
+        li:hover {
+            box-shadow: 0 0 4px #fff, 0 0 13px #f09;
+            transform: scale(1.01);
+        }
+
+/* Nút Next và Prev */
+button {
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Kiểu dáng chung cho các phần tử */
+
+
+.correct {
+    color: green;
+    font-weight: bold;
+}
+
+.incorrect {
+    color: red;
+    font-weight: bold;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+/* Tùy chỉnh kiểu dáng cho màn hình nhỏ */
+@media only screen and (max-width: 600px) {
+    .container {
+        width: 100%;
+    }
+}
+
+
+
+

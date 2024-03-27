@@ -153,7 +153,7 @@ button.default {
     width: 0;
 }
 .chat-container {
-    background-color: #00000054;
+    background-color: #000000a3;
     box-shadow: 0 1px 11px rgba(0, 0, 0, 0.27);
     margin-top: 24vh;
     height: 54vh;
@@ -161,7 +161,14 @@ button.default {
     border-radius: 24px;
     margin-left: 79%;
     margin-top: 36vh;
+    opacity: .6;
 }
+
+.chat-container:hover{
+    opacity: 1;
+}
+
+
 #chat-page ul {
     list-style-type: none;
     /* background-color: #00000054; */

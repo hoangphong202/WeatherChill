@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/account.css">
+    <title>Account</title>
+
+</head>
+<body>
+<!--th:object="${tkKhachEntity}"-->
+<form th:action="@{/Home/updateAccount}" th:each="loggedInUser : ${loggedInUser}" method="post" novalidate>
+
+
+<div class="all_khung">
+    <div class="form-box">
+        <div>
+
+            <h2>Account</h2>
+            <div class="inputbox">
+                <ion-icon name="accessibility-outline"></ion-icon>
+                <input type="text" id="ten" name="name" th:value="${loggedInUser.name}" required>
+                <label for="ten">Nick Name</label>
+            </div>
+
+
+            <div class="inputbox">
+                <ion-icon name="mail-outline"></ion-icon>
+                <input type="text" id="taikhoan" name="email" th:value="${loggedInUser.email}" required>
+                <label for="taikhoan">Email</label>
+            </div>
+
+
+            <div class="inputbox">
+                <ion-icon name="lock-closed-outline"></ion-icon>
+                <input type="text" id="matkhau" name="password" th:value="${loggedInUser.password}" required>
+                <label for="matkhau">Password</label>
+            </div>
+
+
+
+            <div th:if="${error}" class="error-message">
+                <p th:text="${error}"></p>
+            </div>
+
+
+            <button type="submit" class="btn_login">Update</button>
+
+            <button type="button" class="btn_login" th:onclick="|window.location.href='/Home'|">Back</button>
+
+
+
+        </div>
+    </div>
+</div>
+</form>
+
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+
+</body>
+</html>

@@ -125,6 +125,11 @@
 
     <br/>
 
+    <div th:if="${error}" class="error-message">
+        <p th:text="${error}"></p>
+    </div>
+
+    <br/>
     <button type="submit">Submit</button>
     <button type="button" th:onclick="|window.location.href='/ListImage'|">Back</button>
 

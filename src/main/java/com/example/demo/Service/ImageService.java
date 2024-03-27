@@ -19,4 +19,8 @@ public class ImageService {
         return imageRepository.findAll();
     }
 
+    public List<ImageEntity> findImagesByCategoryId(int categoryImageId){
+        return imageRepository.findAllByCategoryImage_Id(categoryImageId);
+    }
+
 }

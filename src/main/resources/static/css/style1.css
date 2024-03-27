@@ -14,7 +14,7 @@ body {
 
 .home a i{
     z-index: 2;
-    color: #831d5d69;
+    color: #ffffff69;
     font-size: 6vh;
     cursor: pointer;
 }
@@ -77,13 +77,15 @@ body {
 
 
 .hung{
-    object-fit: cover
+    object-fit: cover;
+    height: 100vh;
 }
 
 .img_bg1{
 
     top: 0;
     left: 0;
+    align-items: center;
 /*    margin-top:50px;*/
     width: 100%;
     height: 100vh;
@@ -268,7 +270,7 @@ body {
 
 .namems {
     position: absolute;
-    width: 40vh;
+    width: 38vh;
     font-size: 30px;
     margin-right: 600px;
     margin-bottom: 20px;
@@ -299,7 +301,7 @@ body {
     position: absolute;
     top: 0;
     margin-top: 93vh;
-    margin-left: 28vh;
+    margin-left: 12%;
     z-index: 10000;
 }
 

@@ -81,7 +81,7 @@
     margin-left: 5px;
     margin-top: 12vh;
     box-shadow: 0 1px 11px rgba(0, 0, 0, 0.27);
-
+    border: 1px solid #ff8fef;
     position: absolute;
     width: 300px;
     height: 70vh;
@@ -107,9 +107,8 @@
 }
        .menu_header h2 {
            font-size: 3em;
-                   color: #f09;
-                   text-shadow: 0 0 4px #fff, 0 0 10px #fff, 0 0 13px #f09, 0 0 38px #f09, 0 0 73px #f09;
-
+           color: #f09;
+           text-shadow: 0 0 4px #fff, 0 0 10px #fff, 0 0 13px #f09, 0 0 38px #f09, 0 0 73px #f09;
        }
 
 .menucon {

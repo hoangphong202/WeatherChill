@@ -12,7 +12,7 @@ public class CategoryImageService {
     @Autowired
     private CategoryImageRepository categoryImageRepository;
 
-    public List<CategoryImageEntity> GetAllCategoryImage(){
+    public List<CategoryImageEntity> findAllCategoryImage(){
         return categoryImageRepository.findAll();
     }
 
