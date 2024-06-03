@@ -143,26 +143,19 @@
             </li>
 
         </ul>
-        <form class="form-inline my-2 my-lg-0 search">
-            <div class="btn btn-outline-success my-2 my-sm-0" th:attr="onclick=|window.location.href='/login'|">Login</div>
-            <div class="btn btn-outline-success my-2 my-sm-0" th:attr="onclick=|window.location.href='/register'|">Sign Up</div>
+        <form class="form-inline my-2 my-lg-0 search" action="/search" method="get">
+            <div class="btn btn-outline-success my-2 my-sm-0" onclick="location.href='/login'">Login</div>
+            <div class="btn btn-outline-success my-2 my-sm-0" onclick="location.href='/register'">Sign Up</div>
 
-            <input class="form-control mr-sm-2" type="search" placeholder="Search">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="keyword">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 
-            <button class="icon_avatar1"
-                    type="button"
-                    data-bs-toggle="offcanvas"
-                    data-bs-target="#offcanvasRight"
-                    aria-controls="offcanvasRight">
-
-<!--                <img class="avatar" th:src="'/Avatar/' + ${imgpath}">-->
-<!--                <img class="avatar" th:src="'/Avatar/hutaochibi.jpg'">-->
-                <i class='avatar bx bx-user-circle' ></i>
-
+            <button class="icon_avatar1" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                <!-- Thêm biểu tượng người dùng -->
+                <i class="avatar bx bx-user-circle"></i>
             </button>
-
         </form>
+
     </div>
 </nav>
 

@@ -76,13 +76,13 @@
 
     <!--<h2 class="namems" th:text="'Welcome ' + ${ten}">  </h2>-->
 
-    <div class="btn_prev" th:attr="onclick=|window.location.href='/ListAlbum?ten=${ten}'|">
+    <div class="btn_prev" th:attr="onclick=|window.location.href='/ListAlbum'|">
         <i class='bx bxs-left-arrow'></i>
     </div>
 
     <h1>My Album</h1>
 
-    <div class="btn_next" th:attr="onclick=|window.location.href='/ListAlbum?ten=${ten}'|">
+    <div class="btn_next" th:attr="onclick=|window.location.href='/ListAlbum'|">
         <i class='bx bxs-right-arrow'></i>
     </div>
 
@@ -130,7 +130,7 @@
             <div class="box_folow">
                 <div class="like">
                     <p>Like</p>
-                    <a href="">9</a>
+                    <a class="like_a" th:attr="onclick=|window.location.href='/LikedAlbum'|" th:text="${likedAlbumsCount}"></a>
                 </div>
                 <div class="follow">
                     <p>Follow</p>

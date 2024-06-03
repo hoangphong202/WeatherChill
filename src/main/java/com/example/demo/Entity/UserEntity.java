@@ -1,6 +1,10 @@
 package com.example.demo.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.ToString;
+
+import java.util.List;
 
 @Entity(name = "user")
 public class UserEntity {
@@ -26,6 +30,20 @@ public class UserEntity {
     @ManyToOne
     @JoinColumn(name = "role_id")
     private RoleEntity role;
+
+    @OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
+    @ToString.Exclude
+    @JsonIgnore
+    private List<LikeAlbumEntity> LikeAlbum;
+
+
+    public List<LikeAlbumEntity> getLikeAlbum() {
+        return LikeAlbum;
+    }
+
+    public void setLikeAlbum(List<LikeAlbumEntity> likeAlbum) {
+        LikeAlbum = likeAlbum;
+    }
 
     public String getImgpath() {
         return imgpath;

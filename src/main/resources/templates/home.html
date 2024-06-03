@@ -88,18 +88,29 @@
                 <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
             </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0 search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Sign in</button>
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
-            <input class="form-control mr-sm-2" type="search" placeholder="Search">
+        <form class="form-inline my-2 my-lg-0 search" action="/search" method="get">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="keyword">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Toggle right offcanvas</button>
-
         </form>
+
+
+
+        <form th:action="@{/login}" method="post">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
+        </form>
+
+        <form th:action="@{/signin}" method="post">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Sign in</button>
+        </form>
+
+        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Toggle right offcanvas</button>
+
     </div>
 </nav>
 
-
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 
 

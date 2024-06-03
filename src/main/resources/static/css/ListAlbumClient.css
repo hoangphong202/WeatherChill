@@ -97,9 +97,41 @@
     text-shadow: 0 0 4px #fff, 0 0 10px #fff, 0 0 13px #f09, 0 0 38px #f09;
 
     margin-top: -3.7vh;
+    margin-left: 1vh;
+    display: flex;
+}
+
+
+.btn_tim{
+    box-shadow: none;
+    background: none;
+    border: none;
+}
+
+.btn_tim:hover{
+    box-shadow: none;
+}
+
+.tim{
+    position: absolute;
+
+    font-size: 0.7em;
+    color: white;
+    text-shadow: 0 0 4px #fff, 0 0 10px #fff, 0 0 13px #f09, 0 0 38px #f09;
+
+    margin-top: -3.7vh;
     margin-left: 26vh;
     display: flex;
 }
+
+.tim i{
+    margin-top: -4px;
+    font-size: 3vh;
+}
+.red {
+    color: red;
+}
+
 
 .font{
     margin: 0;

@@ -12,4 +12,6 @@ public interface AlbumRepository extends JpaRepository<AlbumEntity, Integer> {
     List<AlbumEntity> findByCategoryAlbum_Id(int categoryId);
     List<AlbumEntity> findAllAlbumByUser_Id(int userId);
     AlbumEntity findById(int albumId);
+
+    List<AlbumEntity> findByNameContaining(String name);
 }

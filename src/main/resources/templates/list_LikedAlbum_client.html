@@ -167,16 +167,17 @@
 <!--------------------------- List album ---------------------------->
 <div class="gallery">
     <div th:each="albumEntity : ${listAlbum}" class="album-item">
-        <a th:href="@{'/ListAlbum/listmusic/' + ${albumEntity.id}(ten=${ten})}">
-            <img th:src="@{'/Album/' + ${albumEntity.imgPath}}" class="size">
-            <p th:text="${albumEntity.name}"></p>
+        <a th:href="@{'/ListAlbum/listmusic/' + ${albumEntity.album.id}(ten=${ten})}">
+            <img th:src="@{'/Album/' + ${albumEntity.album.imgPath}}" class="size">
+            <p th:text="${albumEntity.album.name}"></p>
         </a>
 
-        <form class="tim" th:action="@{(${albumEntity.liked} ? '/ListAlbum/deleteLikeAlbum/' : '/ListAlbum/insertLikeAlbum/') + ${userId} + '/' + ${albumEntity.id}}" method="get">
+        <form class="tim" th:action="@{(${albumEntity.album.liked} ? '/LikedAlbum/insertLikeAlbum/' : '/LikedAlbum/deleteLikeAlbum/') + ${userId} + '/' + ${albumEntity.album.id}}" method="get">
             <button class="btn_tim" type="submit">
-                <i class='bx bxs-heart' th:classappend="${albumEntity.liked ? 'red' : ''}"></i>
+                <i class='bx bxs-heart' th:classappend="${albumEntity.album.liked ? '' : 'red'}"></i>
             </button>
         </form>
+
 
         <script>
             document.addEventListener("DOMContentLoaded", function() {
@@ -194,7 +195,7 @@
         <div class = "view">
 
             <i class="fa fa-eye"></i>
-            <p class="font" th:text="${albumEntity.viewCount >= 1000000 ? albumEntity.viewCount / 1000000 + 'M' : (albumEntity.viewCount >= 1000 ? albumEntity.viewCount / 1000 + 'K' : albumEntity.viewCount)}"></p>
+            <p class="font" th:text="${albumEntity.album.viewCount >= 1000000 ? albumEntity.viewCount / 1000000 + 'M' : (albumEntity.album.viewCount >= 1000 ? albumEntity.album.viewCount / 1000 + 'K' : albumEntity.album.viewCount)}"></p>
         </div>
         <!--            <p th:text="[+ ${albumEntity.category.name} +]"></p>-->
 

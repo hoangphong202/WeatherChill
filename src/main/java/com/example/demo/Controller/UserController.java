@@ -46,6 +46,9 @@ public class UserController {
     private CategoryService categoryService;
     @Autowired
     private MusicService musicService;
+
+    @Autowired
+    private LikeAlbumService likeAlbumService;
     @GetMapping("")
     public String listAlbum( HttpSession session,
                              Model model){
@@ -57,12 +60,23 @@ public class UserController {
         String email = (loggedInUser != null) ? loggedInUser.getEmail() : "";
         String describe = (loggedInUser != null) ? loggedInUser.getDescribe() : "";
         String imgpath = (loggedInUser != null) ? loggedInUser.getImgpath() : "";
-        int userId =  (loggedInUser != null) ? loggedInUser.getId() : 0;
+        int userId =  (loggedInUser != null) ? loggedInUser.getId() : 1;
+
+
+        // Retrieve all liked albums for the user
+        List<LikeAlbumEntity> listAlbumlike = likeAlbumService.getAllLikeAlbumByIdUser(userId);
+        // Count the number of liked albums
+        int likedAlbumsCount = listAlbumlike.size();
+
+
 
         List<AlbumEntity> listAlbum = albumService.getAllAlbumByUserId(userId);
 //        List<AlbumEntity> listAlbum = albumService.getAllAlbum();
 
         Collections.reverse(listAlbum); // đảo list album
+
+        // Add likedAlbumsCount to the model
+        model.addAttribute("likedAlbumsCount", likedAlbumsCount);
 
         model.addAttribute("listAlbum", listAlbum);
 

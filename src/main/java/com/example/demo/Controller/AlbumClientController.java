@@ -1,5 +1,6 @@
 package com.example.demo.Controller;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import com.example.demo.Entity.*;
 import com.example.demo.Repository.AlbumInfoRepository;
 import com.example.demo.Repository.AlbumRepository;
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.security.PrivateKey;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -54,6 +56,9 @@ public class AlbumClientController {
 //        model.addAttribute("ten", ten);
 //        return "list_album_client";
 //    }
+
+    @Autowired
+    private LikeAlbumService likeAlbumService;
     @GetMapping("")
     public String listAlbum( HttpSession session,
                              Model model){
@@ -62,14 +67,54 @@ public class AlbumClientController {
         UserEntity loggedInUser = (UserEntity) session.getAttribute("loggedInUser");
         // Sử dụng toán tử ba ngôi để kiểm tra và lấy tên, trả về chuỗi rỗng nếu loggedInUser là null
         String ten = (loggedInUser != null) ? loggedInUser.getName() : "";
+        int userId = (loggedInUser != null) ? loggedInUser.getId() : 1;
+
+        List<LikeAlbumEntity> listAlbumlike = likeAlbumService.getAllLikeAlbumByIdUser(userId);
+
+        int likedAlbumsCount = 0; // Variable to count liked albums
+
+
+        for (LikeAlbumEntity likeAlbum : listAlbumlike) {
+            AlbumEntity album = likeAlbum.getAlbum();
+            album.setLiked(true); // Đánh dấu album đã được like bởi người dùng hiện tại
+            likedAlbumsCount++; // Increment the count of liked albums
+
+        }
+
+        // Lưu thông tin vào session
+        session.setAttribute("likedAlbumsCount", likedAlbumsCount);
 
         Collections.reverse(listAlbum); // đảo list album
 
         model.addAttribute("listAlbum", listAlbum);
-
+        model.addAttribute("userId", userId);
         model.addAttribute("ten", ten);
         return "list_album_client";
     }
+
+    @GetMapping("/insertLikeAlbum/{userId}/{albumId}")
+    public String insertImage(@PathVariable(name = "userId") int userId,
+                              @PathVariable(name = "albumId") int albumId,
+                              Model model){
+
+        if(likeAlbumService.insertLikeAlbum(userId,albumId)){
+
+            return "redirect:/ListAlbum";
+        }
+        return "redirect:/ListAlbum";
+
+    }
+
+    // xóa nhạc trong album
+    @GetMapping("/deleteLikeAlbum/{userId}/{albumId}")
+    public String deleteMusic(@PathVariable(name = "userId") int userId,
+                              @PathVariable(name = "albumId") int albumId,
+                              Model model){
+        likeAlbumService.deleteLikeAlbum(userId, albumId);
+        return "redirect:/ListAlbum";
+    }
+
+
 
     @GetMapping("/listmusic/{albumId}")
     public String listMusic(@RequestParam(name = "ten", required = false) String ten,

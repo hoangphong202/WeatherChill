@@ -2,6 +2,7 @@ package com.example.demo.Service;
 
 import com.example.demo.Entity.*;
 import com.example.demo.Repository.AlbumRepository;
+import com.example.demo.Repository.LikeAlbumRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,6 +16,14 @@ public class AlbumService {
 
     @Autowired
     private AlbumRepository albumRepository;
+
+    @Autowired
+    private LikeAlbumRepository likeAlbumRepository;
+
+
+    public List<AlbumEntity> searchAlbumsByName(String name) {
+        return albumRepository.findByNameContaining(name);
+    }
 
 
     public boolean InsertCover(MultipartFile file, String name, int categoryId){
@@ -73,6 +82,9 @@ public class AlbumService {
 
         return albumRepository.findAll();
     }
+
+
+
 
     public List<AlbumEntity> getAllAlbumByUserId(int userId){
 

@@ -22,6 +22,9 @@ public class AlbumEntity {
     @Column(name = "img_path")
     private String imgPath;
 
+    @Column(name = "liked")
+    private boolean liked;
+
     @ManyToOne
     @JsonIgnore
     @JoinColumn(name = "user_id")
@@ -39,6 +42,28 @@ public class AlbumEntity {
     @ToString.Exclude
     @JsonIgnore
     private List<AlbumInfoEntity> albums;
+
+    @OneToMany(mappedBy = "album",fetch = FetchType.EAGER)
+    @ToString.Exclude
+    @JsonIgnore
+    private List<LikeAlbumEntity> LikeAlbum;
+
+
+    public boolean isLiked() {
+        return liked;
+    }
+
+    public void setLiked(boolean liked) {
+        this.liked = liked;
+    }
+
+    public List<LikeAlbumEntity> getLikeAlbum() {
+        return LikeAlbum;
+    }
+
+    public void setLikeAlbum(List<LikeAlbumEntity> likeAlbum) {
+        LikeAlbum = likeAlbum;
+    }
 
     public UserEntity getUser() {
         return user;
