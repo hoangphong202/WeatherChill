@@ -1,7 +1,11 @@
 package com.example.demo.Controller;
 
+import com.example.demo.Entity.FavoriteAlbumEntity;
+import com.example.demo.Entity.HistoryEntity;
 import com.example.demo.Entity.RoleEntity;
 import com.example.demo.Entity.UserEntity;
+import com.example.demo.Repository.FavoriteAlbumRepository;
+import com.example.demo.Repository.HistoryRepository;
 import com.example.demo.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +18,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class RegisterController {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private HistoryRepository historyRepository;
+    @Autowired
+    private FavoriteAlbumRepository favoriteAlbumRepository;
 
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
@@ -121,10 +129,16 @@ public class RegisterController {
         RoleEntity role = new RoleEntity();
         role.setId(2);  // Assuming 2 is the ID for "Client" role
         userEntity.setRole(role);
-
-
-        // Lưu người dùng vào cơ sở dữ liệu
         userRepository.save(userEntity);
+
+        HistoryEntity history = new HistoryEntity();
+        history.setUser(userEntity);
+        historyRepository.save(history);
+
+        FavoriteAlbumEntity favoriteAlbum = new FavoriteAlbumEntity();
+        favoriteAlbum.setUser(userEntity);
+        favoriteAlbumRepository.save(favoriteAlbum);
+        // Lưu người dùng vào cơ sở dữ liệu
         // Chuyển hướng đến trang đăng nhập sau khi đăng ký thành công
         return "redirect:/login";
     }

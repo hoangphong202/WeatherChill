@@ -2,10 +2,12 @@ package com.example.demo.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.ToString;
 
 import java.util.List;
 
+@Data
 @Entity(name = "user")
 public class UserEntity {
     @Id
@@ -36,6 +38,11 @@ public class UserEntity {
     @JsonIgnore
     private List<LikeAlbumEntity> LikeAlbum;
 
+    @OneToOne(mappedBy = "user")
+    private FavoriteAlbumEntity album;
+
+    @OneToOne(mappedBy = "user")
+    private HistoryEntity history;
 
     public List<LikeAlbumEntity> getLikeAlbum() {
         return LikeAlbum;

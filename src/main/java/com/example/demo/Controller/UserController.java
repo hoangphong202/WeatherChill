@@ -50,8 +50,7 @@ public class UserController {
     @Autowired
     private LikeAlbumService likeAlbumService;
     @GetMapping("")
-    public String listAlbum( HttpSession session,
-                             Model model){
+    public String listAlbum( HttpSession session, Model model){
 
 
         UserEntity loggedInUser = (UserEntity) session.getAttribute("loggedInUser");

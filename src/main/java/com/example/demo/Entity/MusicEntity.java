@@ -30,6 +30,12 @@ public class MusicEntity {
     @JsonIgnore
     private List<AlbumInfoEntity> albums;
 
+    @OneToMany(mappedBy = "music")
+    private List<FavoriteAlbumInfoEntity> favoriteAlbums;
+
+    @OneToMany(mappedBy = "music")
+
+    private List<HistoryInfoEntity> historys;
     public List<AlbumInfoEntity> getAlbums() {
         return albums;
     }
