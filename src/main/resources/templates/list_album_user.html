@@ -7,14 +7,16 @@
     <title>Album</title>
 
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" type="text/css" href="/css/SlideBar.css" />
     <link rel="stylesheet" type="text/css" href="/css/list_album_client.css" />
     <link rel="stylesheet" type="text/css" href="/css/ListAlbumClient.css" />
-<!--    <link rel="stylesheet" type="text/css" href="/css/BtnNeon.css" />-->
     <link rel="stylesheet" type="text/css" href="/css/category.css" />
+    <link rel="stylesheet" type="text/css" href="/css/BtnNeon.css" />
     <link rel="stylesheet" type="text/css" href="/css/layout.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
 
     <style>
         form {
@@ -26,26 +28,6 @@
             height: 4vh;
             width: 16vh;
         }
-
-        .btn_search{
-            margin-left: 2vh;
-            font-size: 1em;
-            background-color: #0000002b;
-            color: #fae1ff;
-            border: none;
-            text-decoration: none;
-            cursor: pointer;
-            border-radius: 4px;
-            border: 1px solid #89708b;
-            transition: transform 0.3s ease-in-out;
-        }
-        .btn_search:hover {
-            box-shadow: 0 0 4px #fff, 0 0 10px #fff, 0 0 13px #f09, 0 0 38px #f09;
-            transform: scale(1.05);
-        }
-
-
-
 
         .btn{
             margin-left: 2vh;
@@ -62,6 +44,25 @@
         }
 
         .btn:hover {
+            box-shadow: 0 0 4px #fff, 0 0 10px #fff, 0 0 13px #f09, 0 0 38px #f09;
+            transform: scale(1.05);
+        }
+
+
+
+         .btn_search{
+            margin-left: 2vh;
+            font-size: 1em;
+            background-color: #0000002b;
+            color: #fae1ff;
+            border: none;
+            text-decoration: none;
+            cursor: pointer;
+            border-radius: 4px;
+            border: 1px solid #89708b;
+            transition: transform 0.3s ease-in-out;
+        }
+        .btn_search:hover {
             box-shadow: 0 0 4px #fff, 0 0 10px #fff, 0 0 13px #f09, 0 0 38px #f09;
             transform: scale(1.05);
         }
@@ -87,7 +88,7 @@
 
         }
 
-                .category a {
+                        .category a {
             position: absolute;
             right: 4vh;
             margin-top: 40vh;
@@ -110,32 +111,85 @@
 
 }
 
+    .boder{
+        border: 2px solid;
+    }
+
+    .slide{
+        background-color: #00000091;
+        border: 2px solid #7a1c76;
+    }
+
     </style>
 </head>
 <body>
 
-<!--<div class="home">-->
-<!--    <a th:attr="onclick=|window.location.href='/home-page'|">-->
-<!--        <i class='bx bx-home'></i>-->
-<!--    </a>-->
-<!--</div>-->
+<!------------------------------------------- slide bar nav Offcanvas--------------------------->
+<div class="slide offcanvas slide_bar_container " tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
 
-<!--<div class="header">-->
-<!--    <h1>List Album</h1>-->
-<!--    &lt;!&ndash;<h2 class="namems" th:text="'Welcome ' + ${ten}">  </h2>&ndash;&gt;-->
+    <div class="offcanvas-header">
+        <h1 class="slide_h1" id="offcanvasRightLabel">WelCome</h1>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
 
-<!--    <div class="btn_prev" th:attr="onclick=|window.location.href='/User?ten=${ten}'|">-->
-<!--        <i class='bx bxs-left-arrow'></i>-->
-<!--    </div>-->
+    <div class="offcanvas-body pt-0">
+        <div th:attr="onclick=|window.location.href='/User'|" class="form_slide_user">
+            <img class="avatar_slide boder" th:src="'/Avatar/' + ${imgpath}">
+            <p th:text="${ten}"></p>
+        </div>
 
-<!--    <div class="btn_next" th:attr="onclick=|window.location.href='/User?ten=${ten}'|">-->
-<!--        <i class='bx bxs-right-arrow'></i>-->
-<!--    </div>-->
+        <div th:attr="onclick=|window.location.href='/User'|" class="d-flex">
+            <i class='bx bxs-user-circle'></i>
+            <p >My Album</p>
+        </div>
+
+        <div class="d-flex">
+            <i class='bx bxs-star' ></i>
+            <p>Favorites</p>
+        </div>
+
+        <div class="d-flex">
+            <i class='bx bx-history' ></i>
+            <p>History</p>
+        </div>
+
+        <!--        <div class="d-flex">-->
+        <!--            <i class='bx bx-user-check'></i>-->
+        <!--            <p>Follow list</p>-->
+        <!--        </div>-->
+
+        <!--        <div class="d-flex">-->
+        <!--            <i class='bx bx-user'></i>-->
+        <!--            <p>Follower list</p>-->
+        <!--        </div>-->
+
+        <!--        <div class="d-flex">-->
+        <!--            <i class='bx bx-block'></i>-->
+        <!--            <p>Blocked list</p>-->
+        <!--        </div>-->
 
 
-<!--</div>-->
+        <!--        <p>Language</p>-->
 
-<!------------------------ nav ------------------------------------>
+        <!--        <p>Help</p>-->
+
+        <!--        <p>About us</p>-->
+
+        <!--        <p>Information</p>-->
+
+        <a th:href="@{User/Logout}" class="d-flex text-decoration-none">
+            <i class='bx bxs-door-open'></i>
+            <p>Logout</p>
+        </a>
+
+
+    </div>
+
+</div>
+
+
+
+<!------------------------ nav  ------------------------------------>
 <nav class=" navbar navbar-expand-lg  layout">
     <a class="font navbar-brand" href="#">WeatherChill</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
@@ -145,10 +199,8 @@
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 
-
             <li class="nav-item ">
                 <div class="font_li " th:attr="onclick=|window.location.href='/home-page'|">Home</div>
-
             </li>
 
             <li class="nav-item">
@@ -156,8 +208,18 @@
             </li>
 
             <li class="nav-item">
+                <div class="font_li " th:attr="onclick=|window.location.href='/User'|">My Album</div>
+            </li>
+
+            <li class="nav-item">
+                <div class="font_li " th:attr="onclick=|window.location.href='/LikedAlbum'|">Album Favorites</div>
+            </li>
+
+
+            <li class="nav-item">
                 <a class="font_li " href="#">List Music</a>
             </li>
+
             <li class="nav-item">
                 <a class="font_li " href="#">Favorite Music</a>
             </li>
@@ -165,23 +227,44 @@
 
         </ul>
         <form class="form-inline my-2 my-lg-0 search" action="/search" method="get">
-            <div class="btn" onclick="location.href='/login'">Login</div>
-            <div class="btn" onclick="location.href='/register'">Sign Up</div>
-
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="keyword">
-            <button class="btn  my-2 my-sm-0" type="submit">Search</button>
+            <button class="btn my-2 my-sm-0" type="submit">Search</button>
 
-            <button class="icon_avatar1" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
-                <!-- Thêm biểu tượng người dùng -->
-                <i class="avatar bx bx-user-circle"></i>
+
+            <!-- ---------------------------  bell ---------------------------->
+            <!--            <div class="dropdown">-->
+
+            <!--                    <i class='font_li bell bx bxs-bell'></i>-->
+
+            <!--                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">-->
+            <!--                    <li><a class="dropdown-item" href="#">Action</a></li>-->
+            <!--                    <li><a class="dropdown-item" href="#">Another action</a></li>-->
+            <!--                    <li><a class="dropdown-item" href="#">Something else here</a></li>-->
+            <!--                </ul>-->
+
+            <!--            </div>-->
+
+
+
+
+            <button class="icon_avatar1"
+                    type="button"
+                    data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasRight"
+                    aria-controls="offcanvasRight">
+
+                <img class="avatar boder" th:src="'/Avatar/' + ${imgpath}">
+                <!--                                <img class="avatar" th:src="'/Avatar/hutaochibi.jpg'">-->
+
+
             </button>
-        </form>
 
+        </form>
     </div>
 </nav>
 
+<h1>List Album</h1>
 
-    <h1>List Album</h1>
 <!--------------------------- tìm kiếm---------------------------->
 
 <div class="search-container">
@@ -264,7 +347,23 @@
             <p th:text="${albumEntity.name}"></p>
         </a>
 
+        <form class="tim" th:action="@{(${albumEntity.liked} ? '/ListAlbum/deleteLikeAlbum/' : '/ListAlbum/insertLikeAlbum/') + ${userId} + '/' + ${albumEntity.id}}" method="get">
+            <button class="btn_tim" type="submit">
+                <i class='bx bxs-heart' th:classappend="${albumEntity.liked ? 'red' : ''}"></i>
+            </button>
+        </form>
 
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const heartIcons = document.querySelectorAll(".tim i");
+
+                heartIcons.forEach(function(icon) {
+                    icon.addEventListener("click", function() {
+                        this.classList.toggle("red");
+                    });
+                });
+            });
+        </script>
 
 
         <div class = "view">
@@ -276,6 +375,12 @@
 
     </div>
 </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 </body>
 </html>

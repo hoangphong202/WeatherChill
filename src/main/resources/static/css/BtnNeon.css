@@ -38,7 +38,7 @@
             border: none;
             text-decoration: none;
             cursor: pointer;
-            border-radius: 6px;
+            border-radius: 16px !important;
             border: 1px solid #89708b;
             transition: transform 0.3s ease-in-out;
         }
