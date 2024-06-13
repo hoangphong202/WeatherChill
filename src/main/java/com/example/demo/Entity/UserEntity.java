@@ -39,9 +39,13 @@ public class UserEntity {
     private List<LikeAlbumEntity> LikeAlbum;
 
     @OneToOne(mappedBy = "user")
+    @ToString.Exclude
+    @JsonIgnore
     private FavoriteAlbumEntity album;
 
     @OneToOne(mappedBy = "user")
+    @ToString.Exclude
+    @JsonIgnore
     private HistoryEntity history;
 
     public List<LikeAlbumEntity> getLikeAlbum() {

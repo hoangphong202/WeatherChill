@@ -59,15 +59,23 @@
         });
     </script>
     <!-- Duyệt qua danh sách ảnh và hiển thị từng dòng -->
-    <tr th:each="musicEntity : ${listMusic}">
-
-
+    <tr th:each="musicEntity : ${listMusic}" onclick="playMusic(this)">
         <td><audio controls th:attr="src='/Music/' + ${musicEntity.path}"></audio></td>
         <td th:text="${musicEntity.name}"></td>
         <td th:text="${musicEntity.category.name}"></td>
+        <form th:action="@{/history/insert}" method="post">
+            <input type="hidden" name="musicId" th:value="${musicEntity.id}"/>
+        </form>
     </tr>
-
-
+    <script>
+    function playMusic(row) {
+        // Gửi form
+        var form = row.querySelector('form');
+        if (form) {
+            form.submit();
+        }
+    }
+    </script>
 
     <button type="button" th:attr="onclick=|window.location.href='/showImage?ten=${ten}'|">Phát nhạc</button>
     </tbody>

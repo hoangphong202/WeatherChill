@@ -3,6 +3,7 @@ package com.example.demo.Controller;
 import com.example.demo.DTO.FavoriteAlbumDTO;
 import com.example.demo.Entity.CategoryEntity;
 import com.example.demo.Entity.MusicEntity;
+import com.example.demo.Entity.UserEntity;
 import com.example.demo.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
@@ -40,7 +41,6 @@ public class MusicController {
 
         model.addAttribute("listMusic",listMusic);
         model.addAttribute("listCategory",listCategory);
-
         session.setAttribute("filterMusic",listMusic);
         return "list_music";
     }
@@ -130,6 +130,7 @@ public class MusicController {
             return "list_music";
         }
     }
+
     @PostMapping("/filter/album")
     public String FilterAlbum(HttpSession session,Model model, @RequestParam int categoryId,@RequestParam int albumId){
         System.out.println("Ktra: "+categoryId);
@@ -152,16 +153,19 @@ public class MusicController {
             return "add_music_album";
         }
     }
-    @GetMapping("/recommendMusic/{historyId}")
-    public String  recommendMusic(@PathVariable int historyId) {
-        int category = historyInfoService.getTopCategoryByMusicCount(historyId);
-        int userFavoriteAlbumId = favoriteAlbumService.findFavoriteAlbumByHistoryId(historyId);
+
+    @GetMapping("/recommendMusic")
+    public String  recommendMusic(HttpSession session, Model model) {
+        UserEntity user = (UserEntity) session.getAttribute("loggedInUser");
+        int category = historyInfoService.getTopCategoryByMusicCount(user.getHistory().getId());
+        int userFavoriteAlbumId = favoriteAlbumService.findFavoriteAlbumByHistoryId(user.getHistory().getId());
         List<FavoriteAlbumDTO> listFavoriteAlbum = favoriteAlbumInfoService.albumsHavingMostCategorySongs(category);
         List<MusicEntity> listMusic = musicService.listMusicRecommend(listFavoriteAlbum, userFavoriteAlbumId, category);
         System.out.println("List music recommend: ");
         for (MusicEntity music : listMusic) {
             System.out.println("MusicId: "+music.getId()+" Name: "+music.getName()+" Category name: "+music.getCategory().getName());
         }
-        return "login";
+        model.addAttribute("listMusic", listMusic);
+        return "recommendMusic";
     }
 }

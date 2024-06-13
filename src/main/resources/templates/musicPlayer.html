@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Music Player</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+        .background {
+            background-size: cover;
+            background-position: center;
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            filter: blur(5px);
+            -webkit-filter: blur(5px);
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            text-align: center;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            z-index: 1;
+            position: relative;
+        }
+        audio {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div th:if="${background != null}" th:style="'background-image: url(' + ${background.path} + ');'" class="background"></div>
+<div class="content">
+    <h1 th:if="${music != null}" th:text="${music.name}">Music Title</h1>
+    <audio controls th:if="${music != null}" th:attr="src='/Music/' + ${music.path}">Your browser does not support the audio element.</audio>
+    <h1 th:if="${music == null}">No music found</h1>
+</div>
+</body>
+</html>
