@@ -18,6 +18,10 @@ public class AlbumInfoService {
     }
 
     public boolean insertMusic(int musicId, int albumId){
+
+
+        if (!albumInfoRepository.existsByMusicIdAndAlbumId(musicId, albumId)) {
+
         try{
             MusicEntity musicEntity = new MusicEntity();
             musicEntity.setId(musicId);
@@ -33,6 +37,11 @@ public class AlbumInfoService {
             return true;
         }catch (Exception e){
             System.out.println("Loi add music into album");
+            return false;
+        }
+        }else {
+            // Trả về false nếu image_id đã tồn tại
+            System.out.println("Da co nhac trong album roi");
             return false;
         }
 

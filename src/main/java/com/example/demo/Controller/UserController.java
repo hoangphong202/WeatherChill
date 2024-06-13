@@ -344,7 +344,7 @@ public class UserController {
         }
         else {
             System.out.println("Them nhac vao album that bai");
-            return "redirect:/User";
+            return "add_music_album_user";
         }
 
     }

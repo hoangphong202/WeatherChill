@@ -10,7 +10,7 @@ import java.nio.file.StandardCopyOption;
 
 @Service
 public class MusicStorageService {
-    private final String root = "D:/eclipjava/WeatherChill2/src/main/resources/static/Music";
+    private final String root = "src/main/resources/static/Music";
 
     public void save(MultipartFile file) {
         Path rootPath = Paths.get(root);

@@ -13,4 +13,5 @@ public interface AlbumInfoRepository extends JpaRepository<AlbumInfoEntity, Inte
 
     AlbumInfoEntity findByMusicIdAndAlbumId(int musicId, int albumId);
 
+    boolean existsByMusicIdAndAlbumId(int musicId, int albumId);
 }

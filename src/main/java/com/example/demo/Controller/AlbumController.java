@@ -202,6 +202,7 @@ public class AlbumController {
     public String insertMusic(@PathVariable(name = "musicId") int musicId,
                               @PathVariable(name = "albumId") int albumId,
                               Model model){
+
         if(albumInfoService.insertMusic(musicId,albumId)){
             List<CategoryEntity> listCategory = categoryService.getAllCategory();
             List<MusicEntity> listMusic = musicService.getAllMusic();
@@ -214,7 +215,7 @@ public class AlbumController {
         }
         else {
             System.out.println("Them nhac vao album that bai");
-            return "redirect:/album";
+            return "add_music_album";
         }
 
     }

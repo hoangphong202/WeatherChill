@@ -44,11 +44,11 @@ public class ChillController {
         List<MusicEntity> listMusicAll = musicService.getAllMusic();
 
         // Shuffle the list based on the condition
-        if (LisImages != null) {
-            Collections.shuffle(LisImages);
-        } else {
-            Collections.shuffle(LisImagesAll);
-        }
+//        if (LisImages != null) {
+//            Collections.shuffle(LisImages);
+//        } else {
+//            Collections.shuffle(LisImagesAll);
+//        }
 
         // Add attributes to the model
         model.addAttribute("LisImagesAll", LisImagesAll);

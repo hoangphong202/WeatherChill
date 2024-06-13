@@ -299,7 +299,7 @@
 
     <div class="gallery">
         <div th:each="albumEntity : ${listAlbum}" class="album-item">
-            <a th:href="@{'/ListAlbum/listmusic/' + ${albumEntity.id}(ten=${ten})}">
+            <a th:href="@{'/User/listmusic/' + ${albumEntity.id}(ten=${ten})}">
                 <img th:src="@{'/Album/' + ${albumEntity.imgPath}}" class="size">
                 <p th:text="${albumEntity.name}"></p>
             </a>
