@@ -42,26 +42,18 @@ public class LoginController {
         }
 
         UserEntity usertk = userRepository.findByEmail(userEntity.getEmail());
-        UserEntity userpass = userRepository.findByPassword( userEntity.getPassword());
-
         if(usertk == null){
             model.addAttribute("error", "tai khoản không tồn tại!");
-            return "login";
-        }else if(userpass == null){
-            model.addAttribute("error", "mat khẩu không tồn tại!");
             return "login";
         }
 
         UserEntity user = userRepository.findByEmailAndPassword(userEntity.getEmail(),userEntity.getPassword());
 
-
         if (user != null) {
-
             // Lưu thông tin người dùng vào session
             session.setAttribute("loggedInUser", user);
 
             if (user.getRole().getId() == 1) {
-
                 return "redirect:/Home-admin";
             }
             String ten = user.getName();

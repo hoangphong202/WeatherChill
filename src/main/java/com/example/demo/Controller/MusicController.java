@@ -1,10 +1,9 @@
 package com.example.demo.Controller;
 
+import com.example.demo.DTO.FavoriteAlbumDTO;
 import com.example.demo.Entity.CategoryEntity;
 import com.example.demo.Entity.MusicEntity;
-import com.example.demo.Service.AlbumInfoService;
-import com.example.demo.Service.CategoryService;
-import com.example.demo.Service.MusicService;
+import com.example.demo.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
 import org.springframework.boot.web.servlet.server.Session;
@@ -24,13 +23,16 @@ public class MusicController {
 
     @Autowired
     private MusicService musicService;
-
     @Autowired
     private AlbumInfoService albumInfoService;
-
     @Autowired
     private CategoryService categoryService;
-
+    @Autowired
+    private HistoryInfoService historyInfoService;
+    @Autowired
+    private FavoriteAlbumService favoriteAlbumService;
+    @Autowired
+    private FavoriteAlbumInfoService favoriteAlbumInfoService;
     @GetMapping("")
     public String GetAllMusic(HttpSession session,Model model){
         List<MusicEntity> listMusic = musicService.getAllMusic();
@@ -149,5 +151,17 @@ public class MusicController {
             model.addAttribute("albumId", albumId);
             return "add_music_album";
         }
+    }
+    @GetMapping("/recommendMusic/{historyId}")
+    public String  recommendMusic(@PathVariable int historyId) {
+        int category = historyInfoService.getTopCategoryByMusicCount(historyId);
+        int userFavoriteAlbumId = favoriteAlbumService.findFavoriteAlbumByHistoryId(historyId);
+        List<FavoriteAlbumDTO> listFavoriteAlbum = favoriteAlbumInfoService.albumsHavingMostCategorySongs(category);
+        List<MusicEntity> listMusic = musicService.listMusicRecommend(listFavoriteAlbum, userFavoriteAlbumId, category);
+        System.out.println("List music recommend: ");
+        for (MusicEntity music : listMusic) {
+            System.out.println("MusicId: "+music.getId()+" Name: "+music.getName()+" Category name: "+music.getCategory().getName());
+        }
+        return "login";
     }
 }
