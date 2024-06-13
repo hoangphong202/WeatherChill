@@ -48,7 +48,7 @@ public class FavoriteAlbumService {
 
     public String deleteMusic(int musicId, int favoriteAlbumId){
         try{
-            favoriteAlbumInfoRepository.deleteByMusicIdAndFavoriteAlbumId(musicId, favoriteAlbumId);
+            favoriteAlbumInfoRepository.deleteByMusic_IdAndAlbum_Id(musicId, favoriteAlbumId);
             return "Delete success";
         }
         catch (Exception e){

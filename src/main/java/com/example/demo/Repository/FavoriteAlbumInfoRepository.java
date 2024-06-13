@@ -42,5 +42,5 @@ public interface FavoriteAlbumInfoRepository extends JpaRepository<FavoriteAlbum
     @Query(value = "SELECT EXISTS(SELECT 1 FROM favorite_album_info WHERE music_id = :musicId AND favorite_album_id = :favoriteAlbumId)", nativeQuery = true)
     boolean existsByMusicIdAndFavoriteAlbumId(@Param("musicId") int musicId, @Param("favoriteAlbumId") int favoriteAlbumId);
 
-    void deleteByMusicIdAndFavoriteAlbumId(int musicId, int favoriteAlbumId);
+    void deleteByMusic_IdAndAlbum_Id(int musicId, int favoriteAlbumId);
 }
