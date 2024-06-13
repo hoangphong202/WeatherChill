@@ -18,6 +18,7 @@ public class HistoryService {
     @Autowired
     private HistoryRepository historyRepository;
 
+
     public Boolean insertHistory(int musicId, int historyId){
 
         HistoryInfoEntity historyInfoEntity = new HistoryInfoEntity();

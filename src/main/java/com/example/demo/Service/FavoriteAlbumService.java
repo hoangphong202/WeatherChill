@@ -46,13 +46,13 @@ public class FavoriteAlbumService {
         }
     }
 
-    public String deleteMusic(int musicId, int favoriteAlbumId){
-        try{
-            favoriteAlbumInfoRepository.deleteByMusicIdAndFavoriteAlbumId(musicId, favoriteAlbumId);
-            return "Delete success";
-        }
-        catch (Exception e){
-            throw new RuntimeException("Error: "+ e.getLocalizedMessage());
-        }
-    }
+//    public String deleteMusic(int musicId, int favoriteAlbumId){
+//        try{
+//            favoriteAlbumInfoRepository.deleteByMusicIdAndFavoriteAlbumId(musicId, favoriteAlbumId);
+//            return "Delete success";
+//        }
+//        catch (Exception e){
+//            throw new RuntimeException("Error: "+ e.getLocalizedMessage());
+//        }
+//    }
 }

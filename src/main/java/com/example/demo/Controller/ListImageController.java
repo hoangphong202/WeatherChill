@@ -23,13 +23,11 @@ import java.util.stream.Collectors;
 @Controller
 public class ListImageController {
 
-
     @Autowired
     private ImageService imageService;
 
     @Autowired
     private CategoryImageService categoryImageService;
-
 
     @GetMapping("/ListImage")
     public String showImageList(@RequestParam(name = "categoryFilter", required = false) Integer categoryImageId,
