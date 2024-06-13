@@ -56,7 +56,7 @@
 
     <button type="button" th:attr="onclick=|window.location.href='/ListAlbum?ten=${ten}'|">Quay về danh sách Album</button>
 
-    <button type="button" th:attr="onclick=|window.location.href='/showImage?ten=${ten}'|">Phát tất cả nhạc</button>
+    <button type="button" th:attr="onclick=|window.location.href='/showImage/${albumId}?ten=${ten}'|">Phát tất cả nhạc</button>
 
     </tbody>
 </table>

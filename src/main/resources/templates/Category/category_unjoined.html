@@ -9,7 +9,7 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" type="text/css" href="/css/SlideBar.css" />
     <link rel="stylesheet" type="text/css" href="/css/category.css" />
-    <link rel="stylesheet" type="text/css" href="/css/navbar.css" />
+    <link rel="stylesheet" type="text/css" href="/css/layout.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -29,18 +29,14 @@
 
         .category h3 {
           color: white;
-          margin: 0;
+          margin-left: 10vh;
           font-size: 18px;
         }
 
-        .category a {
-          text-decoration: none;
-          color: #007bff;
-          font-size: 14px;
-        }
+
 
         .album_container {
-          padding: 0vh 13vh;
+          padding: 0vh 10vh;
           display: flex;
           flex-wrap: wrap;
         }
@@ -66,6 +62,29 @@
           text-decoration: underline;
         }
 
+        .category a {
+            position: absolute;
+            right: 4vh;
+<!--            margin-top: 40vh;-->
+            display: inline-block;
+            color: #ff66cc;
+            margin-left: 10vh;
+            /* margin: 6px; */
+            font-size: 17px;
+            padding: 10px 20px;
+            border: 2px solid #ff66cc;
+            border-radius: 30px;
+            text-decoration: none;
+            transition:transform 0.3s ease;
+
+}
+
+.category a:hover {
+    transform: scale(1.1); /* Tăng kích thước lên 10% khi hover */
+    text-decoration: none; /* Loại bỏ gạch chân mặc định */
+
+}
+
 
     </style>
 </head>
@@ -73,36 +92,36 @@
 
 
 <!------------------------------------------- slide bar nav Offcanvas --------------------------->
-<div class="offcanvas slide_bar_container " tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+<!--<div class="offcanvas slide_bar_container " tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">-->
 
-    <div class="offcanvas-header">
-        <h5 id="offcanvasRightLabel">WelCome</h5>
-        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
+<!--    <div class="offcanvas-header">-->
+<!--        <h5 id="offcanvasRightLabel">WelCome</h5>-->
+<!--        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>-->
+<!--    </div>-->
 
-    <div class="offcanvas-body pt-0">
-        <div class="form_slide_login">
-            <button th:attr="onclick=|window.location.href='/login'|">login</button>
-            <button th:attr="onclick=|window.location.href='/register'|">Sign Up</button>
-        </div>
+<!--    <div class="offcanvas-body pt-0">-->
+<!--        <div class="form_slide_login">-->
+<!--            <button th:attr="onclick=|window.location.href='/login'|">login</button>-->
+<!--            <button th:attr="onclick=|window.location.href='/register'|">Sign Up</button>-->
+<!--        </div>-->
 
-        <p>Language</p>
+<!--        <p>Language</p>-->
 
-        <p>Help</p>
+<!--        <p>Help</p>-->
 
-        <p>About us</p>
+<!--        <p>About us</p>-->
 
-        <p>Information</p>
+<!--        <p>Information</p>-->
 
-    </div>
+<!--    </div>-->
 
-</div>
+<!--</div>-->
 
 
 
 <!------------------------ nav ------------------------------------>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">WeatherChill</a>
+<nav class=" navbar navbar-expand-lg  layout">
+    <a class="font navbar-brand" href="#">WeatherChill</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -110,45 +129,31 @@
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 
-            <li class="nav-item active">
-                <a class="nav-link" th:attr="onclick=|window.location.href='/home-page'|">Home <span class="sr-only">(current)</span></a>
+
+            <li class="nav-item ">
+                <div class="font_li " th:attr="onclick=|window.location.href='/home-page'|">Home</div>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="#">Timeline</a>
+                <div class="font_li " th:attr="onclick=|window.location.href='/ListAlbum'|">Album</div>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" th:attr="onclick=|window.location.href='/ListAlbum'|">Album</a>
+                <a class="font_li " href="#">List Music</a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="#">Event</a>
+                <a class="font_li " href="#">Favorite Music</a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-            </li>
-
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Link
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
-            </li>
 
         </ul>
         <form class="form-inline my-2 my-lg-0 search" action="/search" method="get">
-            <div class="btn btn-outline-success my-2 my-sm-0" onclick="location.href='/login'">Login</div>
-            <div class="btn btn-outline-success my-2 my-sm-0" onclick="location.href='/register'">Sign Up</div>
+            <div class="btn" onclick="location.href='/login'">Login</div>
+            <div class="btn" onclick="location.href='/register'">Sign Up</div>
 
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="keyword">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            <button class="btn  my-2 my-sm-0" type="submit">Search</button>
 
             <button class="icon_avatar1" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
                 <!-- Thêm biểu tượng người dùng -->
@@ -173,29 +178,29 @@
     <div class="nen">
         <h1>News</h1>
 
-        <a class="news_a">[ EVENT ] Create Album New year is now open.</a>
+        <a class="news_a">[ Update ] Album New year is now open.</a>
     </div>
 
 </div>
 
 
 <!-------------------------------------------------------------------->
-<div class="category">
-    <h3>Event</h3>
-    <a href="#">xem thêm</a>
-</div>
-<div class="album_container">
-    <div class="album">Album 1</div>
-    <div class="album">Album 2</div>
-    <div class="album">Album 3</div>
-    <div class="album">Album 4</div>
-    <div class="album">Album 5</div>
-</div>
-
-<div class="category">
-    <h3>Top view</h3>
-    <a th:href="@{/ListAlbum/TopView}">Xem thêm</a>
-</div>
+<!--<div class="category">-->
+<!--    <h3>Event</h3>-->
+<!--    <a href="#">xem thêm</a>-->
+<!--</div>-->
+<!--<div class="album_container">-->
+<!--    <div class="album">Album 1</div>-->
+<!--    <div class="album">Album 2</div>-->
+<!--    <div class="album">Album 3</div>-->
+<!--    <div class="album">Album 4</div>-->
+<!--    <div class="album">Album 5</div>-->
+<!--</div>-->
+<div class="album-list">
+    <div class="category">
+        <h3>Top view</h3>
+        <a th:href="@{/ListAlbum/TopView}">Xem thêm</a>
+    </div>
 <div class="album_container">
     <div class="album-item" th:each="albumEntity : ${top5AlbumsByView}">
         <a th:href="@{'/ListAlbum/listmusic/' + ${albumEntity.id}(ten=${ten})}">
@@ -203,23 +208,25 @@
             <img th:src="'/Album/' + ${albumEntity.imgPath}" class="size">
             <p th:text="${albumEntity.name}"></p>
         </a>
+
     </div>
+
 </div>
 
-<div class="category">
-    <h3>Top like</h3>
-    <a href="#">xem thêm</a>
-</div>
-<div class="album_container">
-    <div class="album">Album 1</div>
-    <div class="album">Album 2</div>
-    <div class="album">Album 3</div>
-    <div class="album">Album 4</div>
-    <div class="album">Album 5</div>
-</div>
+<!--<div class="category">-->
+<!--    <h3>Top like</h3>-->
+<!--    <a href="#">xem thêm</a>-->
+<!--</div>-->
+<!--<div class="album_container">-->
+<!--    <div class="album">Album 1</div>-->
+<!--    <div class="album">Album 2</div>-->
+<!--    <div class="album">Album 3</div>-->
+<!--    <div class="album">Album 4</div>-->
+<!--    <div class="album">Album 5</div>-->
+<!--</div>-->
 
 <!------------------------------------ Lặp qua danh sách thể loại --------------------------------------->
-<div class="album-list">
+
     <!-- Lặp qua từng thể loại -->
     <div th:each="category : ${listCategoryAlbum}">
         <div class="category">

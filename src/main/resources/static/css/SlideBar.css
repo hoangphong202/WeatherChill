@@ -7,22 +7,57 @@
 }
 
 .form_slide_user{
-    width: 70px;
-    height: 70px;
     display: flex;
-    margin-bottom: 2vh;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
+    text-align: center;
+    cursor: pointer;
+    color: white;
+}
+
+.avatar_slide {
+    width: 100px; /* Adjust the size as needed */
+    height: 100px; /* Ensure the height matches the width for a perfect circle */
+    border-radius: 50%; /* This makes the image circular */
+    object-fit: cover; /* This ensures the image covers the entire circle without distortion */
 }
 
 .form_slide_user p{
-    margin-left: 2vh;
     font-size: 2.6em;
+    color: white;
+    text-shadow: 0 0 4px #fff, 0 0 13px #f09;
 }
 
+.d-flex {
+    margin-bottom: 1vh;
+}
+
+.d-flex:hover{
+    opacity: .8;
+    transform: scale(1.05);
+}
 
 .d-flex i{
     font-size: 2em;
+    color: white;
+    margin-right: 1vh;
+    cursor: pointer;
+    text-shadow: 0 0 4px #fff, 0 0 13px #f09;
 }
 
 .d-flex p{
-
+    font-size: 1.2em;
+    margin-left: 2vh;
+    cursor: pointer;
+    color: white;
+    text-shadow: 0 0 4px #fff, 0 0 13px #f09;
 }
+
+
+.slide_h1{
+    margin-left: 7vh;
+    border-bottom: 2px solid;
+    animation: boder1 2.5s ease-in-out infinite alternate;
+}
+

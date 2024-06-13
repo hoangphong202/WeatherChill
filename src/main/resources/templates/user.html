@@ -7,10 +7,16 @@
     <title>Album</title>
 
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" type="text/css" href="/css/SlideBar.css" />
     <link rel="stylesheet" type="text/css" href="/css/MyUser.css" />
+    <link rel="stylesheet" type="text/css" href="/css/list_album_client.css" />
+    <link rel="stylesheet" type="text/css" href="/css/ListAlbumClient.css" />
+    <link rel="stylesheet" type="text/css" href="/css/category.css" />
     <link rel="stylesheet" type="text/css" href="/css/BtnNeon.css" />
+    <link rel="stylesheet" type="text/css" href="/css/layout.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <style>
         form {
             display: flex;
@@ -61,36 +67,181 @@
             transform: scale(1.05);
 
         }
+    .boder{
+        border: 2px solid;
+    }
+        .slide{
+    background-color: #00000091;
+    border: 2px solid #7a1c76;
+    }
+
 
     </style>
 </head>
 <body>
 
-<div class="home">
-    <a th:attr="onclick=|window.location.href='/home-page'|">
-        <i class='bx bx-home'></i>
-    </a>
-</div>
+<!------------------------------------------- slide bar nav Offcanvas--------------------------->
+<div class="slide offcanvas slide_bar_container " tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
 
-<div class="header">
-
-    <!--<h2 class="namems" th:text="'Welcome ' + ${ten}">  </h2>-->
-
-    <div class="btn_prev" th:attr="onclick=|window.location.href='/ListAlbum'|">
-        <i class='bx bxs-left-arrow'></i>
+    <div class="offcanvas-header">
+        <h1 class="slide_h1" id="offcanvasRightLabel">WelCome</h1>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
 
-    <h1>My Album</h1>
+    <div class="offcanvas-body pt-0">
+        <div th:attr="onclick=|window.location.href='/User'|" class="form_slide_user">
+            <img class="avatar_slide boder" th:src="'/Avatar/' + ${imgpath}">
+            <p th:text="${ten}"></p>
+        </div>
 
-    <div class="btn_next" th:attr="onclick=|window.location.href='/ListAlbum'|">
-        <i class='bx bxs-right-arrow'></i>
+        <div th:attr="onclick=|window.location.href='/User'|" class="d-flex">
+            <i class='bx bxs-user-circle'></i>
+            <p >My Album</p>
+        </div>
+
+        <div class="d-flex">
+            <i class='bx bxs-star' ></i>
+            <p>Favorites</p>
+        </div>
+
+        <div class="d-flex">
+            <i class='bx bx-history' ></i>
+            <p>History</p>
+        </div>
+
+        <!--        <div class="d-flex">-->
+        <!--            <i class='bx bx-user-check'></i>-->
+        <!--            <p>Follow list</p>-->
+        <!--        </div>-->
+
+        <!--        <div class="d-flex">-->
+        <!--            <i class='bx bx-user'></i>-->
+        <!--            <p>Follower list</p>-->
+        <!--        </div>-->
+
+        <!--        <div class="d-flex">-->
+        <!--            <i class='bx bx-block'></i>-->
+        <!--            <p>Blocked list</p>-->
+        <!--        </div>-->
+
+
+        <!--        <p>Language</p>-->
+
+        <!--        <p>Help</p>-->
+
+        <!--        <p>About us</p>-->
+
+        <!--        <p>Information</p>-->
+
+        <a th:href="@{User/Logout}" class="d-flex text-decoration-none">
+            <i class='bx bxs-door-open'></i>
+            <p>Logout</p>
+        </a>
+
+
     </div>
-
 
 </div>
 
+<!------------------------ nav  ------------------------------------>
+<nav class=" navbar navbar-expand-lg  layout">
+    <a class="font navbar-brand" href="#">WeatherChill</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+
+            <li class="nav-item ">
+                <div class="font_li " th:attr="onclick=|window.location.href='/home-page'|">Home</div>
+            </li>
+
+            <li class="nav-item">
+                <div class="font_li " th:attr="onclick=|window.location.href='/ListAlbum'|">Album</div>
+            </li>
+
+            <li class="nav-item">
+                <div class="font_li " th:attr="onclick=|window.location.href='/User'|">My Album</div>
+            </li>
+
+            <li class="nav-item">
+                <div class="font_li " th:attr="onclick=|window.location.href='/LikedAlbum'|">Album Favorites</div>
+            </li>
 
 
+            <!--        <div th:attr="onclick=|window.location.href='/User'|" class="d-flex">-->
+            <!--            <i class='bx bxs-user-circle'></i>-->
+            <!--            <p >My Album</p>-->
+            <!--        </div>-->
+
+            <!--        <div class="d-flex">-->
+            <!--            <i class='bx bxs-star' ></i>-->
+            <!--            <p>Favorites</p>-->
+            <!--        </div>-->
+
+            <li class="nav-item">
+                <a class="font_li " href="#">List Music</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="font_li " href="#">Favorite Music</a>
+            </li>
+
+
+            <!--            <li class="nav-item dropdown">-->
+            <!--                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">-->
+            <!--                    Link-->
+            <!--                </a>-->
+            <!--                <ul class="dropdown-menu">-->
+            <!--                    <li><a class="dropdown-item" href="#">Action</a></li>-->
+            <!--                    <li><a class="dropdown-item" href="#">Another action</a></li>-->
+            <!--                    <li><hr class="dropdown-divider"></li>-->
+            <!--                    <li><a class="dropdown-item" href="#">Something else here</a></li>-->
+            <!--                </ul>-->
+
+            <!--            </li>-->
+
+        </ul>
+        <form class="form-inline my-2 my-lg-0 search" action="/search" method="get">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="keyword">
+            <button class="btn my-2 my-sm-0" type="submit">Search</button>
+
+
+            <!-- ---------------------------  bell ---------------------------->
+            <!--            <div class="dropdown">-->
+
+            <!--                    <i class='font_li bell bx bxs-bell'></i>-->
+
+            <!--                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">-->
+            <!--                    <li><a class="dropdown-item" href="#">Action</a></li>-->
+            <!--                    <li><a class="dropdown-item" href="#">Another action</a></li>-->
+            <!--                    <li><a class="dropdown-item" href="#">Something else here</a></li>-->
+            <!--                </ul>-->
+
+            <!--            </div>-->
+
+
+
+
+            <button class="icon_avatar1"
+                    type="button"
+                    data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasRight"
+                    aria-controls="offcanvasRight">
+
+                <img class="avatar boder" th:src="'/Avatar/' + ${imgpath}">
+                <!--                                <img class="avatar" th:src="'/Avatar/hutaochibi.jpg'">-->
+
+
+            </button>
+
+        </form>
+    </div>
+</nav>
+
+
+<h1>My Album</h1>
 
 <div class="tools_bar">
     <!--------------------------- tìm kiếm---------------------------->
@@ -102,11 +253,11 @@
     <script src="/js/searchAlbum.js"></script>
 
     <!--------------------------- lọc theo lượt --------------------->
-    <div class="sort">
-        <i class='bx bx-sort-down' onclick="sortAlbumsByViews('desc')" ></i>
-        <i class='bx bx-sort-up'  onclick="sortAlbumsByViews('asc')"></i>
-    </div>
-    <script src="/js/sortAlbumsByViews.js"></script>
+<!--    <div class="sort">-->
+<!--        <i class='bx bx-sort-down' onclick="sortAlbumsByViews('desc')" ></i>-->
+<!--        <i class='bx bx-sort-up'  onclick="sortAlbumsByViews('asc')"></i>-->
+<!--    </div>-->
+<!--    <script src="/js/sortAlbumsByViews.js"></script>-->
 
 </div>
 
@@ -123,23 +274,23 @@
 
     <div class="side_bar">
         <div class="form">
-            <img class="avatar" th:src="'/Avatar/' + ${imgpath}">
+            <img class="avatar_chinh" th:src="'/Avatar/' + ${imgpath}">
             <p class="name_avatar" th:text="${ten}"></p>
             <p th:text="${email}"></p>
             <p class="describe" th:text="${describe}"></p>
             <div class="box_folow">
                 <div class="like">
-                    <p>Like</p>
+                    <p>Liked</p>
                     <a class="like_a" th:attr="onclick=|window.location.href='/LikedAlbum'|" th:text="${likedAlbumsCount}"></a>
                 </div>
-                <div class="follow">
-                    <p>Follow</p>
-                    <a href="">9</a>
-                </div>
-                <div class="follower">
-                    <p>Follower</p>
-                    <a href="">9</a>
-                </div>
+                <!--                <div class="follow">-->
+                <!--                    <p>Follow</p>-->
+                <!--                    <a href="">9</a>-->
+                <!--                </div>-->
+                <!--                <div class="follower">-->
+                <!--                    <p>Follower</p>-->
+                <!--                    <a href="">9</a>-->
+                <!--                </div>-->
             </div>
         </div>
     </div>
@@ -147,24 +298,28 @@
 
 
     <div class="gallery">
-        <!--------------------------- List album ---------------------------->
         <div th:each="albumEntity : ${listAlbum}" class="album-item">
-
             <a th:href="@{'/User/listmusic/' + ${albumEntity.id}(ten=${ten})}">
-                <img th:src="'/Album/' + ${albumEntity.imgPath}" class="size">
-
+                <img th:src="@{'/Album/' + ${albumEntity.imgPath}}" class="size">
                 <p th:text="${albumEntity.name}"></p>
-
             </a>
 
+
+
             <div class = "view">
+
                 <i class="fa fa-eye"></i>
-                <p class="font" th:text="${albumEntity.viewCount >= 1000000 ? albumEntity.viewCount / 1000000 + 'M' : (albumEntity.viewCount >= 1000 ? albumEntity.viewCount / 1000 + 'K' : albumEntity.viewCount)}"></p>
+                <p class="font1" th:text="${albumEntity.viewCount >= 1000000 ? albumEntity.viewCount / 1000000 + 'M' : (albumEntity.viewCount >= 1000 ? albumEntity.viewCount / 1000 + 'K' : albumEntity.viewCount)}"></p>
             </div>
             <!--            <p th:text="[+ ${albumEntity.category.name} +]"></p>-->
 
         </div>
     </div>
+
 </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>

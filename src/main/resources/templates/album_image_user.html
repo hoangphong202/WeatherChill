@@ -63,7 +63,7 @@
 
     <button type="button" th:onclick="|window.location.href='/User/insertImage?albumId=${albumId}'|">Thêm Hình Vào Album</button>
 
-    <button type="button" th:attr="onclick=|window.location.href='/showImage?ten=${ten}'|">Phát tất cả nhạc</button>
+    <button type="button" th:attr="onclick=|window.location.href='/showImage/${albumId}?ten=${ten}'|">Phát tất cả nhạc</button>
 
     </tbody>
 </table>

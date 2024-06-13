@@ -31,10 +31,13 @@ public class MusicEntity {
     private List<AlbumInfoEntity> albums;
 
     @OneToMany(mappedBy = "music")
+    @ToString.Exclude
+    @JsonIgnore
     private List<FavoriteAlbumInfoEntity> favoriteAlbums;
 
     @OneToMany(mappedBy = "music")
-
+    @ToString.Exclude
+    @JsonIgnore
     private List<HistoryInfoEntity> historys;
     public List<AlbumInfoEntity> getAlbums() {
         return albums;

@@ -62,12 +62,19 @@ public class AlbumClientController {
     @GetMapping("")
     public String listAlbum( HttpSession session,
                              Model model){
+
+        // Kiểm tra xem người dùng đã đăng nhập hay chưa
+        UserEntity loggedInUser = (UserEntity) session.getAttribute("loggedInUser");
+
+
         List<AlbumEntity> listAlbum = albumService.getAllAlbum();
 
-        UserEntity loggedInUser = (UserEntity) session.getAttribute("loggedInUser");
+
         // Sử dụng toán tử ba ngôi để kiểm tra và lấy tên, trả về chuỗi rỗng nếu loggedInUser là null
         String ten = (loggedInUser != null) ? loggedInUser.getName() : "";
         int userId = (loggedInUser != null) ? loggedInUser.getId() : 1;
+        String imgpath = (loggedInUser != null) ? loggedInUser.getImgpath() : "";
+
 
         List<LikeAlbumEntity> listAlbumlike = likeAlbumService.getAllLikeAlbumByIdUser(userId);
 
@@ -85,11 +92,13 @@ public class AlbumClientController {
         session.setAttribute("likedAlbumsCount", likedAlbumsCount);
 
         Collections.reverse(listAlbum); // đảo list album
-
+        model.addAttribute("imgpath", imgpath);
         model.addAttribute("listAlbum", listAlbum);
         model.addAttribute("userId", userId);
         model.addAttribute("ten", ten);
-        return "list_album_client";
+
+        return loggedInUser != null ? "list_album_user" : "list_album_client";
+
     }
 
     @GetMapping("/insertLikeAlbum/{userId}/{albumId}")
@@ -191,29 +200,79 @@ public class AlbumClientController {
 
     @GetMapping("/contentsSearch")
     public String albumFilter(Model model,
-                              @RequestParam int categoryId){
+                              @RequestParam int categoryId
+                              , HttpSession session){
 
-            List<AlbumEntity> listAlbumByCategory = albumService.getAlbumsByCategory(categoryId);
+        // Kiểm tra xem người dùng đã đăng nhập hay chưa
+        UserEntity loggedInUser = (UserEntity) session.getAttribute("loggedInUser");
+
+        String ten = (loggedInUser != null) ? loggedInUser.getName() : "";
+        int userId = (loggedInUser != null) ? loggedInUser.getId() : 1;
+        String imgpath = (loggedInUser != null) ? loggedInUser.getImgpath() : "";
+
+            List<AlbumEntity> listAlbum = albumService.getAlbumsByCategory(categoryId);
             CategoryAlbumEntity category = categoryAlbumService.getCategoryAlbumById(categoryId);
 
-            model.addAttribute("listAlbum", listAlbumByCategory);
+        // Get the list of liked albums by the user
+        List<LikeAlbumEntity> listAlbumlike = likeAlbumService.getAllLikeAlbumByIdUser(userId);
+
+        // Đánh dấu album là thích nếu chúng nằm trong danh sách thích của người dùng
+        for (AlbumEntity album : listAlbum) {
+            for (LikeAlbumEntity likeAlbum : listAlbumlike) {
+                if (likeAlbum.getAlbum().getId() == album.getId()) {
+                    album.setLiked(true);
+                    break;
+                }
+            }
+        }
+
+
+            model.addAttribute("listAlbum", listAlbum);
             model.addAttribute("category", category);
 
-            return "list_album_search_client";
+        model.addAttribute("imgpath", imgpath);
+        model.addAttribute("userId", userId);
+        model.addAttribute("ten", ten);
+
+        return loggedInUser != null ? "list_album_search" : "list_album_search_unjoin" ;
+
 
     }
 
     @GetMapping("/TopView")
-    public String albumTopView(Model model){
+    public String albumTopView(Model model, HttpSession session) {
+
+        // Kiểm tra xem người dùng đã đăng nhập hay chưa
+        UserEntity loggedInUser = (UserEntity) session.getAttribute("loggedInUser");
+
+        String ten = (loggedInUser != null) ? loggedInUser.getName() : "";
+        int userId = (loggedInUser != null) ? loggedInUser.getId() : 1;
+        String imgpath = (loggedInUser != null) ? loggedInUser.getImgpath() : "";
 
         List<AlbumEntity> listAlbum = albumService.getAllAlbum();
         // Sắp xếp danh sách album theo số lượt xem giảm dần
         listAlbum.sort(Comparator.comparingInt(AlbumEntity::getViewCount).reversed());
 
+        // Get the list of liked albums by the user
+        List<LikeAlbumEntity> listAlbumlike = likeAlbumService.getAllLikeAlbumByIdUser(userId);
+
+        // Đánh dấu album là thích nếu chúng nằm trong danh sách thích của người dùng
+        for (AlbumEntity album : listAlbum) {
+            for (LikeAlbumEntity likeAlbum : listAlbumlike) {
+                if (likeAlbum.getAlbum().getId() == album.getId()) {
+                    album.setLiked(true);
+                    break;
+                }
+            }
+        }
+
         model.addAttribute("listAlbum", listAlbum);
+        model.addAttribute("imgpath", imgpath);
+        model.addAttribute("userId", userId);
+        model.addAttribute("ten", ten);
 
-        return "list_album_top_view_client";
-
+        return loggedInUser != null ? "list_album_top_view" : "list_album_top_view_unjoin";
     }
+
 
 }

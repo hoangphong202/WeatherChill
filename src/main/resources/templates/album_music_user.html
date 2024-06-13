@@ -61,7 +61,7 @@
 
     <button type="button" th:onclick="|window.location.href='/User/insertMusic?albumId=${albumId}'|">Thêm Nhạc Vào Album</button>
 
-    <!--    <a th:href="@{'/showImage/' + ${albumId} + '?ten=' + ${ten}}">Phát tất cả nhạc</a>-->
+<!--        <a th:href="@{'/showImage/' + ${albumId} + '?ten=' + ${ten}}">Phát tất cả nhạc</a>-->
 
     <form th:action="@{'/showImage/' + ${albumId}}" method="get">
         <input type="hidden" name="ten" th:value="${ten}" />

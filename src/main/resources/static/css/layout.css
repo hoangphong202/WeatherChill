@@ -1,0 +1,179 @@
+
+/*animation: bodersd 2.5s ease-in-out infinite alternate;*/
+@keyframes bodersd {
+    0%,100% {
+        transform: translate(0,0);
+        color: #f09;
+    }
+
+    50% {
+        color: #f09;
+        box-shadow: 0 0 4px #fff, 0 0 10px #fff, 0 0 13px #f09, 0 0 38px #f09;
+    }
+}
+/*            text-shadow: 0 0 4px #fff, 0 0 10px #fff, 0 0 13px #f09, 0 0 38px #f09;*/
+
+
+/*    animation: boder1 2.5s ease-in-out infinite alternate;*/
+@keyframes boder1 {
+    0%,100% {
+        transform: translate(0,0);
+        color: rgb(159, 44, 124);
+    }
+
+    50% {
+        color: #f09;
+        text-shadow:
+
+            0 0 13px #f09,
+            0 0 38px #f09,
+            0 0 73px #f09;
+    }
+}
+
+
+
+.search button{
+    border-radius: 30px;
+}
+
+.search input{
+    border-radius: 30px;
+    margin-left: 3vh;
+}
+
+.search{
+
+}
+
+.icon_avatar{
+    padding: 0;
+    border: 1px solid #ff50f3;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    margin-left: 2vh;
+    cursor: pointer;
+    transition: opacity 0.1s ease;
+}
+
+.icon_avatar:hover{
+    opacity: 0.7;
+}
+
+
+.icon_avatar1{
+    background-color: transparent;
+    padding: 0;
+    border: none;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    margin-left: 2vh;
+    cursor: pointer;
+    transition: opacity 0.1s ease;
+}
+
+.icon_avatar1:hover{
+    opacity: 0.7;
+}
+
+.icon_avatar1 i{
+    font-size: 2.5em;
+}
+
+.avatar{
+        height: 100%;
+        width: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+}
+
+.bell{
+    font-size: 1.5em;
+    margin-left: 2vh;
+}
+
+.btn {
+    font-weight: bold !important;
+    opacity: .9;
+    color: #ffc0ff !important;
+    width: 14vh;
+    /* font-size: 0.5em !important; */
+    margin: 1vh 5vh;
+    animation: boder1 2.5s ease-in-out infinite alternate;
+    border-radius: 30px !important;
+    border: 2px solid #ff66cc !important;
+    transition:transform 0.3s ease !important; /* Thêm hiệu ứng chuyển màu và biến đổi kích thước */
+
+}
+
+.btn:hover {
+    transform: scale(1.1) !important; /* Tăng kích thước lên 10% khi hover */
+}
+
+.form-control {
+    border: 2px solid #ff66cc;
+    border-radius: 25px;
+    padding: 10px;
+    margin-right: 10px;
+    transition: border-color 0.3s ease-in-out;
+}
+
+.form-control:focus {
+    border-color: #e055b3;
+    outline: none;
+}
+
+.navbar {
+    border-bottom: 2px solid #ff66cc;
+    backdrop-filter: blur(5px);
+    padding: 10px;
+}
+
+.font {
+    color: white;
+    font-weight: bold;
+    animation: boder1 2.5s ease-in-out infinite alternate;
+    font-size: 4vh !important;
+
+}
+
+.font_li {
+    margin-left: 4vh;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.font_li:hover{
+    text-shadow: 0 0 4px #fff, 0 0 10px #fff, 0 0 13px #f09, 0 0 38px #f09;
+}
+
+.avatar {
+    color: #ff66cc;
+    font-size: 1.5em;
+    transition: color 0.3s ease-in-out;
+}
+
+.icon_avatar1:hover .avatar {
+    color: #e055b3;
+}
+
+.search {
+    display: flex;
+    align-items: center;
+}
+
+.search .btn {
+    margin-left: 10px;
+}
+
+.icon_avatar1 {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+
+

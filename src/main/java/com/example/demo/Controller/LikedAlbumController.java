@@ -30,16 +30,20 @@ public class LikedAlbumController {
                                  Model model){
 
 
+        // Kiểm tra xem người dùng đã đăng nhập hay chưa
         UserEntity loggedInUser = (UserEntity) session.getAttribute("loggedInUser");
-        // Sử dụng toán tử ba ngôi để kiểm tra và lấy tên, trả về chuỗi rỗng nếu loggedInUser là null
+
         String ten = (loggedInUser != null) ? loggedInUser.getName() : "";
         int userId = (loggedInUser != null) ? loggedInUser.getId() : 1;
+        String imgpath = (loggedInUser != null) ? loggedInUser.getImgpath() : "";
 
         List<LikeAlbumEntity> listAlbum = likeAlbumService.getAllLikeAlbumByIdUser(userId);
         Collections.reverse(listAlbum); // đảo list album
 
         model.addAttribute("listAlbum", listAlbum);
-
+        model.addAttribute("imgpath", imgpath);
+        model.addAttribute("userId", userId);
+        model.addAttribute("ten", ten);
         model.addAttribute("userId", userId);
         return "list_LikedAlbum_client";
     }

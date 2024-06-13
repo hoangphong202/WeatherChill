@@ -46,6 +46,7 @@ public class FavoriteAlbumService {
         }
     }
 
+
 //    public String deleteMusic(int musicId, int favoriteAlbumId){
 //        try{
 //            favoriteAlbumInfoRepository.deleteByMusicIdAndFavoriteAlbumId(musicId, favoriteAlbumId);
@@ -55,4 +56,5 @@ public class FavoriteAlbumService {
 //            throw new RuntimeException("Error: "+ e.getLocalizedMessage());
 //        }
 //    }
+
 }

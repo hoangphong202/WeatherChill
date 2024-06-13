@@ -10,7 +10,7 @@ import java.nio.file.StandardCopyOption;
 
 @Service
 public class AlbumStorageService {
-    private static final String UPLOAD_DIR = "src/main/resources/static/Image/";
+    private static final String UPLOAD_DIR = "src/main/resources/static/Album/";
 
     public void save(MultipartFile file) {
         Path rootPath = Paths.get(UPLOAD_DIR);

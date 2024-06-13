@@ -32,6 +32,7 @@
 }
 
         h1 {
+            margin-top: 5vh !important;
             margin: 0;
             font-size: 2.1em;
             text-align: center; /* Center the text within the h1 element */
@@ -119,8 +120,8 @@
     color: white;
     text-shadow: 0 0 4px #fff, 0 0 10px #fff, 0 0 13px #f09, 0 0 38px #f09;
 
-    margin-top: -3.7vh;
-    margin-left: 26vh;
+    margin-top: -4.7vh;
+
     display: flex;
 }
 
@@ -133,7 +134,7 @@
 }
 
 
-.font{
+.font1{
     margin: 0;
     padding-left: 1vh;
 }

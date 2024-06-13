@@ -7,8 +7,8 @@
         // Sắp xếp danh sách album dựa trên giá trị lượt xem
         albumItems.sort(function (a, b) {
             // Lấy giá trị lượt xem từ các phần tử HTML và chuyển đổi thành số nguyên
-            var viewCountA = parseInt(a.querySelector('.font').textContent.replace(/[^\d]/g, ''), 10);
-            var viewCountB = parseInt(b.querySelector('.font').textContent.replace(/[^\d]/g, ''), 10);
+            var viewCountA = parseInt(a.querySelector('.font1').textContent.replace(/[^\d]/g, ''), 10);
+            var viewCountB = parseInt(b.querySelector('.font1').textContent.replace(/[^\d]/g, ''), 10);
 
             // Sắp xếp theo thứ tự tăng dần hoặc giảm dần
             return order === 'asc' ? viewCountA - viewCountB : viewCountB - viewCountA;

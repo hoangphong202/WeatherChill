@@ -50,11 +50,11 @@ public class AddImageController {
         String fileName = file.getOriginalFilename();
         Path filePath = Path.of(UPLOAD_DIR + fileName);
 
-        // Kiểm tra nếu tệp đã tồn tại
-        if (Files.exists(filePath)) {
-            model.addAttribute("error", "Tên tệp đã tồn tại.");
-            return "addimage";
-        }
+//        // Kiểm tra nếu tệp đã tồn tại
+//        if (Files.exists(filePath)) {
+//            model.addAttribute("error", "Tên tệp đã tồn tại.");
+//            return "addimage";
+//        }
 
 
         // Save the file to the "src/main/resources/static/Image/" folder

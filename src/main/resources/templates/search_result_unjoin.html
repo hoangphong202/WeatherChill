@@ -7,14 +7,63 @@
     <link rel="stylesheet" type="text/css" href="/css/list_album_client.css" />
     <link rel="stylesheet" type="text/css" href="/css/ListAlbumClient.css" />
     <link rel="stylesheet" type="text/css" href="/css/BtnNeon.css" />
+    <link rel="stylesheet" type="text/css" href="/css/layout.css" />
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
 <body>
 
-    <h2>Search Results for "
+
+<!------------------------ nav ------------------------------------>
+<nav class=" navbar navbar-expand-lg  layout">
+    <a class="font navbar-brand" href="#">WeatherChill</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+
+
+            <li class="nav-item ">
+                <div class="font_li " th:attr="onclick=|window.location.href='/home-page'|">Home</div>
+
+            </li>
+
+            <li class="nav-item">
+                <div class="font_li " th:attr="onclick=|window.location.href='/ListAlbum'|">Album</div>
+            </li>
+
+            <li class="nav-item">
+                <a class="font_li " href="#">List Music</a>
+            </li>
+            <li class="nav-item">
+                <a class="font_li " href="#">Favorite Music</a>
+            </li>
+
+
+        </ul>
+        <form class="form-inline my-2 my-lg-0 search" action="/search" method="get">
+            <div class="btn" onclick="location.href='/login'">Login</div>
+            <div class="btn" onclick="location.href='/register'">Sign Up</div>
+
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="keyword">
+            <button class="btn  my-2 my-sm-0" type="submit">Search</button>
+
+            <button class="icon_avatar1" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                <!-- Thêm biểu tượng người dùng -->
+                <i class="avatar bx bx-user-circle"></i>
+            </button>
+        </form>
+
+    </div>
+</nav>
+
+
+    <h1>Search Results for "
         <span th:text="${keyword}"></span>"
-    </h2>
+    </h1>
     <!--------------------------- List album ---------------------------->
     <div class="gallery">
         <div th:each="albumEntity : ${listAlbum}" class="album-item">
@@ -28,7 +77,7 @@
             <div class = "view">
 
                 <i class="fa fa-eye"></i>
-                <p class="font" th:text="${albumEntity.viewCount >= 1000000 ? albumEntity.viewCount / 1000000 + 'M' : (albumEntity.viewCount >= 1000 ? albumEntity.viewCount / 1000 + 'K' : albumEntity.viewCount)}"></p>
+                <p class="font1" th:text="${albumEntity.viewCount >= 1000000 ? albumEntity.viewCount / 1000000 + 'M' : (albumEntity.viewCount >= 1000 ? albumEntity.viewCount / 1000 + 'K' : albumEntity.viewCount)}"></p>
             </div>
             <!--            <p th:text="[+ ${albumEntity.category.name} +]"></p>-->
 
