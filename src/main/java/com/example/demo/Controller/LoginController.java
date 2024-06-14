@@ -54,7 +54,7 @@ public class LoginController {
             session.setAttribute("loggedInUser", user);
 
             if (user.getRole().getId() == 1) {
-                return "redirect:/Home-admin";
+                return "redirect:/album";
             }
             String ten = user.getName();
             redirectAttributes.addFlashAttribute("ten", user.getName());

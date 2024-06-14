@@ -66,9 +66,17 @@
         <td th:text="${musicEntity.category.name}"></td>
         <form th:action="@{/history/insert}" method="post">
             <input type="hidden" name="musicId" th:value="${musicEntity.id}"/>
+
         </form>
 
-        <td><button type="button" th:attr="onclick=|window.location.href='/favoriteAlbum'|">like</button></td>
+        <td>
+            <form th:action="@{/favoriteAlbum/insertMusic}" method="post">
+                <input type="hidden" name="musicId" th:value="${musicEntity.id}">
+                <button type="submit">Like</button>
+            </form>
+        </td>
+
+
 
     </tr>
     <script>

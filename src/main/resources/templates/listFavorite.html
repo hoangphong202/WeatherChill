@@ -16,13 +16,13 @@
     <h1>Favorite Music</h1>
     <!--<h2 class="namems" th:text="'Welcome ' + ${ten}">  </h2>-->
 
-    <div class="btn_prev" th:attr="onclick=|window.location.href='/ListAlbum?ten=${ten}'|">
-        <i class='bx bxs-left-arrow'></i>
-    </div>
+<!--    <div class="btn_prev" th:attr="onclick=|window.location.href='/ListAlbum?ten=${ten}'|">-->
+<!--        <i class='bx bxs-left-arrow'></i>-->
+<!--    </div>-->
 
-    <div class="btn_next" th:attr="onclick=|window.location.href='/ListAlbum?ten=${ten}'|">
-        <i class='bx bxs-right-arrow'></i>
-    </div>
+<!--    <div class="btn_next" th:attr="onclick=|window.location.href='/ListAlbum?ten=${ten}'|">-->
+<!--        <i class='bx bxs-right-arrow'></i>-->
+<!--    </div>-->
 
 
 </div>
@@ -35,6 +35,7 @@
         <th>Music</th>
         <th>Name</th>
         <th>Category</th>
+        <th>Delete</th>
 
     </tr>
     </thead>
@@ -66,6 +67,14 @@
         <form th:action="@{/history/insert}" method="post">
             <input type="hidden" name="musicId" th:value="${musicEntity.id}"/>
         </form>
+
+        <td>
+            <form th:action="@{/favoriteAlbum/deleteMusic}" method="post">
+                <input type="hidden" name="musicId" th:value="${musicEntity.id}">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+
     </tr>
     <script>
     function playMusic(row) {
@@ -77,8 +86,7 @@
     }
     </script>
 
-    <button type="button" th:attr="onclick=|window.location.href='/showImage?ten=${ten}'|">Phát nhạc</button>
-    </tbody>
+    <button type="button" th:attr="onclick=|window.location.href='/home-page'|">Quay về</button>    </tbody>
 </table>
 
 </body>

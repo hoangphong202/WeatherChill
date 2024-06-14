@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -44,6 +45,8 @@ public class ListImageController {
                     .filter(image -> Objects.equals(image.getCategoryImage().getId(), categoryImageId))
                     .collect(Collectors.toList());
         }
+
+        Collections.reverse(listImage); // đảo list image
 
         // Đưa danh sách ảnh vào Model để hiển thị trong Thymeleaf
         model.addAttribute("listImage", listImage);

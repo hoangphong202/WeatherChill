@@ -184,6 +184,7 @@ public class UserController {
 
         System.out.printf("List music size: "+listMusic.size());
 
+
         session.setAttribute("filterMusic",listMusic);
         session.setAttribute("filterImage",listImage);
 
@@ -244,7 +245,7 @@ public class UserController {
             // Nếu không, lấy tất cả hình ảnh
             listImage = imageService.getAllImage();
         }
-
+        Collections.reverse(listImage); // đảo list image
         model.addAttribute("albumId", albumId);
         model.addAttribute("listCategoryImage", listCategoryImage);
         model.addAttribute("listImage", listImage);
@@ -278,7 +279,7 @@ public class UserController {
                 listImage = imageService.getAllImage();
             }
 
-
+            Collections.reverse(listImage); // đảo list image
             model.addAttribute("albumId", albumId);
             model.addAttribute("listCategoryImage", listCategoryImage);
             model.addAttribute("listImage", listImage);
@@ -301,7 +302,7 @@ public class UserController {
                 // Nếu không, lấy tất cả hình ảnh
                 listImage = imageService.getAllImage();
             }
-
+            Collections.reverse(listImage); // đảo list image
             model.addAttribute("albumId", albumId);
             model.addAttribute("listCategoryImage", listCategoryImage);
             model.addAttribute("listImage", listImage);
