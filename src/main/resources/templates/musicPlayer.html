@@ -15,14 +15,15 @@
         .background {
             background-size: cover;
             background-position: center;
-            height: 100%;
-            width: 100%;
+            height: calc(100% - 10px); /* Subtracting the border size */
+            width: calc(100% - 10px);  /* Subtracting the border size */
             position: absolute;
-            top: 0;
-            left: 0;
+            top: 5px;
+            left: 5px;
             z-index: -1;
             filter: blur(5px);
             -webkit-filter: blur(5px);
+            border: 5px solid #f800ff;
         }
         .content {
             display: flex;
@@ -36,8 +37,28 @@
             z-index: 1;
             position: relative;
         }
-        audio {
+        button {
             margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: deeppink;
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: pink;
+        }
+        .controls {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .controls input[type="range"] {
+            margin: 10px 0;
+            width: 300px;
         }
     </style>
 </head>
@@ -45,8 +66,47 @@
 <div th:if="${background != null}" th:style="'background-image: url(' + ${background.path} + ');'" class="background"></div>
 <div class="content">
     <h1 th:if="${music != null}" th:text="${music.name}">Music Title</h1>
-    <audio controls th:if="${music != null}" th:attr="src='/Music/' + ${music.path}">Your browser does not support the audio element.</audio>
+    <audio id="audioPlayer" th:if="${music != null}" th:attr="src='/Music/' + ${music.path}" style="display:none;"></audio>
+    <button th:if="${music != null}" onclick="togglePlay()">Play</button>
+    <div class="controls" th:if="${music != null}">
+        <input type="range" id="seekBar" value="0" max="100" step="1" onchange="seekMusic()">
+        <input type="range" id="volumeControl" value="100" max="100" step="1" onchange="adjustVolume()">
+    </div>
     <h1 th:if="${music == null}">No music found</h1>
 </div>
+
+<script>
+    var audio = document.getElementById('audioPlayer');
+    var isPlaying = false;
+    var seekBar = document.getElementById('seekBar');
+    var volumeControl = document.getElementById('volumeControl');
+
+    audio.addEventListener('timeupdate', updateSeekBar);
+
+    function togglePlay() {
+        if (isPlaying) {
+            audio.pause();
+            event.target.textContent = 'Play';
+        } else {
+            audio.play();
+            event.target.textContent = 'Pause';
+        }
+        isPlaying = !isPlaying;
+    }
+
+    function updateSeekBar() {
+        var progress = (audio.currentTime / audio.duration) * 100;
+        seekBar.value = progress;
+    }
+
+    function seekMusic() {
+        var seekTo = audio.duration * (seekBar.value / 100);
+        audio.currentTime = seekTo;
+    }
+
+    function adjustVolume() {
+        audio.volume = volumeControl.value / 100;
+    }
+</script>
 </body>
 </html>
