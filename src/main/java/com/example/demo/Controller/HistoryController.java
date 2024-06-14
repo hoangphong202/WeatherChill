@@ -32,6 +32,20 @@ public class HistoryController {
     @PostMapping("/insert")
     public String insertHistory(Model model, @RequestParam String musicId, HttpSession session){
         UserEntity user = (UserEntity) session.getAttribute("loggedInUser");
+
+        if(user == null)
+        {
+            System.out.println("Insert history success");
+            List<ImageEntity> LisImagesAll = imageRepository.findAll();
+            List<ImageEntity> images = imageRepository.findAll();
+            Random random = new Random();
+            ImageEntity image = images.get(random.nextInt(images.size()));
+            MusicEntity music = musicRepository.findById(Integer.parseInt(musicId)).orElseThrow(()->new RuntimeException("Music not found"));
+            model.addAttribute("music",music);
+            model.addAttribute("background",image);
+            return "musicPlayer";
+        }
+
         if(historyService.insertHistory(Integer.parseInt(musicId), user.getHistory().getId())){
             System.out.println("Insert history success");
             List<ImageEntity> LisImagesAll = imageRepository.findAll();
