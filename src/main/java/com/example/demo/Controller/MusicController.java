@@ -157,6 +157,7 @@ public class MusicController {
     @GetMapping("/recommendMusic")
     public String  recommendMusic(HttpSession session, Model model) {
         UserEntity user = (UserEntity) session.getAttribute("loggedInUser");
+        System.out.println(user.getName());
         int category = historyInfoService.getTopCategoryByMusicCount(user.getHistory().getId());
         int userFavoriteAlbumId = favoriteAlbumService.findFavoriteAlbumByHistoryId(user.getHistory().getId());
         List<FavoriteAlbumDTO> listFavoriteAlbum = favoriteAlbumInfoService.albumsHavingMostCategorySongs(category);

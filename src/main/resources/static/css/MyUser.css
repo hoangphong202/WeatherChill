@@ -338,11 +338,77 @@
     color: #ffd4fd;;
 }
 
-.tools_edit{
+.tools_edit_album{
     position: fixed;
     bottom: 0;
     right: 0;
     margin-bottom: 15vh;
+    margin-right: 3vh;
+    height: 60px;
+    width: 60px;
+    backdrop-filter: blur(15px);
+    background: #00000033;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 1px solid white;
+        display: flex;
+        justify-content: center; /* Căn giữa theo chiều ngang */
+        align-items: center; /* Căn giữa theo chiều dọc */
+    transition: transform 0.3s ease-in-out;
+            z-index: 2;
+}
+
+.tools_edit_album:hover{
+    transform: scale(1.05);
+    box-shadow: 0 0 4px #fff, 0 0 10px #fff, 0 0 13px #f09, 0 0 38px #f09;
+}
+
+.tools_edit_album i{
+    font-size: 1.8em;
+    color: #ffd4fd;;
+}
+
+
+.tools_delete{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin-bottom: 26vh;
+    margin-right: 3vh;
+    height: 60px;
+    width: 60px;
+    backdrop-filter: blur(15px);
+    background: #00000033;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 1px solid white;
+        display: flex;
+        justify-content: center; /* Căn giữa theo chiều ngang */
+        align-items: center; /* Căn giữa theo chiều dọc */
+    transition: transform 0.3s ease-in-out;
+            z-index: 2;
+}
+
+.tools_delete:hover{
+    transform: scale(1.05);
+    box-shadow: 0 0 4px #fff, 0 0 10px #fff, 0 0 13px #f09, 0 0 38px #f09;
+}
+
+.tools_delete i{
+    font-size: 1.8em;
+    color: #ffd4fd;;
+}
+
+
+
+
+
+
+.tools_edit{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin-bottom: 37vh;
     margin-right: 3vh;
     height: 60px;
     width: 60px;
@@ -367,6 +433,11 @@
     font-size: 1.8em;
     color: #ffd4fd;;
 }
+
+
+
+
+
 
 .describe{
     line-height: 2;

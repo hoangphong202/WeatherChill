@@ -363,10 +363,22 @@ public class UserController {
         String imgpath = (loggedInUser != null) ? loggedInUser.getImgpath() : "";
         int userId =  (loggedInUser != null) ? loggedInUser.getId() : 0;
 
+
+        // Retrieve all liked albums for the user
+        List<LikeAlbumEntity> listAlbumlike = likeAlbumService.getAllLikeAlbumByIdUser(userId);
+        // Count the number of liked albums
+        int likedAlbumsCount = listAlbumlike.size();
+
         List<AlbumEntity> listAlbum = albumService.getAllAlbumByUserId(userId);
 //        List<AlbumEntity> listAlbum = albumService.getAllAlbum();
 
         Collections.reverse(listAlbum); // đảo list album
+
+
+
+
+        // Add likedAlbumsCount to the model
+        model.addAttribute("likedAlbumsCount", likedAlbumsCount);
 
         model.addAttribute("listAlbum", listAlbum);
 
@@ -432,5 +444,168 @@ public class UserController {
         // Sau khi đăng xuất, chuyển hướng người dùng đến trang đăng nhập
         return "redirect:/login";
     }
+
+
+
+
+    @GetMapping("/delete")
+    public String listAlbumdelete(HttpSession session, Model model){
+
+
+        UserEntity loggedInUser = (UserEntity) session.getAttribute("loggedInUser");
+        // Sử dụng toán tử ba ngôi để kiểm tra và lấy tên, trả về chuỗi rỗng nếu loggedInUser là null
+        String ten = (loggedInUser != null) ? loggedInUser.getName() : "";
+        String email = (loggedInUser != null) ? loggedInUser.getEmail() : "";
+        String describe = (loggedInUser != null) ? loggedInUser.getDescribe() : "";
+        String imgpath = (loggedInUser != null) ? loggedInUser.getImgpath() : "";
+        int userId =  (loggedInUser != null) ? loggedInUser.getId() : 1;
+
+
+        // Retrieve all liked albums for the user
+        List<LikeAlbumEntity> listAlbumlike = likeAlbumService.getAllLikeAlbumByIdUser(userId);
+        // Count the number of liked albums
+        int likedAlbumsCount = listAlbumlike.size();
+
+
+
+        List<AlbumEntity> listAlbum = albumService.getAllAlbumByUserId(userId);
+//        List<AlbumEntity> listAlbum = albumService.getAllAlbum();
+
+        Collections.reverse(listAlbum); // đảo list album
+
+        // Add likedAlbumsCount to the model
+        model.addAttribute("likedAlbumsCount", likedAlbumsCount);
+
+        model.addAttribute("listAlbum", listAlbum);
+
+        model.addAttribute("ten", ten);
+        model.addAttribute("email", email);
+        model.addAttribute("describe", describe);
+        model.addAttribute("imgpath", imgpath);
+        return "user_delete_album";
+    }
+
+
+    // xóa album
+    @GetMapping("/delete/{albumId}")
+    public String deleteMusic(@PathVariable int albumId) {
+        System.out.println("albumId: "+albumId);
+
+        if(albumInfoService.deleteAlbumInfoByAlbumId(albumId)){
+            albumInfoImageService.deleteAlbumInfoImageByAlbumId(albumId);
+            albumService.deleteAlbumById(albumId);
+            System.out.println("Xoa thanh cong");
+            return "redirect:/delete";
+        }
+        else{
+            System.out.println("Xoa that bai");
+            return "redirect:/delete";
+        }
+    }
+
+
+
+
+    //    sửa album
+
+    @GetMapping("/update")
+    public String updateAlbum(Model model, HttpSession session) {
+
+        UserEntity loggedInUser = (UserEntity) session.getAttribute("loggedInUser");
+        // Sử dụng toán tử ba ngôi để kiểm tra và lấy tên, trả về chuỗi rỗng nếu loggedInUser là null
+        String ten = (loggedInUser != null) ? loggedInUser.getName() : "";
+        String email = (loggedInUser != null) ? loggedInUser.getEmail() : "";
+        String describe = (loggedInUser != null) ? loggedInUser.getDescribe() : "";
+        String imgpath = (loggedInUser != null) ? loggedInUser.getImgpath() : "";
+        int userId =  (loggedInUser != null) ? loggedInUser.getId() : 1;
+
+
+        // Retrieve all liked albums for the user
+        List<LikeAlbumEntity> listAlbumlike = likeAlbumService.getAllLikeAlbumByIdUser(userId);
+        // Count the number of liked albums
+        int likedAlbumsCount = listAlbumlike.size();
+
+
+
+        List<AlbumEntity> listAlbum = albumService.getAllAlbumByUserId(userId);
+//        List<AlbumEntity> listAlbum = albumService.getAllAlbum();
+
+        Collections.reverse(listAlbum); // đảo list album
+
+        // Add likedAlbumsCount to the model
+        model.addAttribute("likedAlbumsCount", likedAlbumsCount);
+
+        model.addAttribute("listAlbum", listAlbum);
+
+        model.addAttribute("ten", ten);
+        model.addAttribute("email", email);
+        model.addAttribute("describe", describe);
+        model.addAttribute("imgpath", imgpath);
+        return "user_edit_album";
+    }
+
+
+    @GetMapping("/update/{albumId}")
+    public String updateAlbum(Model model, @PathVariable int albumId) {
+
+        List<CategoryAlbumEntity> categoryAlbum = categoryAlbumService.getAllCategoryAlbum();
+        AlbumEntity album = albumService.findAlbumById(albumId);
+
+
+        model.addAttribute("categoryAlbum",categoryAlbum);
+        model.addAttribute("album",album);
+        return "update_album_user";
+    }
+
+
+
+    @PostMapping("/update/{albumId}")
+    public String UpdateAlbums(@RequestParam("file") MultipartFile file,
+                               @ModelAttribute("album") AlbumEntity album,
+                               @PathVariable int albumId){
+        // Update album details
+        AlbumEntity existingAlbum = albumService.findAlbumById(albumId);
+
+
+        if (existingAlbum != null) {
+            existingAlbum.setName(album.getName());
+
+            existingAlbum.setCategoryAlbum(album.getCategoryAlbum());
+
+            // nếu file rỗng thì giữ nguyên ko rỗng thì sửa thành cái mới
+            if (!file.isEmpty()) {
+                try {
+                    String uploadDirectory = "src/main/resources/static/Album";
+                    String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+
+//                    // Delete the old file
+//                    if (existingAlbum.getImgPath()!= null && !existingAlbum.getImgPath().isEmpty()) {
+//                        Path oldFilePath = Paths.get(uploadDirectory).resolve(existingAlbum.getImgPath());
+//                        Files.deleteIfExists(oldFilePath);
+//                    }
+
+                    // Save the file to the specified directory
+                    Path uploadPath = Paths.get(uploadDirectory);
+                    try (InputStream inputStream = file.getInputStream()) {
+                        Files.copy(inputStream, uploadPath.resolve(fileName), StandardCopyOption.REPLACE_EXISTING);
+                    }
+
+                    existingAlbum.setImgPath(fileName);
+                } catch (IOException e) {
+                    e.printStackTrace(); // Handle the exception appropriately
+                }
+            }
+
+            // Save the updated album
+            albumRepository.save(existingAlbum);
+
+            // Redirect to the album details page or list
+            return "redirect:/User/update" ; // Adjust the URL as needed
+        } else {
+            // Handle the case where the album with the given ID is not found
+            return "error"; // Redirect to an error page or handle accordingly
+        }
+    }
+
 
 }

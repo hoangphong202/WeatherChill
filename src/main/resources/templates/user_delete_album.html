@@ -75,11 +75,15 @@
     border: 2px solid #7a1c76;
     }
 
+        .z-2{
+            z-index: 2;
+        }
+
 
     </style>
 </head>
 <body>
-
+<div class="block_edit"></div>
 <!------------------------------------------- slide bar nav Offcanvas--------------------------->
 <div class="slide offcanvas slide_bar_container " tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
 
@@ -169,14 +173,6 @@
                 <div class="font_li " th:attr="onclick=|window.location.href='/LikedAlbum'|">Album Favorites</div>
             </li>
 
-            <li class="nav-item">
-                <div class="font_li " th:attr="onclick=|window.location.href='/music/recommendMusic'|">Recommend Music</div>
-            </li>
-
-            <li class="nav-item">
-                <div class="font_li " th:attr="onclick=|window.location.href='/ListMusic'|">List Music</div>
-            </li>
-
 
             <!--        <div th:attr="onclick=|window.location.href='/User'|" class="d-flex">-->
             <!--            <i class='bx bxs-user-circle'></i>-->
@@ -188,7 +184,9 @@
             <!--            <p>Favorites</p>-->
             <!--        </div>-->
 
-
+            <li class="nav-item">
+                <a class="font_li " href="#">List Music</a>
+            </li>
 
             <li class="nav-item">
                 <a class="font_li " href="#">Favorite Music</a>
@@ -247,7 +245,7 @@
 </nav>
 
 
-<h1>My Album</h1>
+<h1>Please select the album to delete</h1>
 
 <div class="tools_bar">
     <!--------------------------- tìm kiếm---------------------------->
@@ -267,22 +265,10 @@
 
 </div>
 
-<div class="tools_album" title="Add New Album" th:onclick="|window.location.href='/User/insert-album'|">
-    <i class='bx bx-add-to-queue'></i>
+<div class="tools_edit_album" title="Ok" th:onclick="|window.location.href='/User'|">
+    <i class='bx bx-check'></i>
 </div>
 
-<div class="tools_edit_album" title="edit" th:onclick="|window.location.href='/User/update'|">
-    <i class='bx bxs-edit'></i>
-</div>
-
-<div class="tools_delete" title="Delete Album" th:onclick="|window.location.href='/User/delete'|">
-    <i class='bx bx-message-square-x' ></i>
-
-</div>
-
-<div class="tools_edit" title="edit" th:onclick="|window.location.href='/User/edit'|">
-    <i class='bx bx-rename'></i>
-</div>
 
 <div class="main_area">
 
@@ -311,9 +297,9 @@
 
 
 
-    <div class="gallery">
+    <div class="gallery z-2">
         <div th:each="albumEntity : ${listAlbum}" class="album-item">
-            <a th:href="@{'/User/listmusic/' + ${albumEntity.id}(ten=${ten})}">
+            <a th:href="@{/User/delete/{albumId}(albumId=${albumEntity.id})}" onclick="return confirm('Are you sure?')">
                 <img th:src="@{'/Album/' + ${albumEntity.imgPath}}" class="size">
                 <p th:text="${albumEntity.name}"></p>
             </a>

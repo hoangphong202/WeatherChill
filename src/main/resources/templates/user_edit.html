@@ -51,6 +51,7 @@
 
         .home{
             position: absolute;
+            z-index: 2;
             margin-top: 1vh;
             margin-left: 1vh;
         }
@@ -68,6 +69,28 @@
             transform: scale(1.05);
 
         }
+    .boder{
+        border: 2px solid;
+    }
+        .slide {
+            background-color: #00000091;
+            border: 2px solid #7a1c76;
+        }
+
+        .side_bar {
+            display: flex;
+        }
+
+        .btn_kakunin {
+            position: relative;
+            right: 0;
+        }
+
+        .btn_kakunin .tools_album {
+            margin-right: 21px;
+        }
+
+
 
     </style>
 </head>
@@ -225,7 +248,6 @@
 
         <form th:action="@{/User/editfile}" method="post" enctype="multipart/form-data">
             <div class="form_up_avatar">
-
                 <input type="file" id="tepHinh" name="file" accept="image/*" style="display: none;" onchange="submitForm()"/>
                 <script>
                     function kichHoatInput() {
@@ -243,47 +265,36 @@
                 </div>
 
                 <button type="submit" id="btntepHinh" style="display: none;"></button>
-
             </div>
         </form>
 
         <form th:action="@{/User/edit}" method="post" >
             <div class="form">
-
                 <img class="avatar_chinh" th:src="'/Avatar/' + ${imgpath}">
 
                 <input class="name_avatar" type="text" name="name"  th:value="${ten}" required/>
 
-
                 <input type="text" name="email"  th:value="${email}" required/>
-
 
                 <textarea maxlength="100" name="describe" type="text" th:text="${describe}" required ></textarea>
 
                 <div class="box_folow">
                     <div class="like">
                         <p>Like</p>
-                        <a href="">9</a>
+                        <a class="like_a" th:attr="onclick=|window.location.href='/LikedAlbum'|" th:text="${likedAlbumsCount}"></a>
                     </div>
-<!--                    <div class="follow">-->
-<!--                        <p>Follow</p>-->
-<!--                        <a href="">9</a>-->
-<!--                    </div>-->
-<!--                    <div class="follower">-->
-<!--                        <p>Follower</p>-->
-<!--                        <a href="">9</a>-->
-<!--                    </div>-->
-<!--                </div>-->
+                </div>
             </div>
 
-            <button type="submit" class="tools_album" title="done">
-                <i class='bx bx-check'></i>
-            </button>
+            <div class="btn_kakunin">
+                <button type="submit" class="tools_album" title="done">
+                    <i class='bx bx-check'></i>
+                </button>
 
-            <div class="tools_edit" title="edit" th:onclick="|window.location.href='/User'|">
-                <i class='bx bx-x'></i>
+                <div class="tools_edit_album" title="edit" th:onclick="|window.location.href='/User'|">
+                    <i class='bx bx-x'></i>
+                </div>
             </div>
-
         </form>
     </div>
 
@@ -293,7 +304,7 @@
 
     <div class="gallery">
         <div th:each="albumEntity : ${listAlbum}" class="album-item">
-            <a th:href="@{'/ListAlbum/listmusic/' + ${albumEntity.id}(ten=${ten})}">
+            <a th:href="@{'/User/listmusic/' + ${albumEntity.id}(ten=${ten})}">
                 <img th:src="@{'/Album/' + ${albumEntity.imgPath}}" class="size">
                 <p th:text="${albumEntity.name}"></p>
             </a>
