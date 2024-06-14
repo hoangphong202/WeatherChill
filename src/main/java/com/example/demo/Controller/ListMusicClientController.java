@@ -2,6 +2,7 @@ package com.example.demo.Controller;
 
 import com.example.demo.Entity.CategoryEntity;
 import com.example.demo.Entity.MusicEntity;
+import com.example.demo.Entity.UserEntity;
 import com.example.demo.Service.CategoryService;
 import com.example.demo.Service.MusicService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,13 +28,17 @@ public class ListMusicClientController {
     @Autowired
     private CategoryService categoryService;
     @GetMapping("")
-    public String GetAllMusic(@RequestParam(name = "ten", required = false) String ten,Model model){
+    public String GetAllMusic(@RequestParam(name = "ten", required = false) String ten,Model model, HttpSession session){
+        UserEntity loggedInUser = (UserEntity) session.getAttribute("loggedInUser");
+
         List<MusicEntity> listMusic = musicService.getAllMusic();
         List<CategoryEntity> listCategory = categoryService.getAllCategory();
         model.addAttribute("listMusic",listMusic);
         model.addAttribute("listCategory",listCategory);
         model.addAttribute("ten", ten);
-        return "list_music_client";
+        return loggedInUser != null ? "list_music_user" : "list_music_unjoin";
+
+
     }
 
 

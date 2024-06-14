@@ -1,0 +1,91 @@
+<!-- image-list.html -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Music List</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" type="text/css" href="/css/ListMusicClient.css"/>
+
+</head>
+
+<body>
+
+<div class="header">
+    <h1>List All Music</h1>
+    <!--<h2 class="namems" th:text="'Welcome ' + ${ten}">  </h2>-->
+
+<!--    <div class="btn_prev" th:attr="onclick=|window.location.href='/ListAlbum?ten=${ten}'|">-->
+<!--        <i class='bx bxs-left-arrow'></i>-->
+<!--    </div>-->
+
+<!--    <div class="btn_next" th:attr="onclick=|window.location.href='/ListAlbum?ten=${ten}'|">-->
+<!--        <i class='bx bxs-right-arrow'></i>-->
+<!--    </div>-->
+
+
+</div>
+
+<!-- Hiển thị danh sách ảnh trong một bảng -->
+<table border="1">
+    <thead>
+    <tr>
+
+        <th>Music</th>
+        <th>Name</th>
+        <th>Category</th>
+<!--        <th>Like</th>-->
+
+    </tr>
+    </thead>
+    <tbody>
+    <form th:action="@{'/ListMusic/filter?ten=' + ${ten}}" method="post" enctype="multipart/form-data">
+        <select id="categorySelect" name="categorySelect">
+            <option value="0" selected>Tất cả</option>
+            <!-- Sử dụng th:each để lặp qua danh sách thể loại và tạo các tùy chọn -->
+            <option th:each="category : ${listCategory}" th:value="${category.id}" th:text="${category.name}"></option>
+        </select>
+        <br/>
+        <input type="hidden" id="categoryId" name="categoryId" th:value="0"/>
+        <button type="submit">Lọc</button>
+    </form>
+    <script>
+        document.getElementById('categorySelect').addEventListener('change', function() {
+            // Lấy giá trị của tùy chọn được chọn
+            var selectedGenre = this.value;
+
+            // Cập nhật giá trị vào trường input ẩn
+            document.getElementById('categoryId').value = selectedGenre;
+        });
+    </script>
+    <!-- Duyệt qua danh sách ảnh và hiển thị từng dòng -->
+    <tr th:each="musicEntity : ${listMusic}" onclick="playMusic(this)">
+        <td><audio controls th:attr="src='/Music/' + ${musicEntity.path}"></audio></td>
+        <td th:text="${musicEntity.name}"></td>
+        <td th:text="${musicEntity.category.name}"></td>
+        <form th:action="@{/history/insert}" method="post">
+            <input type="hidden" name="musicId" th:value="${musicEntity.id}"/>
+        </form>
+
+<!--        <td><button type="button" th:attr="onclick=|window.location.href='/favoriteAlbum'|">like</button></td>-->
+
+    </tr>
+    <script>
+    function playMusic(row) {
+        // Gửi form
+        var form = row.querySelector('form');
+        if (form) {
+            form.submit();
+        }
+    }
+    </script>
+
+<!--    <button type="button" th:attr="onclick=|window.location.href='/showImage?ten=${ten}'|">Phát nhạc</button>-->
+    <button type="button" th:attr="onclick=|window.location.href='/home-page'|">Quay về</button>
+
+    </tbody>
+</table>
+
+</body>
+</html>
