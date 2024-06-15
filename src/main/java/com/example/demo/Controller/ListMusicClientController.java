@@ -57,7 +57,7 @@ public class ListMusicClientController {
             model.addAttribute("listMusic", listMusic);
             model.addAttribute("listCategory", listCategory);
             model.addAttribute("ten", ten);
-            return "list_music_client";
+            return "list_music_unjoin";
         }
     }
 

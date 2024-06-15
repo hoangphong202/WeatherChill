@@ -117,11 +117,6 @@
 </head>
 <body>
 
-<!--<div class="home">-->
-<!--    <a th:attr="onclick=|window.location.href='/ListMusic'|">-->
-<!--        <i class='bx bx-home'></i>-->
-<!--    </a>-->
-<!--</div>-->
 <div class="home">
     <a href="javascript:history.back()">
         <i class='bx bx-home'></i>
@@ -131,7 +126,7 @@
 <div th:if="${background != null}" th:style="'background-image: url(' + '/image/bg_listmusic1.png' + ');'" class="background"></div>
 <div class="content">
     <h1 th:if="${music != null}" th:text="${music.name}">Music Title</h1>
-    <audio id="audioPlayer" th:if="${music != null}" th:attr="src='/Music/' + ${music.path}" style="display:none;"></audio>
+    <audio id="audioPlayer" th:if="${music != null}" th:attr="src='/Music/' + ${music.path}" style="display:none;" loop></audio>
     <button th:if="${music != null}" onclick="togglePlay()">Play</button>
     <div class="controls" th:if="${music != null}">
         <input type="range" id="seekBar" value="0" max="100" step="1" onchange="seekMusic()">
@@ -144,7 +139,6 @@
     <i class='icon bx bx-volume-full' ></i>
 </div>
 
-
 <script>
     var audio = document.getElementById('audioPlayer');
     var isPlaying = false;
@@ -152,6 +146,10 @@
     var volumeControl = document.getElementById('volumeControl');
 
     audio.addEventListener('timeupdate', updateSeekBar);
+    audio.addEventListener('ended', function() {
+        audio.currentTime = 0;
+        audio.play();
+    });
 
     function togglePlay() {
         if (isPlaying) {

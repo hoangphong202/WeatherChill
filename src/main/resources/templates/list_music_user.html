@@ -7,6 +7,7 @@
     <title>Music List</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" type="text/css" href="/css/ListMusicClient.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/category.css" />
 
 </head>
 
@@ -26,6 +27,36 @@
 
 
 </div>
+
+<!--------------------------- tìm kiếm---------------------------->
+<div class="search-container">
+    <input type="text" id="searchInput" placeholder="Search by album name...">
+    <button onclick="searchAlbum()">Search</button>
+</div>
+
+<!-- JavaScript cho chức năng tìm kiếm -->
+<script>
+    function searchAlbum() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById('searchInput');
+        filter = input.value.toUpperCase();
+        table = document.querySelector('table tbody');
+        tr = table.getElementsByTagName('tr');
+
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByClassName('search1');
+            if (td.length > 0) {
+                txtValue = td[0].textContent || td[0].innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+
 
 <!-- Hiển thị danh sách ảnh trong một bảng -->
 <table border="1">
@@ -62,7 +93,7 @@
     <!-- Duyệt qua danh sách ảnh và hiển thị từng dòng -->
     <tr th:each="musicEntity : ${listMusic}" onclick="playMusic(this)">
         <td><audio controls th:attr="src='/Music/' + ${musicEntity.path}"></audio></td>
-        <td th:text="${musicEntity.name}"></td>
+        <td class="search1" th:text="${musicEntity.name}"></td>
         <td th:text="${musicEntity.category.name}"></td>
         <form th:action="@{/history/insert}" method="post">
             <input type="hidden" name="musicId" th:value="${musicEntity.id}"/>

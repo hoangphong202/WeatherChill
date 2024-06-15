@@ -496,11 +496,11 @@ public class UserController {
             albumInfoImageService.deleteAlbumInfoImageByAlbumId(albumId);
             albumService.deleteAlbumById(albumId);
             System.out.println("Xoa thanh cong");
-            return "redirect:/delete";
+            return "redirect:/User/delete";
         }
         else{
             System.out.println("Xoa that bai");
-            return "redirect:/delete";
+            return "redirect:User/delete";
         }
     }
 
@@ -608,5 +608,21 @@ public class UserController {
         }
     }
 
+    @PostMapping("/filter")
+    public String Filter(HttpSession session,Model model, @RequestParam int categoryId){
+        System.out.println("Ktra: "+categoryId);
+        if(categoryId==0){
+            return "redirect:/music";
+        }
+        else{
+            List<MusicEntity> listMusic = musicService.FilterByCategoryId(categoryId);
+            session.setAttribute("filterMusic",listMusic);
+            List<CategoryEntity> listCategory = categoryService.getAllCategory();
+            model.addAttribute("categoryId", categoryId);
+            model.addAttribute("listMusic", listMusic);
+            model.addAttribute("listCategory", listCategory);
+            return "add_music_album_user";
+        }
+    }
 
 }

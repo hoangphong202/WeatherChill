@@ -25,7 +25,6 @@
         margin-top: 20px;
     }
 
-
     select, button {
         padding: 8px;
         margin-bottom: 10px;
@@ -34,10 +33,6 @@
     audio {
         width: 100%;
     }
-
-
-
-
   </style>
 </head>
 <body>
@@ -51,30 +46,27 @@
 </div>
 
 <!-- JavaScript cho chức năng tìm kiếm -->
-<script >
+<script>
   function searchAlbum() {
-      // Lấy giá trị đầu vào tìm kiếm và chuyển đổi thành chữ in hoa để so sánh không phân biệt chữ hoa/chữ thường
-      var input, filter, albumItems, txtValue;
+      var input, filter, table, tr, td, i, txtValue;
       input = document.getElementById('searchInput');
       filter = input.value.toUpperCase();
-      albumItems = document.getElementsByClassName('search1');
+      table = document.querySelector('table tbody');
+      tr = table.getElementsByTagName('tr');
 
-      // Lặp qua các mục album và lọc dựa trên tên album
-      for (var i = 0; i < albumItems.length; i++) {
-          var albumNameElement = albumItems[i];
-          txtValue = albumNameElement.textContent || albumNameElement.innerText;
-
-          // Sử dụng includes cho so sánh chuỗi không phân biệt chữ hoa/chữ thường
-          if (txtValue.toUpperCase().includes(filter)) {
-              albumNameElement.parentNode.style.display = ''; // Hiển thị phần tử cha nếu có kết quả
-          } else {
-              albumNameElement.parentNode.style.display = 'none'; // Ẩn phần tử cha nếu không có kết quả
+      for (i = 0; i < tr.length; i++) {
+          td = tr[i].getElementsByClassName('search1');
+          if (td.length > 0) {
+              txtValue = td[0].textContent || td[0].innerText;
+              if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                  tr[i].style.display = "";
+              } else {
+                  tr[i].style.display = "none";
+              }
           }
       }
   }
-
 </script>
-
 
 <!-- Hiển thị danh sách ảnh trong một bảng -->
 <table>
@@ -88,7 +80,7 @@
   </tr>
   </thead>
   <tbody>
-  <form th:action="@{/User/filter/album}" method="post" enctype="multipart/form-data">
+  <form th:action="@{/User/filter}" method="post" enctype="multipart/form-data">
     <select id="categorySelect" name="categorySelect">
       <option th:value="0">All</option>
       <option th:each="category : ${listCategory}" th:value="${category.id}" th:text="${category.name}"></option>
@@ -106,6 +98,11 @@
     });
   </script>
 
+
+  <button th:onclick="|window.location.href='/User/listmusic/' + ${albumId}|">Quay về</button>
+
+
+
   <tr th:each="musicEntity : ${listMusic}">
     <td th:text="${musicEntity.id}"></td>
     <td><audio controls th:attr="src='/Music/' + ${musicEntity.path}"></audio></td>
@@ -118,11 +115,10 @@
     </td>
   </tr>
 
-
-      <button th:onclick="|window.location.href='/User/listmusic/' + ${albumId}|">Quay về</button>
-
   </tbody>
 </table>
+
+
 
 </body>
 </html>
